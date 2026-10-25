@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#101827">
-<title>SUM SHIFT | Prototype v0.3.0</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SUM SHIFT">
+<title>SUM SHIFT | Prototype v0.3.4 Mobile</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -48,7 +51,7 @@ button:disabled{opacity:.45;cursor:default}
 .btn.secondary{background:transparent}
 .footer{margin-top:16px;display:flex;justify-content:space-between;gap:10px;align-items:center;color:var(--muted);font-size:.83rem}
 .footer-actions{display:flex;align-items:center;gap:14px}.footer button{color:#b5dff5;border:0;background:transparent;padding:8px 0}
-.footer button:disabled{opacity:.35}.footer button,#levelUndo{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;text-decoration:none;white-space:nowrap}.guide-lead:empty{display:none}.hidden{display:none!important}
+.footer button:disabled{opacity:.35}.footer button,#levelUndo{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;text-decoration:none;white-space:nowrap}.guide-title:empty,.guide-lead:empty{display:none}.hidden{display:none!important}
 @keyframes breathe{to{box-shadow:0 0 0 6px #42c5ff27}}
 @keyframes flash{0%{background:#7ce8fa;box-shadow:0 0 23px #42c5ffb0;transform:scale(1.055)}100%{box-shadow:none;transform:scale(1)}}
 @keyframes pop{0%{transform:scale(.35);opacity:0}18%{transform:scale(1.14);opacity:1}35%{transform:scale(1)}78%{opacity:1}100%{transform:translateY(-14px);opacity:0}}
@@ -87,9 +90,9 @@ button:disabled{opacity:.45;cursor:default}
 #tutorialView.hidden{display:none}
 #tutorialView>.game{margin:auto 0;z-index:1}
 #tutorialView>.game>.board{max-width:345px;margin:auto}
-#tutorialView .guide-card{position:fixed;inset:0;z-index:20;margin:0;border:0;border-radius:0;background:rgba(0,0,0,.20);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px 28px;text-align:center;cursor:pointer}
+#tutorialView .guide-card{position:fixed;inset:0;z-index:20;margin:0;border:0;border-radius:0;background:rgba(0,0,0,.78);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px 28px;text-align:center;cursor:pointer}
 #tutorialView .guide-card:before{display:none}
-#tutorialView .guide-card .eyebrow{letter-spacing:.19em}
+#tutorialView .guide-card .eyebrow{display:none}
 #tutorialView .guide-card .guide-title{font-size:clamp(24px,7vw,34px);text-shadow:0 2px 8px #000}
 #tutorialView .guide-card .guide-lead,#tutorialView .guide-card .guide-body{max-width:360px;color:#f3f7ff;text-shadow:0 2px 8px #000;min-height:0}
 .tap-anywhere{font-size:.8rem;letter-spacing:.06em;color:#bceeff;margin-top:24px;animation:breatheText 1.8s ease-in-out infinite}
@@ -105,12 +108,37 @@ button:disabled{opacity:.45;cursor:default}
 #tutorialView #primary{display:none!important}
 #tutorialView .footer{z-index:2;position:relative}
 #tutorialView .progress{margin-bottom:10px}
+#tutorialView.controls-focus:before{content:"";position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:18;pointer-events:none}
+#tutorialView.controls-focus #modeControls{position:relative;z-index:21}
+#tutorialView.controls-focus #modeControls .btn{box-shadow:0 0 0 2px #79e5ff55,0 0 22px #42c5ff66;transform:scale(1.01)}
+#tutorialView.controls-focus #modeControls{animation:controlsFade 1.25s ease-out both}
+@keyframes controlsFade{0%{opacity:0;transform:translateY(9px)}100%{opacity:1;transform:translateY(0)}}
+#tutorialView.controls-focus .mode-intro-message{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:19;pointer-events:none;padding:25px;text-align:center}
+.mode-intro-message .message-inner{max-width:360px;text-shadow:0 3px 12px #000;color:#fff;animation:introTextFade .55s ease-out both}
+.mode-intro-message h2{font-size:clamp(26px,7vw,35px);margin:0 0 12px}
+.mode-intro-message p{font-size:1rem;line-height:1.8;margin:0}
+@keyframes introTextFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.stage-clear-tap{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.83);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#fff;padding:24px;cursor:pointer;touch-action:manipulation}
+.stage-clear-tap h2{font-size:clamp(30px,8vw,43px);color:var(--green);margin:0 0 14px}
+.stage-clear-tap .tap-stars{color:#ffd785;font-size:1.8rem;letter-spacing:5px}
+.stage-clear-tap .tap-next{color:#bceeff;margin-top:34px;font-size:.88rem;animation:breatheText 1.8s ease-in-out infinite}
 @media(max-width:390px){#stagePlayView>.game-actions .btn{font-size:.68rem;padding:6px 8px}}
+/* iPhone Safari layout refinements */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button{-webkit-tap-highlight-color:transparent}
+@media(max-width:430px){
+ .app{padding-left:16px;padding-right:16px}
+ .board{gap:7px}
+ .tile{border-radius:13px}
+ .footer{flex-wrap:wrap;row-gap:6px}
+ .footer-actions{margin-left:auto}
+ #tutorialView .guide-card{padding-left:20px;padding-right:20px}
+}
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.3.0</div></div><div id="statePill" class="pill">LESSON</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.3.4</div></div><div id="statePill" class="pill">LESSON</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">ステージ選択へ →</button></div>
   <div id="tutorialView" class="view">
   <div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -128,6 +156,7 @@ button:disabled{opacity:.45;cursor:default}
     <div id="overlay" class="overlay" aria-live="polite"></div>
   </div>
 
+  <div id="modeIntroMessage" class="mode-intro-message hidden" aria-live="polite"></div>
   <div id="modeControls" class="controls hidden"><button id="minusBtn" class="btn selected" type="button">−1 操作</button><button id="plusBtn" class="btn" type="button">+1 操作</button></div>
   <div id="actions" class="controls"><button id="primary" class="btn primary" type="button">はじめる →</button><button id="hint" class="btn secondary hidden" type="button">ヒント</button></div>
   <div class="footer"><span id="moves">操作回数：0</span><div class="footer-actions"><button id="back" type="button">一つ戻る ↶</button><button id="reset" type="button">最初からやり直す ↻</button></div></div>
@@ -149,6 +178,7 @@ button:disabled{opacity:.45;cursor:default}
       <div id="levelHintPanel" class="hint-detail hidden" aria-live="polite"><strong id="levelHintTitle"></strong><p id="levelHintText"></p><div class="hint-controls"><button id="levelHintPrev" class="btn secondary" type="button">前のヒント</button><button id="levelHintNext" class="btn secondary" type="button">次のヒント</button></div></div>
     </section>
   </section>
+  <div id="stageClearTap" class="stage-clear-tap hidden" role="button" tabindex="0" aria-label="次のステージへ進む"></div>
 </main>
 <script>
 'use strict';
@@ -164,18 +194,24 @@ let locked = false;
 let showHint = false;
 let animationHandle = null;
 let guidanceTimer = null;
+let modeIntroTimer = null;
+let modeIntroTextTimer = null;
 let history = [];
 function saveState(){ history.push({board:[...board],phase,direction,moves,showHint}); }
 function cancelGuidance(){ if(guidanceTimer!==null){clearTimeout(guidanceTimer);guidanceTimer=null;} document.querySelectorAll(".nudge").forEach(el=>el.classList.remove("nudge")); }
+function cancelModeIntro(){
+  if(modeIntroTimer!==null){clearTimeout(modeIntroTimer);modeIntroTimer=null;}
+  if(modeIntroTextTimer!==null){clearTimeout(modeIntroTextTimer);modeIntroTextTimer=null;}
+}
 function scheduleGuidance(){
   cancelGuidance();
-  const target = phase === "tap" ? ".tile.target" : ["intro","affected","center"].includes(phase) ? "#primary" : null;
+  const target = phase === "tap" ? ".tile.target" : ["intro","affected"].includes(phase) ? "#primary" : null;
   if(!target || locked)return;
   guidanceTimer=setTimeout(()=>{ const el=document.querySelector(target);if(el)el.classList.add("nudge");guidanceTimer=null; },5000);
 }
 function goBack(){
   if(!history.length)return;
-  clearAnimation();cancelGuidance();locked=false;
+  clearAnimation();cancelGuidance();cancelModeIntro();locked=false;
   const prev=history.pop();board=[...prev.board];phase=prev.phase;direction=prev.direction;moves=prev.moves;showHint=prev.showHint;render();
 }
 
@@ -248,20 +284,24 @@ function render(){
   renderBoard();
   const config={
     intro:{title:'はじめてみよう！',lead:'まずは、数字がどう変化するかを体験しよう。',body:'最終的な目標は、9マスの数字をすべて0にすること。',primary:'はじめる →'},
-    tap:{title:'ここを押してね！',lead:'中央の「1」をタップしてみよう。',body:'青く光っている真ん中のマスを押してね。',primary:''},
+    tap:{title:'',lead:'中央の「1」をタップしてみよう。',body:'青く光っている真ん中のマスを押してね。',primary:''},
     animating:{title:'操作成功！',lead:'十字のマスが変化したよ。',body:'いま起きた変化を、このあと順番に見ていこう。',primary:''},
     affected:{title:'どこが変わった？',lead:'中央を押すと、縦と横の合計5マスが変化するよ。',body:'<strong>押したマス自身と、上下左右の4マス</strong>が変わったね。斜めのマスは変わらないよ。',primary:'次へ →'},
-    center:{title:'押した数字の変化',lead:'',body:'中央の数字は <strong>1 → 0</strong> に変わったね。',primary:'次へ →'},
     neighbors:{title:'周りの数字の変化',lead:'0から1引くと、どうなるかな？',body:'このゲームの数字は <strong>0 → 1 → 2 → 0</strong> と循環するよ。だから上下左右の <strong>0 → 2</strong> になったんだ。',primary:'確認問題へ →'},
+
     practice:{title:'自分で解いてみよう！',lead:'今度はヒントなしで、全部0にしてみよう。',body:'<strong>−1操作</strong>で、好きなマスをタップしてみてね。'+(showHint?'<br><strong>ヒント：</strong>「1」が十字に並んでいるよ。':''),primary:''},
     complete:{title:'確認問題クリア！',lead:'自分でルールを使って解けたね。',body:`<strong>${moves}手でクリア！</strong> 次は+1も使える自由プレイに挑戦できるよ。`,primary:'次の問題へ →'},
+    modeIntro:{title:'',lead:'',body:'',primary:''},
     free:{title:'2手問題に挑戦！',lead:'今度は「+1」と「−1」の両方を使おう。',body:'方向を選んでマスを押そう。すべて0にすればクリア！'+(showHint?'<br><strong>ヒント：</strong>左上に−1、右下に+1を1回ずつ。':''),primary:''},
     freeComplete:{title:'クリア！',lead:'SUM SHIFTの基本操作はマスターしたね。',body:`<strong>${moves}手でクリア！</strong> この問題は最短2手で解けるよ。`,primary:'本編ステージへ →'}
   }[phase];
 
-  const narrative=['intro','affected','center','neighbors','complete','freeComplete'].includes(phase);
+  const narrative=['intro','affected','neighbors','complete','freeComplete'].includes(phase);
   $('tutorialGuide').classList.toggle('nonblocking',!narrative);
+  $('tutorialGuide').classList.toggle('hidden',phase==='modeIntro');
   $('tapAnywhere').classList.toggle('hidden',!narrative);
+  $('tutorialView').classList.toggle('controls-focus',phase==='modeIntro');
+  if(phase!=='modeIntro'){$('modeIntroMessage').classList.add('hidden');$('modeIntroMessage').replaceChildren();}
   $('heading').textContent=config.title;
   $('lead').textContent=config.lead;
   $('guideBody').innerHTML=config.body;
@@ -269,32 +309,48 @@ function render(){
   $('primary').classList.toggle('hidden',!config.primary);
   $('hint').classList.toggle('hidden',phase!=='practice'&&phase!=='free');
   $('hint').textContent=showHint?'ヒントを閉じる':'ヒントを見る';
-  $('modeControls').classList.toggle('hidden',phase!=='free');
+  $('modeControls').classList.toggle('hidden',!(phase==='free' || phase==='modeIntro'));
   $('minusBtn').classList.toggle('selected',direction===-1);
   $('plusBtn').classList.toggle('selected',direction===1);
   $('moves').textContent=`操作回数：${moves}`;
   $('statePill').textContent=['practice','complete','free','freeComplete'].includes(phase)?'PLAY':'LESSON';
 
-  const stage=['intro','tap','animating','affected','center','neighbors','practice','complete','free','freeComplete'].indexOf(phase);
-  $('progress').innerHTML=Array.from({length:6},(_,i)=>`<i class="${i<=Math.min(stage,5)?'active':''}"></i>`).join('');
-  $('back').disabled=history.length===0;
+  const progressMap={intro:0,tap:1,animating:1,affected:2,neighbors:3,practice:4,complete:4,modeIntro:5,free:5,freeComplete:5};
+  const progressIndex=progressMap[phase] ?? 0;
+  $('progress').innerHTML=Array.from({length:6},(_,i)=>`<i class="${i<=progressIndex?'active':''}"></i>`).join('');
+  $('back').disabled=history.length===0 || phase==='modeIntro';
+  cancelModeIntro();
+  if(phase==='modeIntro'){
+    locked=true;
+    // First let the two controls fade in; only then display the problem text.
+    modeIntroTextTimer=setTimeout(()=>{
+      modeIntroTextTimer=null;
+      if(page!=='tutorial'||phase!=='modeIntro')return;
+      $('modeIntroMessage').innerHTML='<div class="message-inner"><h2>2手問題に挑戦！</h2><p>「−1」と「+1」を使い分けて、すべて0にしよう！</p></div>';
+      $('modeIntroMessage').classList.remove('hidden');
+    },1250);
+    modeIntroTimer=setTimeout(()=>{
+      modeIntroTimer=null;
+      if(page!=='tutorial'||phase!=='modeIntro')return;
+      locked=false;setPhase('free');
+    },3500);
+  }
   scheduleGuidance();
 }
 function advanceGuide(){
   if(locked) return;
   if(phase==='intro'){saveState();setPhase('tap');}
-  else if(phase==='affected'){saveState();setPhase('center');}
-  else if(phase==='center'){saveState();setPhase('neighbors');}
+  else if(phase==='affected'){saveState();setPhase('neighbors');}
   else if(phase==='neighbors'){saveState(); board=[...PRACTICE]; moves=0; showHint=false; setPhase('practice'); }
-  else if(phase==='complete'){saveState(); board=[...FREE]; moves=0; showHint=false; direction=-1; setPhase('free'); }
+  else if(phase==='complete'){saveState(); board=[...FREE]; moves=0; showHint=false; direction=-1; setPhase('modeIntro'); }
   else if(phase==='freeComplete') navigate('select');
 }
-$('tutorialGuide').addEventListener('click',()=>{if(!locked && ['intro','affected','center','neighbors','complete','freeComplete'].includes(phase))advanceGuide()});
+$('tutorialGuide').addEventListener('click',()=>{if(!locked && ['intro','affected','neighbors','complete','freeComplete'].includes(phase))advanceGuide()});
 $('primary').addEventListener('click',advanceGuide);
 $('minusBtn').addEventListener('click',()=>{ direction=-1; render(); });
 $('plusBtn').addEventListener('click',()=>{ direction=1; render(); });
 $('hint').addEventListener('click',()=>{ showHint=!showHint; render(); });
-function restart(){ clearAnimation();cancelGuidance();history=[]; locked=false; board=[...DEMO]; moves=0; showHint=false; direction=-1; setPhase('intro'); }
+function restart(){ clearAnimation();cancelGuidance();cancelModeIntro();history=[]; locked=false; board=[...DEMO]; moves=0; showHint=false; direction=-1; setPhase('intro'); }
 $('reset').addEventListener('click',restart);
 $('back').addEventListener('click',goBack);
 
@@ -385,7 +441,7 @@ function loadProgress(){
 function storeProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(progressData))}catch(e){}}
 function stopLevelFx(){if(levelTimer!==null){clearTimeout(levelTimer);levelTimer=null;}levelAnimating=false;$('levelOverlay').replaceChildren();}
 function navigate(where){
-  stopLevelFx();cancelGuidance();if(where!=='tutorial'){clearAnimation();locked=false;if(phase==='animating'){phase='tap';board=[...DEMO];}}page=where;
+  stopLevelFx();cancelGuidance();cancelModeIntro();$('stageClearTap').classList.add('hidden');if(where!=='tutorial'){clearAnimation();locked=false;if(phase==='animating'){phase='tap';board=[...DEMO];}}page=where;
   $('tutorialView').classList.toggle('hidden',where!=='tutorial');
   $('stageSelectView').classList.toggle('hidden',where!=='select');
   $('stagePlayView').classList.toggle('hidden',where!=='play');
@@ -427,7 +483,14 @@ function renderLevel(){
   const cleared=isLevelClear();
   $('levelMode').classList.toggle('hidden',cleared);
   $('levelWin').classList.toggle('hidden',!cleared||levelAnimating);
-  $('levelNext').classList.toggle('hidden',selectedLevel===STAGES.length-1);
+  $('levelNext').classList.add('hidden');
+  $('levelWin').classList.add('hidden');
+  const clearTap=$('stageClearTap');
+  clearTap.classList.toggle('hidden',!cleared||levelAnimating);
+  if(cleared&&!levelAnimating){
+    const stars=scoreStars(levelMovesCount,stage.min);
+    clearTap.innerHTML=`<h2>STAGE CLEAR!</h2><div class="tap-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p>${levelMovesCount}手でクリア！ 最短：${stage.min}手</p><div class="tap-next">${selectedLevel<STAGES.length-1?'画面をタップして次のステージへ ↓':'画面をタップしてステージ一覧へ ↓'}</div>`;
+  }
   if(cleared&&!levelAnimating){
     const stars=scoreStars(levelMovesCount,stage.min);
     $('levelStars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);
@@ -469,6 +532,12 @@ $('backToTutorial').addEventListener('click',()=>navigate('tutorial'));
 $('levelHome').addEventListener('click',()=>navigate('select'));
 $('levelSelect').addEventListener('click',()=>navigate('select'));
 $('levelNext').addEventListener('click',()=>{if(selectedLevel<STAGES.length-1)startLevel(selectedLevel+1)});
+function advanceStageClear(){
+  if(page!=='play'||levelAnimating||!isLevelClear())return;
+  if(selectedLevel<STAGES.length-1)startLevel(selectedLevel+1);else navigate('select');
+}
+$('stageClearTap').addEventListener('click',advanceStageClear);
+$('stageClearTap').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();advanceStageClear();}});
 $('levelRestart').addEventListener('click',()=>startLevel(selectedLevel));
 $('levelUndo').addEventListener('click',()=>{
   if(levelAnimating||!levelHistory.length)return;
