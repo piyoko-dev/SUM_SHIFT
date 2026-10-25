@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#101827">
-<title>SUM SHIFT | Prototype v0.2.3</title>
+<title>SUM SHIFT | Prototype v0.3.0</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -68,20 +68,59 @@ button:disabled{opacity:.45;cursor:default}
 .menu-btn{border:1px solid #3c5673;background:#24344c;color:#e8f3ff;border-radius:9px;padding:8px 11px;font-size:.85rem}
 @media(max-width:390px){.stage-list{gap:6px}.stage-choice{min-height:69px}.stage-choice .number{font-size:1.1rem}.footer{font-size:.75rem}.footer-actions{gap:9px}}
 .level-hint{margin-top:12px}.hint-bar{display:flex;align-items:center;gap:12px}.hint-bar .btn{flex:1}.hint-count{font-size:.76rem;color:var(--muted);white-space:nowrap}.hint-detail{margin-top:9px;background:#1a2c42;border:1px solid #36536d;border-radius:13px;padding:13px 15px;line-height:1.65;font-size:.9rem}.hint-detail strong{color:#8cdbff}.hint-detail p{margin:7px 0 12px}.hint-controls{display:flex;gap:8px}.hint-controls .btn{min-height:39px;font-size:.85rem}.hint-controls .btn:disabled{opacity:.38}
+
+/* Ver.0.3: number board is the focal point */
+#stagePlayView{min-height:calc(100dvh - 125px);display:flex;flex-direction:column}
+#stagePlayView.hidden{display:none}
+.play-heading{text-align:center;padding-top:4px}
+.play-heading h1{margin:9px 0 5px;font-size:1.35rem;letter-spacing:.07em}
+.play-heading p{margin:0;color:var(--muted);font-size:.76rem}
+.play-heading .play-meta{justify-content:center;gap:24px;margin-top:10px;font-size:.77rem;color:var(--muted)}
+#stagePlayView>.game{margin:auto 0;padding:14px 0}
+#levelBoard{max-width:345px;margin:0 auto}
+#levelMode{max-width:345px;width:100%;margin:15px auto 0}
+#stagePlayView>.game-actions{margin-top:18px;justify-content:center;gap:6px}
+#stagePlayView>.game-actions .btn{flex:0 1 auto;min-width:0;min-height:36px;padding:6px 10px;font-size:.72rem;color:#9eafc8;background:transparent;border-color:#2c3b50;font-weight:500}
+#stagePlayView .level-hint{margin-top:14px}
+#stagePlayView #levelHint{font-size:.78rem;min-height:38px;border-color:#2b3d53}
+#tutorialView{position:relative;min-height:calc(100dvh - 175px);display:flex;flex-direction:column;justify-content:center}
+#tutorialView.hidden{display:none}
+#tutorialView>.game{margin:auto 0;z-index:1}
+#tutorialView>.game>.board{max-width:345px;margin:auto}
+#tutorialView .guide-card{position:fixed;inset:0;z-index:20;margin:0;border:0;border-radius:0;background:rgba(0,0,0,.20);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:24px 28px;text-align:center;cursor:pointer}
+#tutorialView .guide-card:before{display:none}
+#tutorialView .guide-card .eyebrow{letter-spacing:.19em}
+#tutorialView .guide-card .guide-title{font-size:clamp(24px,7vw,34px);text-shadow:0 2px 8px #000}
+#tutorialView .guide-card .guide-lead,#tutorialView .guide-card .guide-body{max-width:360px;color:#f3f7ff;text-shadow:0 2px 8px #000;min-height:0}
+.tap-anywhere{font-size:.8rem;letter-spacing:.06em;color:#bceeff;margin-top:24px;animation:breatheText 1.8s ease-in-out infinite}
+@keyframes breatheText{50%{opacity:.4}}
+#tutorialView .guide-card.nonblocking{position:relative;inset:auto;z-index:2;padding:8px 10px 2px;background:none;cursor:default}
+#tutorialView .guide-card.nonblocking:before{display:none}
+#tutorialView .guide-card.nonblocking .tap-anywhere{display:none}
+#tutorialView .guide-card.nonblocking .guide-title{font-size:1.2rem}
+#tutorialView .guide-card.nonblocking .guide-body{font-size:.82rem}
+#tutorialView .guide-card.nonblocking .guide-lead{font-size:.86rem}
+#tutorialView .guide-card.nonblocking .eyebrow{display:none}
+#tutorialView #actions{z-index:2;position:relative}
+#tutorialView #primary{display:none!important}
+#tutorialView .footer{z-index:2;position:relative}
+#tutorialView .progress{margin-bottom:10px}
+@media(max-width:390px){#stagePlayView>.game-actions .btn{font-size:.68rem;padding:6px 8px}}
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.2.3 · Tutorial</div></div><div id="statePill" class="pill">LESSON</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.3.0</div></div><div id="statePill" class="pill">LESSON</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">ステージ選択へ →</button></div>
   <div id="tutorialView" class="view">
   <div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
 
-  <section class="guide-card" aria-live="polite">
+  <section class="guide-card" id="tutorialGuide" aria-live="polite">
     <div class="eyebrow">GUIDE</div>
     <h1 id="heading" class="guide-title">数字のひみつ</h1>
     <p id="lead" class="guide-lead"></p>
     <div id="guideBody" class="guide-body"></div>
+    <p id="tapAnywhere" class="tap-anywhere">画面をタップして続ける ↓</p>
   </section>
 
   <div class="game">
@@ -94,22 +133,21 @@ button:disabled{opacity:.45;cursor:default}
   <div class="footer"><span id="moves">操作回数：0</span><div class="footer-actions"><button id="back" type="button">一つ戻る ↶</button><button id="reset" type="button">最初からやり直す ↻</button></div></div>
   </div>
   <section id="stageSelectView" class="view hidden">
-    <div class="guide-card"><div class="eyebrow">STAGE SELECT</div><h1 class="guide-title">パズルを選ぼう！</h1><p class="guide-lead">01から順番にステージを解放しよう。06〜10は新しい問題！</p><p class="guide-body">クリア手数に応じて星を獲得できるよ。何度でも挑戦可能！</p></div>
+    <div class="guide-card"><div class="eyebrow">STAGE SELECT</div><h1 class="guide-title">パズルを選ぼう！</h1><p class="guide-lead">01から順番に解放。04は打ち消し合いの練習！</p><p class="guide-body">クリア手数に応じて星を獲得できるよ。何度でも挑戦可能！</p></div>
     <div id="stageList" class="stage-list" aria-label="ステージ一覧"></div>
     <p id="stageSummary" class="stage-info"></p>
     <div class="controls"><button id="backToTutorial" class="btn secondary">チュートリアルに戻る</button></div>
   </section>
   <section id="stagePlayView" class="view hidden">
-    <div class="guide-card"><div class="eyebrow">MAIN GAME</div><h1 id="levelTitle" class="guide-title">STAGE 01</h1><p id="levelDescription" class="guide-lead">全部0にしよう！</p>
-    <div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span></div></div>
+    <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><p id="levelDescription">全部0にしよう！</p><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span></div></div>
+    <div class="game"><div id="levelBoard" class="board" aria-label="ステージ盤面"></div><div id="levelOverlay" class="overlay" aria-live="polite"></div></div>
+    <div id="levelMode" class="controls"><button id="levelMinus" class="btn selected" type="button">−1 操作</button><button id="levelPlus" class="btn" type="button">+1 操作</button></div>
+    <div id="levelWin" class="win-card hidden" aria-live="polite"><h2>STAGE CLEAR!</h2><div id="levelStars" class="win-stars"></div><p id="levelScore"></p><div class="game-actions"><button id="levelNext" class="btn primary">次のステージ →</button><button id="levelSelect" class="btn secondary">一覧へ戻る</button></div></div>
+    <div class="game-actions"><button id="levelUndo" class="btn secondary" type="button">↶ 戻る</button><button id="levelRestart" class="btn secondary" type="button">↻ リセット</button><button id="levelHome" class="btn secondary" type="button">一覧</button></div>
     <section class="level-hint" aria-label="ステージヒント">
       <div class="hint-bar"><button id="levelHint" class="btn secondary" type="button">💡 ヒントを見る（1 / 3）</button><span id="levelHintCount" class="hint-count">未使用</span></div>
       <div id="levelHintPanel" class="hint-detail hidden" aria-live="polite"><strong id="levelHintTitle"></strong><p id="levelHintText"></p><div class="hint-controls"><button id="levelHintPrev" class="btn secondary" type="button">前のヒント</button><button id="levelHintNext" class="btn secondary" type="button">次のヒント</button></div></div>
     </section>
-    <div class="game"><div id="levelBoard" class="board" aria-label="ステージ盤面"></div><div id="levelOverlay" class="overlay" aria-live="polite"></div></div>
-    <div id="levelMode" class="controls"><button id="levelMinus" class="btn selected" type="button">−1 操作</button><button id="levelPlus" class="btn" type="button">+1 操作</button></div>
-    <div id="levelWin" class="win-card hidden" aria-live="polite"><h2>STAGE CLEAR!</h2><div id="levelStars" class="win-stars"></div><p id="levelScore"></p><div class="game-actions"><button id="levelNext" class="btn primary">次のステージ →</button><button id="levelSelect" class="btn secondary">一覧へ戻る</button></div></div>
-    <div class="game-actions"><button id="levelUndo" class="btn secondary" type="button">一つ戻る ↶</button><button id="levelRestart" class="btn secondary" type="button">やり直す ↻</button><button id="levelHome" class="btn secondary" type="button">ステージ一覧</button></div>
   </section>
 </main>
 <script>
@@ -221,6 +259,9 @@ function render(){
     freeComplete:{title:'クリア！',lead:'SUM SHIFTの基本操作はマスターしたね。',body:`<strong>${moves}手でクリア！</strong> この問題は最短2手で解けるよ。`,primary:'本編ステージへ →'}
   }[phase];
 
+  const narrative=['intro','affected','center','neighbors','complete','freeComplete'].includes(phase);
+  $('tutorialGuide').classList.toggle('nonblocking',!narrative);
+  $('tapAnywhere').classList.toggle('hidden',!narrative);
   $('heading').textContent=config.title;
   $('lead').textContent=config.lead;
   $('guideBody').innerHTML=config.body;
@@ -239,7 +280,7 @@ function render(){
   $('back').disabled=history.length===0;
   scheduleGuidance();
 }
-$('primary').addEventListener('click',()=>{
+function advanceGuide(){
   if(locked) return;
   if(phase==='intro'){saveState();setPhase('tap');}
   else if(phase==='affected'){saveState();setPhase('center');}
@@ -247,7 +288,9 @@ $('primary').addEventListener('click',()=>{
   else if(phase==='neighbors'){saveState(); board=[...PRACTICE]; moves=0; showHint=false; setPhase('practice'); }
   else if(phase==='complete'){saveState(); board=[...FREE]; moves=0; showHint=false; direction=-1; setPhase('free'); }
   else if(phase==='freeComplete') navigate('select');
-});
+}
+$('tutorialGuide').addEventListener('click',()=>{if(!locked && ['intro','affected','center','neighbors','complete','freeComplete'].includes(phase))advanceGuide()});
+$('primary').addEventListener('click',advanceGuide);
 $('minusBtn').addEventListener('click',()=>{ direction=-1; render(); });
 $('plusBtn').addEventListener('click',()=>{ direction=1; render(); });
 $('hint').addEventListener('click',()=>{ showHint=!showHint; render(); });
@@ -258,7 +301,7 @@ $('back').addEventListener('click',goBack);
 // ==========================================
 // Ver.0.2 本編：ステージとクリア記録
 // ==========================================
-const STAGES = [{"board":[1,1,1,1,0,0,1,0,0],"min":1},{"board":[2,2,2,1,1,0,1,1,0],"min":2},{"board":[0,0,0,1,1,1,1,1,1],"min":3},{"board":[0,0,2,0,1,2,1,2,2],"min":3},{"board":[1,0,0,2,2,2,2,1,1],"min":4},{"board":[2,1,2,0,2,1,1,1,1],"min":5},{"board":[1,1,2,2,1,1,0,2,2],"min":6},{"board":[2,2,2,2,1,2,1,0,1],"min":7},{"board":[1,1,2,1,1,0,1,2,1],"min":7},{"board":[1,2,1,1,1,2,0,2,2],"min":8}];
+const STAGES = [{"board":[1,1,1,1,0,0,1,0,0],"min":1},{"board":[2,2,2,1,1,0,1,1,0],"min":2},{"board":[0,0,0,1,1,1,1,1,1],"min":3},{"board":[0,0,0,2,1,0,2,1,0],"min":2,"lesson":"cancel"},{"board":[0,0,2,0,1,2,1,2,2],"min":3},{"board":[1,0,0,2,2,2,2,1,1],"min":4},{"board":[2,1,2,0,2,1,1,1,1],"min":5},{"board":[1,1,2,2,1,1,0,2,2],"min":6},{"board":[2,2,2,2,1,2,1,0,1],"min":7},{"board":[1,1,2,1,1,0,1,2,1],"min":7},{"board":[1,2,1,1,1,2,0,2,2],"min":8}];
 // 本編ステージの3段階ヒント。どのヒントも正解マスや操作列は表示しません。
 const STAGE_HINTS = [
   [
@@ -275,6 +318,11 @@ const STAGE_HINTS = [
     "数字の変化は 0→1→2→0 の繰り返し。",
     "同じ場所に別々の操作の影響が重なることもあるよ。",
     "1マスずつ消すより、複数の操作を組み合わせて考えてみよう。"
+  ],
+  [
+    "2つの操作が同じ場所に重なったときの数字を見てみよう。",
+    "＋1と−1が両方当たったマスはどうなるかな？",
+    "＋1と−1は互いに打ち消し合うよ。重なる部分を先に見つけて、残った変化だけを考えよう。"
   ],
   [
     "途中で数字が増えても、失敗とは限らないよ。",
@@ -314,7 +362,8 @@ const STAGE_HINTS = [
 ];
 const HINT_TITLES=['ヒント①｜考え方','ヒント②｜注目する場所','ヒント③｜解き方のコツ'];
 let levelHintStep=0;
-const SAVE_KEY = 'sumshift_v023_progress';
+const SAVE_KEY = 'sumshift_v030_progress';
+const PREVIOUS_SAVE_KEY = 'sumshift_v023_progress';
 const OLD_SAVE_KEY = 'sumshift_v02_progress';
 let progressData = loadProgress();
 let page = 'tutorial';
@@ -326,10 +375,12 @@ let levelMovesCount = 0;
 let levelAnimating = false;
 let levelTimer = null;
 function loadProgress(){
-  try {const v=JSON.parse(localStorage.getItem(SAVE_KEY));if(v&&Array.isArray(v.stars)&&v.stars.length===10){return {stars:v.stars.map(n=>Math.max(0,Math.min(3,Number(n)||0)))}}}catch(e){}
-  // 旧版のクリア記録はSTAGE 01〜05だけ引き継ぐ。新しい06〜10の星は未獲得にする。
-  try {const old=JSON.parse(localStorage.getItem(OLD_SAVE_KEY));if(old&&Array.isArray(old.stars)&&old.stars.length===10){return {stars:old.stars.map((n,i)=>i<5?Math.max(0,Math.min(3,Number(n)||0)):0)}}}catch(e){}
-  return {stars:Array(10).fill(0)};
+  try {const v=JSON.parse(localStorage.getItem(SAVE_KEY));if(v&&Array.isArray(v.stars)&&v.stars.length===STAGES.length)return {stars:v.stars.map(n=>Math.max(0,Math.min(3,Number(n)||0)))}}catch(e){}
+  // Stage 04 is a new lesson, so carry forward only stages 01-03.
+  for(const key of [PREVIOUS_SAVE_KEY,OLD_SAVE_KEY]){
+    try {const old=JSON.parse(localStorage.getItem(key));if(old&&Array.isArray(old.stars))return {stars:STAGES.map((_,i)=>i<3?Math.max(0,Math.min(3,Number(old.stars[i])||0)):0)}}catch(e){}
+  }
+  return {stars:Array(STAGES.length).fill(0)};
 }
 function storeProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(progressData))}catch(e){}}
 function stopLevelFx(){if(levelTimer!==null){clearTimeout(levelTimer);levelTimer=null;}levelAnimating=false;$('levelOverlay').replaceChildren();}
@@ -351,7 +402,7 @@ function renderStageSelect(){
     btn.setAttribute('aria-label',`ステージ${i+1} ${isUnlocked(i)?'選択可能':'ロック中'}`);
     btn.addEventListener('click',()=>startLevel(i));$('stageList').appendChild(btn);
   });
-  $('stageSummary').textContent=`クリア済み ${progressData.stars.filter(x=>x>0).length} / 10 ステージ　｜　獲得スター ${progressData.stars.reduce((a,b)=>a+b,0)} / 30`;
+  $('stageSummary').textContent=`クリア済み ${progressData.stars.filter(x=>x>0).length} / ${STAGES.length} ステージ　｜　獲得スター ${progressData.stars.reduce((a,b)=>a+b,0)} / ${STAGES.length*3}`;
 }
 function startLevel(index){
   if(!isUnlocked(index))return;
@@ -361,7 +412,7 @@ function isLevelClear(){return levelBoard.every(n=>n===0)}
 function renderLevel(){
   const stage=STAGES[selectedLevel];
   $('levelTitle').textContent=`STAGE ${String(selectedLevel+1).padStart(2,'0')}`;
-  $('levelDescription').textContent=selectedLevel===0?'最初は1手！すべて0にしよう。':selectedLevel===9?'最後の難問に挑戦！最短手数を目指そう。':'+1と−1を使い分け、すべて0にしよう。';
+  $('levelDescription').textContent=selectedLevel===0?'最初は1手！すべて0にしよう。':selectedLevel===3?'打ち消し合いを体験！ ＋1と−1で2手クリアを目指そう。':selectedLevel===STAGES.length-1?'最後の難問に挑戦！最短手数を目指そう。':'+1と−1を使い分け、すべて0にしよう。';
   $('levelMoves').textContent=`操作：${levelMovesCount}手`;
   $('levelMinimum').textContent=`最短：${stage.min}手`;
   renderLevelHint();
@@ -376,7 +427,7 @@ function renderLevel(){
   const cleared=isLevelClear();
   $('levelMode').classList.toggle('hidden',cleared);
   $('levelWin').classList.toggle('hidden',!cleared||levelAnimating);
-  $('levelNext').classList.toggle('hidden',selectedLevel===9);
+  $('levelNext').classList.toggle('hidden',selectedLevel===STAGES.length-1);
   if(cleared&&!levelAnimating){
     const stars=scoreStars(levelMovesCount,stage.min);
     $('levelStars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);
@@ -417,7 +468,7 @@ $('toStages').addEventListener('click',()=>navigate('select'));
 $('backToTutorial').addEventListener('click',()=>navigate('tutorial'));
 $('levelHome').addEventListener('click',()=>navigate('select'));
 $('levelSelect').addEventListener('click',()=>navigate('select'));
-$('levelNext').addEventListener('click',()=>{if(selectedLevel<9)startLevel(selectedLevel+1)});
+$('levelNext').addEventListener('click',()=>{if(selectedLevel<STAGES.length-1)startLevel(selectedLevel+1)});
 $('levelRestart').addEventListener('click',()=>startLevel(selectedLevel));
 $('levelUndo').addEventListener('click',()=>{
   if(levelAnimating||!levelHistory.length)return;
