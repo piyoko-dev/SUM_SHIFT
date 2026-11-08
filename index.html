@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Prototype v0.3.4 Mobile</title>
+<title>SUM SHIFT | Prototype v0.4.0 Mobile</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -112,6 +112,10 @@ button:disabled{opacity:.45;cursor:default}
 #tutorialView.controls-focus #modeControls{position:relative;z-index:21}
 #tutorialView.controls-focus #modeControls .btn{box-shadow:0 0 0 2px #79e5ff55,0 0 22px #42c5ff66;transform:scale(1.01)}
 #tutorialView.controls-focus #modeControls{animation:controlsFade 1.25s ease-out both}
+#tutorialView.controls-focus #modeControls .btn{pointer-events:none}
+.mode-intro-tap-layer{position:fixed;inset:0;z-index:23;cursor:pointer;touch-action:manipulation}
+.mode-intro-continue{position:absolute;left:0;right:0;bottom:max(8%,env(safe-area-inset-bottom));text-align:center;color:#bceeff;font-size:.83rem;animation:breatheText 1.8s ease-in-out infinite}
+#tutorialView.controls-focus .footer,#tutorialView.controls-focus .nav-top{pointer-events:none}
 @keyframes controlsFade{0%{opacity:0;transform:translateY(9px)}100%{opacity:1;transform:translateY(0)}}
 #tutorialView.controls-focus .mode-intro-message{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:19;pointer-events:none;padding:25px;text-align:center}
 .mode-intro-message .message-inner{max-width:360px;text-shadow:0 3px 12px #000;color:#fff;animation:introTextFade .55s ease-out both}
@@ -134,11 +138,37 @@ button{-webkit-tap-highlight-color:transparent}
  .footer-actions{margin-left:auto}
  #tutorialView .guide-card{padding-left:20px;padding-right:20px}
 }
+/* v0.3.6: CSVヒント編集 */
+.hint-import-area{margin-top:20px;padding:14px;border:1px solid #32445e;border-radius:13px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.hint-import-button{display:inline-block;cursor:pointer;border:1px solid #3e7094;background:#1b3d56;border-radius:9px;color:#d4f1ff;padding:10px 13px;font-size:.86rem;font-weight:650}
+.hint-import-button:focus-within{outline:2px solid #5ac4ff}
+#hintCsvFile{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.hint-reset{border:0;background:transparent;color:#b8c8da;font-size:.8rem;padding:10px 4px}
+.hint-import-status{color:#b1c6db;font-size:.77rem;line-height:1.5;margin:0;width:100%}
+
+/* v0.3.7: insight highlighting retained; long-press preview removed */
+#levelBoard .tile{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+.tile.insight-tile{outline:2px solid #72e6ef;outline-offset:-3px;animation:insightPulse 2s ease-in-out infinite}
+@keyframes insightPulse{50%{box-shadow:0 0 0 3px #42c5ff44,0 0 18px #42c5ff55}}
+@media(prefers-reduced-motion:reduce){.tile.insight-tile{animation:none}}
+/* Hint-chan: compact, optional companion on stage screens */
+.hintchan-launch{align-self:flex-start;display:flex;align-items:center;gap:8px;max-width:100%;font-size:.75rem;color:#d4efff;background:#172a40;border:1px solid #355875;border-radius:999px;padding:6px 12px;margin:8px 0 0;min-height:40px}
+.hintchan-avatar{display:inline-grid;place-items:center;width:28px;height:28px;background:#c9f2ff;color:#102339;border-radius:50%;font-size:19px;font-weight:700;flex-shrink:0}
+.hintchan-shade{position:fixed;inset:0;background:rgba(0,0,0,.68);z-index:45;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.hintchan-dialog{background:#17253b;color:#f2f7ff;border:1px solid #42627f;width:min(100%,420px);border-radius:20px;padding:19px;box-shadow:0 16px 60px #0008;max-height:min(88dvh,750px);overflow-y:auto}
+.hintchan-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}.hintchan-top .name{font-weight:800;flex:1}.hintchan-close{color:#c9d9e9;background:transparent;border:1px solid #405570;padding:5px 9px;border-radius:9px}
+.hintchan-speech{background:#233650;border-radius:13px;padding:15px;font-size:.92rem;line-height:1.75;white-space:pre-wrap;margin-bottom:13px}
+.hintchan-choices{display:grid;gap:8px}.hintchan-choice{background:#273c57;color:#ecf8ff;border:1px solid #4c6884;border-radius:11px;padding:12px;text-align:left;min-height:46px}.hintchan-choice:hover{background:#305276}
+.hintchan-note{font-size:.73rem;color:#b7c8da;margin:13px 0 0;line-height:1.6}
+.hintchan-followup{padding-top:11px;margin-top:12px;border-top:1px solid #3e5870}
+.hintchan-hintstep{font-size:.78rem;color:#a5dff7;margin-bottom:8px}
+.hintchan-followup .hintchan-choice{width:100%;text-align:center}
+@media(max-width:390px){.hintchan-dialog{padding:14px}.hintchan-launch{font-size:.70rem}}
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.3.4</div></div><div id="statePill" class="pill">LESSON</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.4.0</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">ステージ選択へ →</button></div>
   <div id="tutorialView" class="view">
   <div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -157,6 +187,7 @@ button{-webkit-tap-highlight-color:transparent}
   </div>
 
   <div id="modeIntroMessage" class="mode-intro-message hidden" aria-live="polite"></div>
+  <div id="modeIntroTapLayer" class="mode-intro-tap-layer hidden" role="button" tabindex="-1" aria-label="操作説明を閉じて2手問題を始める"><span id="modeIntroContinue" class="mode-intro-continue hidden">画面をタップして続ける ↓</span></div>
   <div id="modeControls" class="controls hidden"><button id="minusBtn" class="btn selected" type="button">−1 操作</button><button id="plusBtn" class="btn" type="button">+1 操作</button></div>
   <div id="actions" class="controls"><button id="primary" class="btn primary" type="button">はじめる →</button><button id="hint" class="btn secondary hidden" type="button">ヒント</button></div>
   <div class="footer"><span id="moves">操作回数：0</span><div class="footer-actions"><button id="back" type="button">一つ戻る ↶</button><button id="reset" type="button">最初からやり直す ↻</button></div></div>
@@ -165,19 +196,39 @@ button{-webkit-tap-highlight-color:transparent}
     <div class="guide-card"><div class="eyebrow">STAGE SELECT</div><h1 class="guide-title">パズルを選ぼう！</h1><p class="guide-lead">01から順番に解放。04は打ち消し合いの練習！</p><p class="guide-body">クリア手数に応じて星を獲得できるよ。何度でも挑戦可能！</p></div>
     <div id="stageList" class="stage-list" aria-label="ステージ一覧"></div>
     <p id="stageSummary" class="stage-info"></p>
+    <div class="hint-import-area">
+      <label class="hint-import-button" for="hintCsvFile">ヒントCSVを読み込む</label>
+      <input id="hintCsvFile" type="file" accept=".csv,text/csv,text/plain" aria-label="ヒントのCSVファイルを選択">
+      <button id="resetHintCsv" class="hint-reset" type="button">初期ヒントに戻す</button>
+      <p id="hintImportStatus" class="hint-import-status" role="status" aria-live="polite">スプレッドシートで編集したCSVを読み込めます。クリア記録はそのまま残ります。</p>
+    </div>
     <div class="controls"><button id="backToTutorial" class="btn secondary">チュートリアルに戻る</button></div>
   </section>
   <section id="stagePlayView" class="view hidden">
+    <button id="hintchanLaunch" class="hintchan-launch" type="button"><span class="hintchan-avatar" aria-hidden="true">🤖</span>ヒントちゃんに盤面を見てもらう</button>
     <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><p id="levelDescription">全部0にしよう！</p><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span></div></div>
     <div class="game"><div id="levelBoard" class="board" aria-label="ステージ盤面"></div><div id="levelOverlay" class="overlay" aria-live="polite"></div></div>
     <div id="levelMode" class="controls"><button id="levelMinus" class="btn selected" type="button">−1 操作</button><button id="levelPlus" class="btn" type="button">+1 操作</button></div>
     <div id="levelWin" class="win-card hidden" aria-live="polite"><h2>STAGE CLEAR!</h2><div id="levelStars" class="win-stars"></div><p id="levelScore"></p><div class="game-actions"><button id="levelNext" class="btn primary">次のステージ →</button><button id="levelSelect" class="btn secondary">一覧へ戻る</button></div></div>
     <div class="game-actions"><button id="levelUndo" class="btn secondary" type="button">↶ 戻る</button><button id="levelRestart" class="btn secondary" type="button">↻ リセット</button><button id="levelHome" class="btn secondary" type="button">一覧</button></div>
-    <section class="level-hint" aria-label="ステージヒント">
-      <div class="hint-bar"><button id="levelHint" class="btn secondary" type="button">💡 ヒントを見る（1 / 3）</button><span id="levelHintCount" class="hint-count">未使用</span></div>
-      <div id="levelHintPanel" class="hint-detail hidden" aria-live="polite"><strong id="levelHintTitle"></strong><p id="levelHintText"></p><div class="hint-controls"><button id="levelHintPrev" class="btn secondary" type="button">前のヒント</button><button id="levelHintNext" class="btn secondary" type="button">次のヒント</button></div></div>
-    </section>
+
   </section>
+  <div id="hintchanShade" class="hintchan-shade hidden" role="presentation">
+    <section class="hintchan-dialog" role="dialog" aria-modal="true" aria-labelledby="hintchanName">
+      <div class="hintchan-top"><span class="hintchan-avatar" aria-hidden="true">🤖</span><span id="hintchanName" class="name">ヒントちゃん</span><button id="hintchanClose" class="hintchan-close" type="button">閉じる ×</button></div>
+      <div id="hintchanSpeech" class="hintchan-speech" aria-live="polite"></div>
+      <div class="hintchan-choices">
+        <button class="hintchan-choice" type="button" data-advice="distance">あと何手で解ける？</button>
+        <button class="hintchan-choice" type="button" data-advice="next">次の一手で悩んでいる</button>
+        <button class="hintchan-choice" type="button" data-advice="route">最短ルートから外れてる？</button>
+      </div>
+      <div id="hintchanFollowup" class="hintchan-followup hidden">
+        <div id="hintchanHintStep" class="hintchan-hintstep" aria-live="polite"></div>
+        <button id="hintchanMore" type="button" class="hintchan-choice">もう少し教えて →</button>
+      </div>
+      <p class="hintchan-note">次の一手の相談は、今の数字と最短解を分析して3段階で案内するよ。答えのマスは表示しないよ。</p>
+    </section>
+  </div>
   <div id="stageClearTap" class="stage-clear-tap hidden" role="button" tabindex="0" aria-label="次のステージへ進む"></div>
 </main>
 <script>
@@ -196,10 +247,12 @@ let animationHandle = null;
 let guidanceTimer = null;
 let modeIntroTimer = null;
 let modeIntroTextTimer = null;
+let modeIntroCanContinue = false;
 let history = [];
 function saveState(){ history.push({board:[...board],phase,direction,moves,showHint}); }
 function cancelGuidance(){ if(guidanceTimer!==null){clearTimeout(guidanceTimer);guidanceTimer=null;} document.querySelectorAll(".nudge").forEach(el=>el.classList.remove("nudge")); }
 function cancelModeIntro(){
+  modeIntroCanContinue=false;
   if(modeIntroTimer!==null){clearTimeout(modeIntroTimer);modeIntroTimer=null;}
   if(modeIntroTextTimer!==null){clearTimeout(modeIntroTextTimer);modeIntroTextTimer=null;}
 }
@@ -290,7 +343,7 @@ function render(){
     neighbors:{title:'周りの数字の変化',lead:'0から1引くと、どうなるかな？',body:'このゲームの数字は <strong>0 → 1 → 2 → 0</strong> と循環するよ。だから上下左右の <strong>0 → 2</strong> になったんだ。',primary:'確認問題へ →'},
 
     practice:{title:'自分で解いてみよう！',lead:'今度はヒントなしで、全部0にしてみよう。',body:'<strong>−1操作</strong>で、好きなマスをタップしてみてね。'+(showHint?'<br><strong>ヒント：</strong>「1」が十字に並んでいるよ。':''),primary:''},
-    complete:{title:'確認問題クリア！',lead:'自分でルールを使って解けたね。',body:`<strong>${moves}手でクリア！</strong> 次は+1も使える自由プレイに挑戦できるよ。`,primary:'次の問題へ →'},
+    complete:{title:'確認問題クリア！',lead:'自分でルールを使って解けたね。',body:'<strong>一手でクリア！</strong><br>次は＋1も使える操作モードが増えるよ。',primary:'次の問題へ →'},
     modeIntro:{title:'',lead:'',body:'',primary:''},
     free:{title:'2手問題に挑戦！',lead:'今度は「+1」と「−1」の両方を使おう。',body:'方向を選んでマスを押そう。すべて0にすればクリア！'+(showHint?'<br><strong>ヒント：</strong>左上に−1、右下に+1を1回ずつ。':''),primary:''},
     freeComplete:{title:'クリア！',lead:'SUM SHIFTの基本操作はマスターしたね。',body:`<strong>${moves}手でクリア！</strong> この問題は最短2手で解けるよ。`,primary:'本編ステージへ →'}
@@ -301,7 +354,7 @@ function render(){
   $('tutorialGuide').classList.toggle('hidden',phase==='modeIntro');
   $('tapAnywhere').classList.toggle('hidden',!narrative);
   $('tutorialView').classList.toggle('controls-focus',phase==='modeIntro');
-  if(phase!=='modeIntro'){$('modeIntroMessage').classList.add('hidden');$('modeIntroMessage').replaceChildren();}
+  if(phase!=='modeIntro'){$('modeIntroMessage').classList.add('hidden');$('modeIntroMessage').replaceChildren();$('modeIntroTapLayer').classList.add('hidden');$('modeIntroContinue').classList.add('hidden');}
   $('heading').textContent=config.title;
   $('lead').textContent=config.lead;
   $('guideBody').innerHTML=config.body;
@@ -313,7 +366,8 @@ function render(){
   $('minusBtn').classList.toggle('selected',direction===-1);
   $('plusBtn').classList.toggle('selected',direction===1);
   $('moves').textContent=`操作回数：${moves}`;
-  $('statePill').textContent=['practice','complete','free','freeComplete'].includes(phase)?'PLAY':'LESSON';
+  $('statePill').textContent='TUTORIAL';
+  $('statePill').classList.toggle('hidden',page!=='tutorial');
 
   const progressMap={intro:0,tap:1,animating:1,affected:2,neighbors:3,practice:4,complete:4,modeIntro:5,free:5,freeComplete:5};
   const progressIndex=progressMap[phase] ?? 0;
@@ -322,18 +376,22 @@ function render(){
   cancelModeIntro();
   if(phase==='modeIntro'){
     locked=true;
-    // First let the two controls fade in; only then display the problem text.
+    modeIntroCanContinue=false;
+    $('modeIntroTapLayer').classList.remove('hidden');
+    $('modeIntroContinue').classList.add('hidden');
+    // ボタンがフェードインし、その後説明文が現れる。2秒経過するまでタップ不可。
     modeIntroTextTimer=setTimeout(()=>{
       modeIntroTextTimer=null;
       if(page!=='tutorial'||phase!=='modeIntro')return;
-      $('modeIntroMessage').innerHTML='<div class="message-inner"><h2>2手問題に挑戦！</h2><p>「−1」と「+1」を使い分けて、すべて0にしよう！</p></div>';
+      $('modeIntroMessage').innerHTML='<div class="message-inner"><h2>2手問題に挑戦！</h2><p>「−1」と「＋1」を使い分けて、すべて0にしよう！</p></div>';
       $('modeIntroMessage').classList.remove('hidden');
-    },1250);
+    },800);
     modeIntroTimer=setTimeout(()=>{
       modeIntroTimer=null;
       if(page!=='tutorial'||phase!=='modeIntro')return;
-      locked=false;setPhase('free');
-    },3500);
+      modeIntroCanContinue=true;
+      $('modeIntroContinue').classList.remove('hidden');
+    },2000);
   }
   scheduleGuidance();
 }
@@ -346,6 +404,10 @@ function advanceGuide(){
   else if(phase==='freeComplete') navigate('select');
 }
 $('tutorialGuide').addEventListener('click',()=>{if(!locked && ['intro','affected','neighbors','complete','freeComplete'].includes(phase))advanceGuide()});
+$('modeIntroTapLayer').addEventListener('click',()=>{
+  if(page!=='tutorial'||phase!=='modeIntro'||!modeIntroCanContinue)return;
+  cancelModeIntro();locked=false;setPhase('free');
+});
 $('primary').addEventListener('click',advanceGuide);
 $('minusBtn').addEventListener('click',()=>{ direction=-1; render(); });
 $('plusBtn').addEventListener('click',()=>{ direction=1; render(); });
@@ -359,7 +421,7 @@ $('back').addEventListener('click',goBack);
 // ==========================================
 const STAGES = [{"board":[1,1,1,1,0,0,1,0,0],"min":1},{"board":[2,2,2,1,1,0,1,1,0],"min":2},{"board":[0,0,0,1,1,1,1,1,1],"min":3},{"board":[0,0,0,2,1,0,2,1,0],"min":2,"lesson":"cancel"},{"board":[0,0,2,0,1,2,1,2,2],"min":3},{"board":[1,0,0,2,2,2,2,1,1],"min":4},{"board":[2,1,2,0,2,1,1,1,1],"min":5},{"board":[1,1,2,2,1,1,0,2,2],"min":6},{"board":[2,2,2,2,1,2,1,0,1],"min":7},{"board":[1,1,2,1,1,0,1,2,1],"min":7},{"board":[1,2,1,1,1,2,0,2,2],"min":8}];
 // 本編ステージの3段階ヒント。どのヒントも正解マスや操作列は表示しません。
-const STAGE_HINTS = [
+const DEFAULT_STAGE_HINTS = [
   [
     "数字1を0にする方法を思い出してみよう。",
     "同じ縦・横にある数字が、まとめて変わるよ。",
@@ -416,7 +478,46 @@ const STAGE_HINTS = [
     "行ごとの操作の合計と、列ごとの操作の合計を別々に考えよう。最後は両方の影響を足して数字を0にできるよ。"
   ]
 ];
+const HINT_STORAGE_KEY = 'sumshift_custom_hints_v1';
+let STAGE_HINTS = DEFAULT_STAGE_HINTS.map(row => [...row]);
+function loadCustomHints(){
+  try {
+    const saved=JSON.parse(localStorage.getItem(HINT_STORAGE_KEY));
+    if(Array.isArray(saved)&&saved.length===DEFAULT_STAGE_HINTS.length&&saved.every(row=>Array.isArray(row)&&row.length===3&&row.every(v=>typeof v==='string'&&v.trim()))) STAGE_HINTS=saved;
+  } catch(e) { console.warn('ヒントの保存データを読み込めませんでした',e); }
+}
+loadCustomHints();
 const HINT_TITLES=['ヒント①｜考え方','ヒント②｜注目する場所','ヒント③｜解き方のコツ'];
+// 正確な残り最短手数：全 3^9=19,683 盤面からゴールへの距離をBFSで計算。
+// +1/-1 は互いの逆操作なので、ゴールから探索した距離を利用できる。
+const SOLVER_POW3=Array.from({length:9},(_,i)=>3**i);
+function encodePuzzle(b){let n=0;for(let i=0;i<9;i++)n+=b[i]*SOLVER_POW3[i];return n;}
+function decodePuzzle(code){const b=[];for(let i=0;i<9;i++){b.push(code%3);code=Math.floor(code/3);}return b;}
+function buildDistanceMap(){
+  const count=19683, distance=new Int8Array(count);distance.fill(-1);
+  const queue=new Int32Array(count);let head=0,tail=1;queue[0]=0;distance[0]=0;
+  while(head<tail){
+    const code=queue[head++],b=decodePuzzle(code),depth=distance[code]+1;
+    for(let pos=0;pos<9;pos++)for(const delta of [-1,1]){
+      const next=encodePuzzle(updateBoard(b,pos,delta));
+      if(distance[next]!==-1)continue;
+      distance[next]=depth;queue[tail++]=next;
+    }
+  }
+  if(tail!==count)console.warn('探索可能な盤面数:',tail,'/',count);
+  return distance;
+}
+const PUZZLE_DISTANCE=buildDistanceMap();
+function minimumRemaining(boardValue){return PUZZLE_DISTANCE[encodePuzzle(boardValue)];}
+function optimalNextChoices(boardValue){
+  const d=minimumRemaining(boardValue),choices=[];
+  if(d<=0)return choices;
+  for(let pos=0;pos<9;pos++)for(const delta of [-1,1]){
+    const next=updateBoard(boardValue,pos,delta);
+    if(minimumRemaining(next)===d-1)choices.push({pos,delta,next});
+  }
+  return choices;
+}
 let levelHintStep=0;
 const SAVE_KEY = 'sumshift_v030_progress';
 const PREVIOUS_SAVE_KEY = 'sumshift_v023_progress';
@@ -430,6 +531,15 @@ let levelHistory = [];
 let levelMovesCount = 0;
 let levelAnimating = false;
 let levelTimer = null;
+function insightCells(level){
+  // Stage 08–11: focus on rows/columns related to each stage's clue.
+  if(level===7)return [0,1,2,6,7,8]; // compare upper and lower rows
+  if(level===8)return [3,4,5];       // middle row
+  if(level===9)return [0,1,2,6,7,8]; // compare outer rows
+  if(level===10)return [0,1,2,6,7,8]; // upper/lower rows
+  return [];
+}
+
 function loadProgress(){
   try {const v=JSON.parse(localStorage.getItem(SAVE_KEY));if(v&&Array.isArray(v.stars)&&v.stars.length===STAGES.length)return {stars:v.stars.map(n=>Math.max(0,Math.min(3,Number(n)||0)))}}catch(e){}
   // Stage 04 is a new lesson, so carry forward only stages 01-03.
@@ -441,12 +551,13 @@ function loadProgress(){
 function storeProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(progressData))}catch(e){}}
 function stopLevelFx(){if(levelTimer!==null){clearTimeout(levelTimer);levelTimer=null;}levelAnimating=false;$('levelOverlay').replaceChildren();}
 function navigate(where){
-  stopLevelFx();cancelGuidance();cancelModeIntro();$('stageClearTap').classList.add('hidden');if(where!=='tutorial'){clearAnimation();locked=false;if(phase==='animating'){phase='tap';board=[...DEMO];}}page=where;
+  hideHintchan();stopLevelFx();cancelGuidance();cancelModeIntro();$('stageClearTap').classList.add('hidden');if(where!=='tutorial'){clearAnimation();locked=false;if(phase==='animating'){phase='tap';board=[...DEMO];}}page=where;
   $('tutorialView').classList.toggle('hidden',where!=='tutorial');
   $('stageSelectView').classList.toggle('hidden',where!=='select');
   $('stagePlayView').classList.toggle('hidden',where!=='play');
   $('toStages').classList.toggle('hidden',where!=='tutorial');
-  $('statePill').textContent=where==='tutorial'?'LESSON':where==='select'?'STAGES':'PLAY';
+  $('statePill').textContent='TUTORIAL';
+  $('statePill').classList.toggle('hidden',where!=='tutorial');
   if(where==='tutorial'){render();}else if(where==='select'){renderStageSelect();}else{renderLevel();}
 }
 function isUnlocked(i){return i===0||progressData.stars[i-1]>0;}
@@ -462,7 +573,7 @@ function renderStageSelect(){
 }
 function startLevel(index){
   if(!isUnlocked(index))return;
-  selectedLevel=index;levelBoard=[...STAGES[index].board];levelDirection=-1;levelHistory=[];levelMovesCount=0;levelHintStep=0;stopLevelFx();navigate('play');
+  hideHintchan();selectedLevel=index;levelBoard=[...STAGES[index].board];levelDirection=-1;levelHistory=[];levelMovesCount=0;levelHintStep=0;stopLevelFx();navigate('play');
 }
 function isLevelClear(){return levelBoard.every(n=>n===0)}
 function renderLevel(){
@@ -471,14 +582,15 @@ function renderLevel(){
   $('levelDescription').textContent=selectedLevel===0?'最初は1手！すべて0にしよう。':selectedLevel===3?'打ち消し合いを体験！ ＋1と−1で2手クリアを目指そう。':selectedLevel===STAGES.length-1?'最後の難問に挑戦！最短手数を目指そう。':'+1と−1を使い分け、すべて0にしよう。';
   $('levelMoves').textContent=`操作：${levelMovesCount}手`;
   $('levelMinimum').textContent=`最短：${stage.min}手`;
-  renderLevelHint();
   $('levelMinus').classList.toggle('selected',levelDirection===-1);
   $('levelPlus').classList.toggle('selected',levelDirection===1);
   $('levelUndo').disabled=levelHistory.length===0||levelAnimating;
   $('levelBoard').replaceChildren();
   levelBoard.forEach((n,i)=>{
     const b=document.createElement('button');b.type='button';b.className='tile';b.dataset.value=n;b.textContent=n;b.disabled=levelAnimating||isLevelClear();
-    b.setAttribute('aria-label',`${Math.floor(i/3)+1}行${i%3+1}列 数字${n}`);b.addEventListener('click',()=>tapLevel(i));$('levelBoard').appendChild(b);
+    b.setAttribute('aria-label',`${Math.floor(i/3)+1}行${i%3+1}列 数字${n}`);
+    b.addEventListener('click',()=>tapLevel(i));
+    $('levelBoard').appendChild(b);
   });
   const cleared=isLevelClear();
   $('levelMode').classList.toggle('hidden',cleared);
@@ -497,22 +609,10 @@ function renderLevel(){
     $('levelScore').textContent=`${levelMovesCount}手でクリア！ 最短手数：${stage.min}手`;
   }
 }
-function renderLevelHint(){
-  const visible=levelHintStep>0;
-  $('levelHintPanel').classList.toggle('hidden',!visible);
-  $('levelHintCount').textContent=visible?`${levelHintStep} / 3 表示中`:'未使用';
-  $('levelHint').textContent=visible?'💡 ヒントを閉じる':'💡 ヒントを見る（1 / 3）';
-  if(visible){
-    $('levelHintTitle').textContent=HINT_TITLES[levelHintStep-1];
-    $('levelHintText').textContent=STAGE_HINTS[selectedLevel][levelHintStep-1];
-  }
-  $('levelHintPrev').disabled=levelHintStep<=1;
-  $('levelHintNext').disabled=levelHintStep>=3;
-}
 function scoreStars(used,min){return used===min?3:used<=min+2?2:1;}
 function tapLevel(index){
   if(page!=='play'||levelAnimating||isLevelClear())return;
-  levelHistory.push([...levelBoard]);
+  hideHintchan();levelHistory.push([...levelBoard]);
   levelBoard=updateBoard(levelBoard,index,levelDirection);levelMovesCount++;
   const clear=isLevelClear();
   if(clear){
@@ -538,16 +638,212 @@ function advanceStageClear(){
 }
 $('stageClearTap').addEventListener('click',advanceStageClear);
 $('stageClearTap').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();advanceStageClear();}});
-$('levelRestart').addEventListener('click',()=>startLevel(selectedLevel));
+$('levelRestart').addEventListener('click',()=>{
+  if(levelAnimating)return;
+  hideHintchan();
+  const keptDirection=levelDirection;
+  const keptHint=levelHintStep;
+  levelBoard=[...STAGES[selectedLevel].board];
+  levelHistory=[];levelMovesCount=0;
+  levelDirection=keptDirection;levelHintStep=keptHint;
+  stopLevelFx();renderLevel();
+});
 $('levelUndo').addEventListener('click',()=>{
   if(levelAnimating||!levelHistory.length)return;
+  hideHintchan();
   levelBoard=levelHistory.pop();levelMovesCount--;renderLevel();
 });
-$('levelHint').addEventListener('click',()=>{levelHintStep=levelHintStep===0?1:0;renderLevelHint();});
-$('levelHintPrev').addEventListener('click',()=>{if(levelHintStep>1){levelHintStep--;renderLevelHint();}});
-$('levelHintNext').addEventListener('click',()=>{if(levelHintStep>0&&levelHintStep<3){levelHintStep++;renderLevelHint();}});
 $('levelMinus').addEventListener('click',()=>{levelDirection=-1;renderLevel()});
 $('levelPlus').addEventListener('click',()=>{levelDirection=1;renderLevel()});
+
+// 「ヒントちゃん」: 各手番の最新盤面を解析し、答えを示さず3段階で支援する。
+let hintchanPreviousFocus=null;
+let hintchanNextStep=0;
+let hintchanAnalyzedBoard=null;
+const HINTCHAN_ROWS=['上段','中段','下段'];
+const HINTCHAN_COLS=['左列','中央列','右列'];
+function hintchanZeroCount(b){return b.filter(x=>x===0).length;}
+function hintchanObservation(b){
+  const rowData=[0,1,2].map(r=>b.slice(r*3,r*3+3));
+  const colData=[0,1,2].map(c=>[b[c],b[c+3],b[c+6]]);
+  const zeroRows=rowData.map((v,i)=>v.every(n=>n===0)?HINTCHAN_ROWS[i]:null).filter(Boolean);
+  if(zeroRows.length)return `${zeroRows.join('と')}は全部0だね。でも今後の操作で変わっても大丈夫。`;
+  const sameRow=rowData.findIndex(v=>v.every(n=>n===v[0]));
+  if(sameRow>=0)return `${HINTCHAN_ROWS[sameRow]}には${rowData[sameRow][0]}が3つ並んでいるね。`;
+  const sameCol=colData.findIndex(v=>v.every(n=>n===v[0]));
+  if(sameCol>=0)return `${HINTCHAN_COLS[sameCol]}には${colData[sameCol][0]}が3つ並んでいるね。`;
+  const counts=[0,1,2].map(n=>b.filter(x=>x===n).length);
+  const target=counts[1]>=counts[2]?1:2;
+  return `今は0が${counts[0]}マス、1が${counts[1]}マス、2が${counts[2]}マスあるね。${target}のある場所も気にしてみよう。`;
+}
+// 最短距離を必ず1手減らす候補のみ使用。0の増加だけでなく盤面の形も評価する。
+function hintchanBestChoice(boardValue,choices){
+  const before=hintchanZeroCount(boardValue);
+  return [...choices].sort((a,b)=>{
+    const gainA=hintchanZeroCount(a.next)-before;
+    const gainB=hintchanZeroCount(b.next)-before;
+    if(gainA!==gainB)return gainB-gainA;
+    const impactA=a.next.reduce((s,n,i)=>s+(n!==boardValue[i]?1:0),0);
+    const impactB=b.next.reduce((s,n,i)=>s+(n!==boardValue[i]?1:0),0);
+    return impactB-impactA || a.pos-b.pos || a.delta-b.delta;
+  })[0];
+}
+function hintchanNextAdvice(step,b){
+  const remaining=minimumRemaining(b);
+  if(remaining<=0)return 'もう全部0になっているね！';
+  const options=optimalNextChoices(b);
+  if(!options.length)return '次の操作を計算できなかったよ。盤面を確認してみてね。';
+  const best=hintchanBestChoice(b,options);
+  const dir=best.delta===1?'＋1':'−1';
+  const row=HINTCHAN_ROWS[Math.floor(best.pos/3)];
+  const beforeZeros=hintchanZeroCount(b),afterZeros=hintchanZeroCount(best.next);
+  const stayShortest=levelMovesCount+remaining===STAGES[selectedLevel].min;
+  if(step===1){
+    return `【ヒント①｜今の盤面を観察】\n${hintchanObservation(b)}\nここから最短あと${remaining}手。${stayShortest?'まだステージ最短の可能性があるよ。':'ここからでもクリアできるよ。'} まずは数字の並びを見てみよう。`;
+  }
+  if(step===2){
+    const uniqueDirs=new Set(options.map(c=>c.delta));
+    const r=Math.floor(best.pos/3),c=best.pos%3;
+    const rowNums=b.slice(r*3,r*3+3);
+    const colNums=[b[c],b[c+3],b[c+6]];
+    const impacted=b.filter((_,i)=>crossing(i,best.pos));
+    let focus;
+    if(rowNums.every(v=>v===rowNums[0])){
+      focus=`${row}は「${rowNums[0]}」が横一列に並んでいるね。この並びを一度に動かすことを考えてみよう。`;
+    }else if(colNums.every(v=>v===colNums[0])){
+      focus=`${HINTCHAN_COLS[c]}は同じ数字が縦に並んでいるね。行と列を組み合わせると、どう動くかな？`;
+    }else if(rowNums.includes(0)){
+      focus=`${row}には0も混ざっているね。今ある0を守るより、最後に全部0になる変化を探してみよう。`;
+    }else if(impacted.filter(n=>n===1).length>=3){
+      focus=`${row}を通る十字には1が多いね。−1で動かす場合と＋1で動かす場合を比べてみよう。`;
+    }else if(impacted.filter(n=>n===2).length>=3){
+      focus=`${row}に関係する十字には2が多いね。数字の循環を考えると、操作方向のヒントになるよ。`;
+    }else{
+      focus=`${row}と交わる列をセットで考えてみよう。どの数字が同時に変わるか整理すると見通しがよくなるよ。`;
+    }
+    const dirText=uniqueDirs.size===1
+      ?`今の盤面から最短へ進むなら「${dir}」の操作がカギになるよ。`
+      :`最短につながる候補は「＋1」と「−1」の両方にあるよ。`;
+    return `【ヒント②｜一手の方向性】\n${focus}\n${dirText}`;
+  }
+  const gain=afterZeros-beforeZeros;
+  let outcome;
+  if(gain>0)outcome=`その操作では0のマスが${beforeZeros}個から${afterZeros}個に増えるよ。`;
+  else if(gain===0)outcome=`その操作では0のマスの数は${beforeZeros}個のままだよ。数字の並び方が変わることに注目して。`;
+  else outcome=`その操作では0のマスが${beforeZeros}個から${afterZeros}個に減るけれど、残り最短手数はちゃんと1手減るよ。`;
+  return `【ヒント③｜実際の変化を想像】\n最短につながる一例では、${row}のどこかに「${dir}」を使うよ。${outcome}\n正解マスはまだ秘密。十字の変化を比べてみよう！`;
+}
+function hideHintchan(){
+  const shade=$('hintchanShade');if(shade)shade.classList.add('hidden');
+  hintchanNextStep=0;hintchanAnalyzedBoard=null;
+  $('hintchanFollowup').classList.add('hidden');
+  if(hintchanPreviousFocus&&typeof hintchanPreviousFocus.focus==='function')hintchanPreviousFocus.focus();
+  hintchanPreviousFocus=null;
+}
+function openHintchan(){
+  if(page!=='play'||levelAnimating||isLevelClear())return;
+  hintchanPreviousFocus=document.activeElement;
+  hintchanNextStep=0;hintchanAnalyzedBoard=null;
+  $('hintchanFollowup').classList.add('hidden');
+  $('hintchanSpeech').textContent=`STAGE ${String(selectedLevel+1).padStart(2,'0')} の今の盤面を見ているよ。\nどうしたの？ 一緒に考えよう！`;
+  $('hintchanShade').classList.remove('hidden');
+  $('hintchanClose').focus();
+}
+function showHintchanNextStep(){
+  if(!hintchanAnalyzedBoard)return;
+  hintchanNextStep=Math.min(hintchanNextStep+1,3);
+  $('hintchanSpeech').textContent=hintchanNextAdvice(hintchanNextStep,hintchanAnalyzedBoard);
+  $('hintchanHintStep').textContent=`現在の盤面から考えるヒント ${hintchanNextStep} / 3`;
+  $('hintchanMore').classList.toggle('hidden',hintchanNextStep>=3);
+  $('hintchanMore').textContent=hintchanNextStep===1?'ヒント②を聞く →':'ヒント③を聞く →';
+}
+function hintchanRespond(kind){
+  if(page!=='play')return;
+  const remaining=minimumRemaining(levelBoard);
+  const used=levelMovesCount,original=STAGES[selectedLevel].min;
+  let msg='';
+  $('hintchanFollowup').classList.add('hidden');
+  hintchanNextStep=0;hintchanAnalyzedBoard=null;
+  if(kind==='distance'){
+    msg=remaining===0?'もう全部0だよ。クリアおめでとう！':`今の盤面からは、最短あと ${remaining} 手で解けるよ！\nここまで ${used} 手だから、合計の最短は ${used+remaining} 手だね。`;
+  }else if(kind==='route'){
+    if(used+remaining===original){
+      msg=`いい感じ！ 今から最善の手を選べば、最短 ${original} 手でクリアできるよ。\n焦らなくて大丈夫。次の一手で悩んでる？`;
+    }else{
+      msg=`今の盤面から残り最短 ${remaining} 手。使った ${used} 手と合わせて ${used+remaining} 手になるね。\nこのステージの最短記録は ${original} 手だから、最短記録を狙うなら少し前の操作を見直すのがおすすめ。でもこのままでもクリアはできるよ！`;
+    }
+  }else if(kind==='next'){
+    hintchanAnalyzedBoard=[...levelBoard];
+    $('hintchanFollowup').classList.remove('hidden');
+    showHintchanNextStep();
+    return;
+  }
+  $('hintchanSpeech').textContent=msg;
+}
+$('hintchanLaunch').addEventListener('click',openHintchan);
+$('hintchanClose').addEventListener('click',hideHintchan);
+$('hintchanShade').addEventListener('click',e=>{if(e.target===$('hintchanShade'))hideHintchan();});
+document.querySelectorAll('[data-advice]').forEach(b=>b.addEventListener('click',()=>hintchanRespond(b.dataset.advice)));
+$('hintchanMore').addEventListener('click',showHintchanNextStep);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('hintchanShade').classList.contains('hidden'))hideHintchan();});
+
+// Google SheetsからダウンロードしたCSVを読み込み、ブラウザ内に保存する。
+// カンマ・ダブルクォート・セル内改行に対応したCSVパーサー。
+function parseCSV(text){
+  const rows=[];let row=[],cell='',quoted=false;
+  text=text.replace(/^\uFEFF/,'');
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(quoted){
+      if(c==='"'&&text[i+1]==='"'){cell+='"';i++;}
+      else if(c==='"')quoted=false;
+      else cell+=c;
+    }else if(c==='"'){quoted=true;}
+    else if(c===','){row.push(cell);cell='';}
+    else if(c==='\n'||c==='\r'){
+      if(c==='\r'&&text[i+1]==='\n')i++;
+      row.push(cell);if(row.some(v=>v.trim()!==''))rows.push(row);
+      row=[];cell='';
+    }else cell+=c;
+  }
+  if(quoted)throw new Error('CSVの引用符が閉じられていません。');
+  row.push(cell);
+  if(row.some(v=>v.trim()!==''))rows.push(row);
+  return rows;
+}
+function applyHintsFromCSV(csvText){
+  const rows=parseCSV(csvText);
+  const header=['ステージ','ヒント①','ヒント②','ヒント③'];
+  if(rows.length!==STAGES.length+1)throw new Error(`データは見出し＋${STAGES.length}ステージの行が必要です（現在${rows.length}行）。`);
+  if(header.some((h,i)=>(rows[0][i]||'').trim()!==h))throw new Error('列見出しが異なります。「ステージ」「ヒント①」「ヒント②」「ヒント③」を使ってください。');
+  const newHints=rows.slice(1).map((row,index)=>{
+    const expected=`STAGE ${String(index+1).padStart(2,'0')}`;
+    if(row.length!==4||(row[0]||'').trim()!==expected)throw new Error(`${index+2}行目のステージ名、または列数を確認してください（${expected}）。`);
+    const result=row.slice(1).map(v=>v.trim());
+    if(result.some(v=>!v))throw new Error(`${expected}のヒントに空欄があります。`);
+    return result;
+  });
+  // 全件チェック後に初めて置き換えるため、エラー時は既存データを保持。
+  localStorage.setItem(HINT_STORAGE_KEY,JSON.stringify(newHints));
+  STAGE_HINTS=newHints;
+  return newHints.length;
+}
+$('hintCsvFile').addEventListener('change',async e=>{
+  const file=e.target.files?.[0];
+  if(!file)return;
+  try{
+    const count=applyHintsFromCSV(await file.text());
+    $('hintImportStatus').textContent=`✓ ${count}ステージ・${count*3}件のヒントを読み込みました。各ステージで確認できます。`;
+  }catch(err){
+    $('hintImportStatus').textContent=`読み込み失敗：${err.message}`;
+  }
+  e.target.value='';
+});
+$('resetHintCsv').addEventListener('click',()=>{
+  try{localStorage.removeItem(HINT_STORAGE_KEY);STAGE_HINTS=DEFAULT_STAGE_HINTS.map(row=>[...row]);$('hintImportStatus').textContent='初期ヒントに戻しました。クリア記録は変更していません。';}
+  catch(err){$('hintImportStatus').textContent='初期化に失敗しました：'+err.message;}
+});
+
 
 render();
 </script>
