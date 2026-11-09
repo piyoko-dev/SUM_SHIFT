@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Prototype v0.4.0 Mobile</title>
+<title>SUM SHIFT | Prototype v0.4.2 Mobile</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -138,14 +138,6 @@ button{-webkit-tap-highlight-color:transparent}
  .footer-actions{margin-left:auto}
  #tutorialView .guide-card{padding-left:20px;padding-right:20px}
 }
-/* v0.3.6: CSVヒント編集 */
-.hint-import-area{margin-top:20px;padding:14px;border:1px solid #32445e;border-radius:13px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-.hint-import-button{display:inline-block;cursor:pointer;border:1px solid #3e7094;background:#1b3d56;border-radius:9px;color:#d4f1ff;padding:10px 13px;font-size:.86rem;font-weight:650}
-.hint-import-button:focus-within{outline:2px solid #5ac4ff}
-#hintCsvFile{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
-.hint-reset{border:0;background:transparent;color:#b8c8da;font-size:.8rem;padding:10px 4px}
-.hint-import-status{color:#b1c6db;font-size:.77rem;line-height:1.5;margin:0;width:100%}
-
 /* v0.3.7: insight highlighting retained; long-press preview removed */
 #levelBoard .tile{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
 .tile.insight-tile{outline:2px solid #72e6ef;outline-offset:-3px;animation:insightPulse 2s ease-in-out infinite}
@@ -164,11 +156,31 @@ button{-webkit-tap-highlight-color:transparent}
 .hintchan-hintstep{font-size:.78rem;color:#a5dff7;margin-bottom:8px}
 .hintchan-followup .hintchan-choice{width:100%;text-align:center}
 @media(max-width:390px){.hintchan-dialog{padding:14px}.hintchan-launch{font-size:.70rem}}
+
+/* v0.4.1: small-screen tutorial readability */
+#tutorialView .guide-card.nonblocking .guide-lead{margin-bottom:3px;line-height:1.35}
+#tutorialView .guide-card.nonblocking .guide-body{margin-top:0;line-height:1.4}
+#tutorialView .guide-card.nonblocking{padding-bottom:2px;margin-bottom:clamp(20px,5vh,34px)}
+.mode-intro-message .message-inner p{line-height:1.55}
+.play-heading #levelDescription{line-height:1.55;text-wrap:pretty}
+@media(max-width:390px){.play-heading #levelDescription{font-size:.76rem;letter-spacing:-.01em}}
+
+/* v0.4.2: first-time completion celebrations */
+.achievement-shade{position:fixed;inset:0;z-index:80;background:rgba(5,11,25,.94);display:flex;align-items:center;justify-content:center;padding:calc(18px + env(safe-area-inset-top)) 18px calc(18px + env(safe-area-inset-bottom));overscroll-behavior:contain}
+.achievement-panel{width:min(100%,440px);max-height:95dvh;overflow-y:auto;display:flex;align-items:center;flex-direction:column;gap:10px;text-align:center}
+.achievement-image{width:min(88vw,390px,53dvh);height:auto;aspect-ratio:1;object-fit:contain;animation:achievementAppear .55s ease-out both}
+.achievement-caption{font-size:.88rem;color:#d4e8f9;line-height:1.6;margin:0}
+.achievement-buttons{display:grid;gap:10px;width:min(100%,310px);margin-top:8px;animation:achievementAppear .35s ease-out both}
+.achievement-buttons .btn{width:100%;flex:auto}
+.achievement-buttons .btn.primary{background:#4cc8ed;border-color:#4cc8ed}
+.achievement-progress{color:#9bb6cb;font-size:.77rem;min-height:19px}
+@keyframes achievementAppear{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-height:650px){.achievement-image{width:min(65vw,300px,48dvh)}.achievement-panel{gap:5px}}
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.4.0</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.4.2</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">ステージ選択へ →</button></div>
   <div id="tutorialView" class="view">
   <div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -189,19 +201,13 @@ button{-webkit-tap-highlight-color:transparent}
   <div id="modeIntroMessage" class="mode-intro-message hidden" aria-live="polite"></div>
   <div id="modeIntroTapLayer" class="mode-intro-tap-layer hidden" role="button" tabindex="-1" aria-label="操作説明を閉じて2手問題を始める"><span id="modeIntroContinue" class="mode-intro-continue hidden">画面をタップして続ける ↓</span></div>
   <div id="modeControls" class="controls hidden"><button id="minusBtn" class="btn selected" type="button">−1 操作</button><button id="plusBtn" class="btn" type="button">+1 操作</button></div>
-  <div id="actions" class="controls"><button id="primary" class="btn primary" type="button">はじめる →</button><button id="hint" class="btn secondary hidden" type="button">ヒント</button></div>
+  <div id="actions" class="controls"><button id="primary" class="btn primary" type="button">はじめる →</button></div>
   <div class="footer"><span id="moves">操作回数：0</span><div class="footer-actions"><button id="back" type="button">一つ戻る ↶</button><button id="reset" type="button">最初からやり直す ↻</button></div></div>
   </div>
   <section id="stageSelectView" class="view hidden">
     <div class="guide-card"><div class="eyebrow">STAGE SELECT</div><h1 class="guide-title">パズルを選ぼう！</h1><p class="guide-lead">01から順番に解放。04は打ち消し合いの練習！</p><p class="guide-body">クリア手数に応じて星を獲得できるよ。何度でも挑戦可能！</p></div>
     <div id="stageList" class="stage-list" aria-label="ステージ一覧"></div>
     <p id="stageSummary" class="stage-info"></p>
-    <div class="hint-import-area">
-      <label class="hint-import-button" for="hintCsvFile">ヒントCSVを読み込む</label>
-      <input id="hintCsvFile" type="file" accept=".csv,text/csv,text/plain" aria-label="ヒントのCSVファイルを選択">
-      <button id="resetHintCsv" class="hint-reset" type="button">初期ヒントに戻す</button>
-      <p id="hintImportStatus" class="hint-import-status" role="status" aria-live="polite">スプレッドシートで編集したCSVを読み込めます。クリア記録はそのまま残ります。</p>
-    </div>
     <div class="controls"><button id="backToTutorial" class="btn secondary">チュートリアルに戻る</button></div>
   </section>
   <section id="stagePlayView" class="view hidden">
@@ -227,6 +233,19 @@ button{-webkit-tap-highlight-color:transparent}
         <button id="hintchanMore" type="button" class="hintchan-choice">もう少し教えて →</button>
       </div>
       <p class="hintchan-note">次の一手の相談は、今の数字と最短解を分析して3段階で案内するよ。答えのマスは表示しないよ。</p>
+    </section>
+  </div>
+
+  <div id="achievementShade" class="achievement-shade hidden" role="dialog" aria-modal="true" aria-labelledby="achievementHeading">
+    <section class="achievement-panel">
+      <img id="achievementImage" class="achievement-image" src="images/clear.png" alt="CLEAR" width="1200" height="1200">
+      <h2 id="achievementHeading" class="hidden">CLEAR</h2>
+      <p id="achievementCaption" class="achievement-caption"></p>
+      <p id="achievementProgress" class="achievement-progress" aria-live="polite"></p>
+      <div id="achievementButtons" class="achievement-buttons hidden">
+        <button type="button" class="btn primary" id="achievementShare">SNSで共有 ↗</button>
+        <button type="button" class="btn secondary" id="achievementClose">ゲームに戻る</button>
+      </div>
     </section>
   </div>
   <div id="stageClearTap" class="stage-clear-tap hidden" role="button" tabindex="0" aria-label="次のステージへ進む"></div>
@@ -342,10 +361,10 @@ function render(){
     affected:{title:'どこが変わった？',lead:'中央を押すと、縦と横の合計5マスが変化するよ。',body:'<strong>押したマス自身と、上下左右の4マス</strong>が変わったね。斜めのマスは変わらないよ。',primary:'次へ →'},
     neighbors:{title:'周りの数字の変化',lead:'0から1引くと、どうなるかな？',body:'このゲームの数字は <strong>0 → 1 → 2 → 0</strong> と循環するよ。だから上下左右の <strong>0 → 2</strong> になったんだ。',primary:'確認問題へ →'},
 
-    practice:{title:'自分で解いてみよう！',lead:'今度はヒントなしで、全部0にしてみよう。',body:'<strong>−1操作</strong>で、好きなマスをタップしてみてね。'+(showHint?'<br><strong>ヒント：</strong>「1」が十字に並んでいるよ。':''),primary:''},
+    practice:{title:'自分で解いてみよう！',lead:'今度はヒントなしで、全部0にしてみよう。',body:'<strong>−1操作</strong>で、好きなマスをタップしてみてね。',primary:''},
     complete:{title:'確認問題クリア！',lead:'自分でルールを使って解けたね。',body:'<strong>一手でクリア！</strong><br>次は＋1も使える操作モードが増えるよ。',primary:'次の問題へ →'},
     modeIntro:{title:'',lead:'',body:'',primary:''},
-    free:{title:'2手問題に挑戦！',lead:'今度は「+1」と「−1」の両方を使おう。',body:'方向を選んでマスを押そう。すべて0にすればクリア！'+(showHint?'<br><strong>ヒント：</strong>左上に−1、右下に+1を1回ずつ。':''),primary:''},
+    free:{title:'2手問題に挑戦！',lead:'今度は「+1」と「−1」の両方を使おう。',body:'方向を選んでマスを押そう。すべて0にすればクリア！',primary:''},
     freeComplete:{title:'クリア！',lead:'SUM SHIFTの基本操作はマスターしたね。',body:`<strong>${moves}手でクリア！</strong> この問題は最短2手で解けるよ。`,primary:'本編ステージへ →'}
   }[phase];
 
@@ -360,8 +379,6 @@ function render(){
   $('guideBody').innerHTML=config.body;
   $('primary').textContent=config.primary;
   $('primary').classList.toggle('hidden',!config.primary);
-  $('hint').classList.toggle('hidden',phase!=='practice'&&phase!=='free');
-  $('hint').textContent=showHint?'ヒントを閉じる':'ヒントを見る';
   $('modeControls').classList.toggle('hidden',!(phase==='free' || phase==='modeIntro'));
   $('minusBtn').classList.toggle('selected',direction===-1);
   $('plusBtn').classList.toggle('selected',direction===1);
@@ -383,7 +400,7 @@ function render(){
     modeIntroTextTimer=setTimeout(()=>{
       modeIntroTextTimer=null;
       if(page!=='tutorial'||phase!=='modeIntro')return;
-      $('modeIntroMessage').innerHTML='<div class="message-inner"><h2>2手問題に挑戦！</h2><p>「−1」と「＋1」を使い分けて、すべて0にしよう！</p></div>';
+      $('modeIntroMessage').innerHTML='<div class="message-inner"><h2>2手問題に挑戦！</h2><p>「−1」と「＋1」を使い分けて、<br>すべて0にしよう！</p></div>';
       $('modeIntroMessage').classList.remove('hidden');
     },800);
     modeIntroTimer=setTimeout(()=>{
@@ -411,7 +428,6 @@ $('modeIntroTapLayer').addEventListener('click',()=>{
 $('primary').addEventListener('click',advanceGuide);
 $('minusBtn').addEventListener('click',()=>{ direction=-1; render(); });
 $('plusBtn').addEventListener('click',()=>{ direction=1; render(); });
-$('hint').addEventListener('click',()=>{ showHint=!showHint; render(); });
 function restart(){ clearAnimation();cancelGuidance();cancelModeIntro();history=[]; locked=false; board=[...DEMO]; moves=0; showHint=false; direction=-1; setPhase('intro'); }
 $('reset').addEventListener('click',restart);
 $('back').addEventListener('click',goBack);
@@ -523,6 +539,106 @@ const SAVE_KEY = 'sumshift_v030_progress';
 const PREVIOUS_SAVE_KEY = 'sumshift_v023_progress';
 const OLD_SAVE_KEY = 'sumshift_v02_progress';
 let progressData = loadProgress();
+
+// 11ステージ/33スターの「初回達成時」だけをキューに追加する。
+const ACHIEVEMENT_KEY = 'sumshift_v042_achievement_seen';
+const ACHIEVEMENT_DURATION = 2500; // CLEAR と ALL CLEAR はともに2.5秒
+const GAME_URL = 'https://piyoko-dev.github.io/SUM_SHIFT/';
+let achievementSeen = readAchievementSeen();
+let pendingAchievements = [];
+let activeAchievement = null;
+let achievementTimer = null;
+let achievementReady = false;
+function readAchievementSeen(){
+  try {
+    const v=JSON.parse(localStorage.getItem(ACHIEVEMENT_KEY));
+    return {clear:v?.clear===true,allClear:v?.allClear===true};
+  } catch(e){return {clear:false,allClear:false}}
+}
+function writeAchievementSeen(){
+  try{localStorage.setItem(ACHIEVEMENT_KEY,JSON.stringify(achievementSeen))}catch(e){}
+}
+function achievementCounts(){
+  return {cleared:progressData.stars.filter(n=>n>0).length,stars:progressData.stars.reduce((a,b)=>a+b,0)};
+}
+function queueNewAchievements(before,after){
+  // 既存の保存データから起動しただけでは表示しない。条件を初めて満たす瞬間にのみ起動。
+  if(before.cleared<STAGES.length && after.cleared===STAGES.length && !achievementSeen.clear){
+    pendingAchievements.push('clear');achievementSeen.clear=true;
+  }
+  if(before.stars<STAGES.length*3 && after.stars===STAGES.length*3 && !achievementSeen.allClear){
+    pendingAchievements.push('allClear');achievementSeen.allClear=true;
+  }
+  writeAchievementSeen();
+}
+function showPendingAchievements(){
+  if(page!=='play'||activeAchievement||pendingAchievements.length===0)return;
+  $('stageClearTap').classList.add('hidden');
+  advanceAchievement();
+}
+function advanceAchievement(){
+  if(achievementTimer!==null){clearTimeout(achievementTimer);achievementTimer=null;}
+  const kind=pendingAchievements.shift();
+  if(!kind){closeAchievement();return;}
+  activeAchievement=kind;achievementReady=false;
+  $('achievementShade').classList.remove('hidden');
+  const isPerfect=kind==='allClear';
+  $('achievementImage').src=isPerfect?'images/all_clear.png':'images/clear.png';
+  $('achievementImage').alt=isPerfect?'ALL CLEAR':'CLEAR';
+  $('achievementHeading').textContent=isPerfect?'ALL CLEAR':'CLEAR';
+  $('achievementCaption').textContent=isPerfect?'全11ステージ・33スター完全制覇！':'全11ステージクリア！';
+  $('achievementButtons').classList.add('hidden');
+  $('achievementProgress').textContent=pendingAchievements.length?'次の達成演出に続くよ…':'達成おめでとう！';
+  $('achievementImage').style.animation='none';void $('achievementImage').offsetWidth;$('achievementImage').style.animation='';
+  achievementTimer=setTimeout(()=>{
+    achievementTimer=null;
+    if(pendingAchievements.length){advanceAchievement();return;}
+    achievementReady=true;
+    $('achievementProgress').textContent='達成記念をシェアしよう！';
+    $('achievementButtons').classList.remove('hidden');
+  },ACHIEVEMENT_DURATION);
+}
+function closeAchievement(){
+  if(achievementTimer!==null){clearTimeout(achievementTimer);achievementTimer=null;}
+  activeAchievement=null;pendingAchievements=[];achievementReady=false;
+  $('achievementShade').classList.add('hidden');
+  if(page==='play')renderLevel();
+}
+function achievementShareText(kind){
+  if(kind==='allClear')return 'SUM SHIFTを完全制覇！\n全11ステージクリア＆33スター獲得！';
+  return 'SUM SHIFTの全11ステージをクリアしたよ！';
+}
+async function shareAchievement(){
+  if(!activeAchievement||!achievementReady)return;
+  const text=achievementShareText(activeAchievement);
+  const asset=activeAchievement==='allClear'?'images/all_clear.png':'images/clear.png';
+  // Web Share API: iPhone Safariはファイル共有に対応する場合がある。
+  // ローカルfile://のようにファイル共有できない環境ではテキストとURLへフォールバック。
+  if(navigator.share){
+    try{
+      const r=await fetch(asset);
+      if(r.ok){
+        const blob=await r.blob();
+        const file=new File([blob],activeAchievement==='allClear'?'SUM_SHIFT_ALL_CLEAR.png':'SUM_SHIFT_CLEAR.png',{type:'image/png'});
+        if(navigator.canShare&&navigator.canShare({files:[file]})){
+          await navigator.share({title:'SUM SHIFT',text:text+'\n'+GAME_URL,files:[file]});return;
+        }
+      }
+    }catch(e){if(e?.name==='AbortError')return;}
+    try{await navigator.share({title:'SUM SHIFT',text,url:GAME_URL});return;}
+    catch(e){if(e?.name==='AbortError')return;}
+  }
+  const copyText=text+'\n'+GAME_URL;
+  try{await navigator.clipboard.writeText(copyText);$('achievementProgress').textContent='共有文とURLをコピーしたよ！';}
+  catch(e){
+    // clipboardへのアクセスがないブラウザでは、X投稿画面に遷移する。
+    window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(GAME_URL),'_blank','noopener,noreferrer');
+    $('achievementProgress').textContent='Xで共有する画面を開いたよ';
+  }
+}
+$('achievementShare').addEventListener('click',shareAchievement);
+$('achievementClose').addEventListener('click',closeAchievement);
+
 let page = 'tutorial';
 let selectedLevel = 0;
 let levelBoard = [];
@@ -551,6 +667,8 @@ function loadProgress(){
 function storeProgress(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(progressData))}catch(e){}}
 function stopLevelFx(){if(levelTimer!==null){clearTimeout(levelTimer);levelTimer=null;}levelAnimating=false;$('levelOverlay').replaceChildren();}
 function navigate(where){
+  if(activeAchievement)return;
+  if(where!=='play' && pendingAchievements.length){pendingAchievements=[];}
   hideHintchan();stopLevelFx();cancelGuidance();cancelModeIntro();$('stageClearTap').classList.add('hidden');if(where!=='tutorial'){clearAnimation();locked=false;if(phase==='animating'){phase='tap';board=[...DEMO];}}page=where;
   $('tutorialView').classList.toggle('hidden',where!=='tutorial');
   $('stageSelectView').classList.toggle('hidden',where!=='select');
@@ -579,7 +697,7 @@ function isLevelClear(){return levelBoard.every(n=>n===0)}
 function renderLevel(){
   const stage=STAGES[selectedLevel];
   $('levelTitle').textContent=`STAGE ${String(selectedLevel+1).padStart(2,'0')}`;
-  $('levelDescription').textContent=selectedLevel===0?'最初は1手！すべて0にしよう。':selectedLevel===3?'打ち消し合いを体験！ ＋1と−1で2手クリアを目指そう。':selectedLevel===STAGES.length-1?'最後の難問に挑戦！最短手数を目指そう。':'+1と−1を使い分け、すべて0にしよう。';
+  $('levelDescription').innerHTML=selectedLevel===0?'最初は1手！すべて0にしよう。':selectedLevel===3?'打ち消し合いを体験！ ＋1と−1で2手クリアを目指そう。':selectedLevel===STAGES.length-1?'最後の難問に挑戦！最短手数を目指そう。':'「−1」と「＋1」を使い分けて、<br>すべて0にしよう！';
   $('levelMoves').textContent=`操作：${levelMovesCount}手`;
   $('levelMinimum').textContent=`最短：${stage.min}手`;
   $('levelMinus').classList.toggle('selected',levelDirection===-1);
@@ -618,13 +736,15 @@ function tapLevel(index){
   if(clear){
     levelAnimating=true;
     const score=scoreStars(levelMovesCount,STAGES[selectedLevel].min);
+    const before=achievementCounts();
     progressData.stars[selectedLevel]=Math.max(progressData.stars[selectedLevel],score);storeProgress();
+    queueNewAchievements(before,achievementCounts());
   }
   renderLevel();
   $('levelBoard').querySelectorAll('.tile').forEach((b,i)=>{if(crossing(i,index)){b.classList.add('affected')}});
   if(clear){
     $('levelOverlay').innerHTML='<div class="clear">CLEAR!<small>STAGE CLEAR</small></div>';
-    levelTimer=setTimeout(()=>{levelAnimating=false;levelTimer=null;$('levelOverlay').replaceChildren();if(page==='play')renderLevel();},1400);
+    levelTimer=setTimeout(()=>{levelAnimating=false;levelTimer=null;$('levelOverlay').replaceChildren();if(page==='play'){renderLevel();showPendingAchievements();}},1400);
   }
 }
 $('toStages').addEventListener('click',()=>navigate('select'));
@@ -633,6 +753,7 @@ $('levelHome').addEventListener('click',()=>navigate('select'));
 $('levelSelect').addEventListener('click',()=>navigate('select'));
 $('levelNext').addEventListener('click',()=>{if(selectedLevel<STAGES.length-1)startLevel(selectedLevel+1)});
 function advanceStageClear(){
+  if(activeAchievement||pendingAchievements.length)return;
   if(page!=='play'||levelAnimating||!isLevelClear())return;
   if(selectedLevel<STAGES.length-1)startLevel(selectedLevel+1);else navigate('select');
 }
@@ -828,21 +949,6 @@ function applyHintsFromCSV(csvText){
   STAGE_HINTS=newHints;
   return newHints.length;
 }
-$('hintCsvFile').addEventListener('change',async e=>{
-  const file=e.target.files?.[0];
-  if(!file)return;
-  try{
-    const count=applyHintsFromCSV(await file.text());
-    $('hintImportStatus').textContent=`✓ ${count}ステージ・${count*3}件のヒントを読み込みました。各ステージで確認できます。`;
-  }catch(err){
-    $('hintImportStatus').textContent=`読み込み失敗：${err.message}`;
-  }
-  e.target.value='';
-});
-$('resetHintCsv').addEventListener('click',()=>{
-  try{localStorage.removeItem(HINT_STORAGE_KEY);STAGE_HINTS=DEFAULT_STAGE_HINTS.map(row=>[...row]);$('hintImportStatus').textContent='初期ヒントに戻しました。クリア記録は変更していません。';}
-  catch(err){$('hintImportStatus').textContent='初期化に失敗しました：'+err.message;}
-});
 
 
 render();
