@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#101827">
+<meta name="theme-color" content=" #fff7e9">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Prototype v0.4.2 Mobile</title>
+<title>SUM SHIFT | Ver.0.5.0</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -176,14 +176,60 @@ button{-webkit-tap-highlight-color:transparent}
 .achievement-progress{color:#9bb6cb;font-size:.77rem;min-height:19px}
 @keyframes achievementAppear{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-height:650px){.achievement-image{width:min(65vw,300px,48dvh)}.achievement-panel{gap:5px}}
+
+/* SUM SHIFT v0.5.0 — warm Piyoko UI. Core 3x3 puzzle logic is unchanged. */
+:root{color-scheme:light;--bg:#fff9ed;--card:#fffaef;--tile:#fff9f0;--ink:#654025;--muted:#927150;--blue:#55afe3;--green:#35b77a;--pink:#ff8c9d}
+html,body{background:#fff9eb;color:var(--ink)}
+body{background:radial-gradient(circle at 50% 0%,#ffecad 0%,#fff9ed 32%,#fff9ed 85%,#fff2bd 100%)}
+.app{max-width:480px;min-height:100dvh;padding:calc(15px + env(safe-area-inset-top)) 16px calc(26px + env(safe-area-inset-bottom));background:linear-gradient(180deg,#fff0b5 0 145px,#fff9ee 145px 96%,#ffefb5 100%)}
+.top{justify-content:center;min-height:95px;position:relative}.top>div:first-child{text-align:center}.brand{font-size:clamp(30px,9vw,44px);font-weight:1000;line-height:.91;letter-spacing:.005em;color:#774a27;text-shadow:2px 3px 0 #fff9e8}.subtitle{font-weight:750;color:#b88a50;font-size:.65rem;margin-top:8px}.pill{position:absolute;right:0;top:1px;background:#fff8e7;color:#85552d;border:2px solid #e7bd83;font-weight:800}
+.nav-top{margin-top:-6px;margin-bottom:4px}.menu-btn{color:#744826;background:#fff7e8;border:2px solid #dcaf7d;border-radius:999px;font-weight:800;box-shadow:0 3px 0 #d4ad83}
+.view{color:var(--ink)}.board{gap:7px}.tile{border:2px solid #e9c9ab;border-radius:18px;background:linear-gradient(#fffefa,#fff1df);color:#6c4327;box-shadow:0 4px 0 #d6b28c,0 5px 9px #a6753b1c;font-size:clamp(33px,10vw,51px);font-weight:900;text-shadow:0 1px #fff}
+.tile[data-value="0"]{background:linear-gradient(#fff9bd,#ffe78b);color:#7c4d24;border-color:#edcb7d;box-shadow:0 4px 0 #d5ad51}
+.tile[data-value="1"],.tile[data-value="2"]{background:linear-gradient(#fffefa,#fff2e0);color:#64402a;border-color:#e6c9a8}
+.tile.target{border-color:#40ace6;box-shadow:0 0 0 3px #70d7ff70,0 4px 0 #b3b18a}
+.controls{gap:11px}.btn{background:#fff8e9;color:#754527;border:2px solid #dfb687;border-radius:999px;box-shadow:0 4px 0 #d2ac80;font-weight:850;min-height:49px}.btn.primary{background:linear-gradient(#ffb445,#ff921a);border-color:#f6a02b;color:#fff;box-shadow:0 4px 0 #d37a1d}.btn.secondary{background:#fff8e9;color:#78502f}.btn.selected{background:linear-gradient(#ffc063,#ff9419);border-color:#f5a23c;color:white;box-shadow:0 4px 0 #cb7621}
+#levelMinus{background:linear-gradient(#80d3ff,#4da7e1);border-color:#5cb5e3;color:#fff;box-shadow:0 4px 0 #3985b7}#levelPlus{background:linear-gradient(#ffc46c,#ff9a26);border-color:#ffad40;color:#fff;box-shadow:0 4px 0 #d27a22}
+#levelMode .btn:not(.selected){filter:saturate(.58);opacity:.67}#levelMode .btn.selected{filter:saturate(1.13);opacity:1;outline:3px solid #fff9ee;outline-offset:-6px}
+#levelMode,#modeControls{margin-top:18px}#levelMode button{font-size:1.08rem;min-height:54px}
+#stagePlayView{min-height:calc(100dvh - 140px);gap:0}.play-heading{text-align:center;padding-top:2px}.play-heading h1{margin:3px auto 7px;font-size:1rem;display:table;border:2px solid #e6c49d;background:#fffaf1;border-radius:999px;padding:5px 24px;color:#86542c}.play-heading p{color:#895931;font-size:.83rem;font-weight:750}.play-heading .play-meta{margin-top:12px;background:#fff1d0;border:1px solid #f3d7a4;border-radius:999px;padding:6px 18px;color:#85502d;justify-content:space-around;font-weight:800}
+#stagePlayView>.game{margin:8px 0 4px;padding:6px 0}#levelBoard{max-width:350px;margin:0 auto;border-radius:27px;background:#ffe5c1;padding:12px;border:2px solid #efc8a1}
+#stagePlayView>.game-actions{margin-top:22px;gap:8px;justify-content:space-between;flex-wrap:nowrap}#stagePlayView>.game-actions .btn{flex:1;font-size:.76rem;min-height:47px;white-space:nowrap;padding:7px 8px;border:2px solid #e3be92;color:#7b4e2a;background:#fff8eb;font-weight:800;box-shadow:0 3px 0 #d4b28c;border-radius:16px}
+.hintchan-launch{width:100%;align-self:stretch;min-height:83px;padding:4px 10px 4px 0;display:flex;gap:7px;border:0;background:transparent;color:#6c4225;margin:4px 0 9px;box-shadow:none}
+.hintchan-launch-img{width:92px;height:80px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 2px 0 #e9c393)}
+.hintchan-launch-talk{position:relative;text-align:center;flex:1;border:2px solid #e2bd94;background:#fffdf7;border-radius:23px;min-height:66px;display:flex;flex-direction:column;justify-content:center;padding:9px 10px;font-weight:850;font-size:.8rem;box-shadow:0 3px 0 #d8ba9a}
+.hintchan-launch-talk:before{content:"";position:absolute;left:-8px;top:25px;width:14px;height:14px;transform:rotate(45deg);background:#fffdf7;border-left:2px solid #e2bd94;border-bottom:2px solid #e2bd94}
+.hintchan-launch-talk small{display:block;color:#a57952;font-size:.7rem;margin-top:4px}
+.hintchan-shade{background:#3d2919ad}.hintchan-dialog{background:#fffaf0;color:#664225;border:3px solid #ddb88e;box-shadow:0 20px 55px #53341770;border-radius:28px}
+.hintchan-top{gap:7px}.hintchan-dialog-img{width:70px;height:65px;object-fit:contain}.hintchan-top .name{font-weight:900;color:#754927}.hintchan-close{background:#fff1d9;border:1px solid #dfba92;color:#80512f;border-radius:999px;padding:8px 12px;font-weight:750}
+.hintchan-speech{background:#fff4d9;border:2px solid #f2dbb2;color:#694426;border-radius:20px;font-weight:650}.hintchan-choices{gap:9px}.hintchan-choice{border:2px solid #e2bc92;background:#fff9ea;color:#764c2a;border-radius:18px;font-weight:750}.hintchan-choice:hover,.hintchan-choice:focus-visible{background:#fff0cd;color:#6e4626}.hintchan-note,.hintchan-hintstep{color:#957052}.hintchan-followup{border-color:#e6c69d}
+.stage-list{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.stage-choice{background:linear-gradient(#fffefa,#fff0dc);color:#724727;border:2px solid #e5c39b;box-shadow:0 4px 0 #d4b187;border-radius:18px;min-height:89px}.stage-choice.locked{background:#f2e6d6;border-color:#e1ccaf;color:#aa9277}.stage-choice .stars,.stage-choice.locked .stars{color:#f0af22}.stage-info{text-align:center;color:#825331;background:#fff0d2;border-radius:20px;padding:12px;font-weight:800}
+#stageSelectView .guide-card{margin-top:10px;text-align:center;background:#fff7e5;border:2px solid #ebd2ad;color:#785333;padding:12px}.guide-title{color:#744729}.guide-lead{color:#895a34}.guide-body{color:#9b7652}
+.select-mascot{display:flex;align-items:center;gap:8px;justify-content:center;margin:5px auto 0}.select-mascot img{width:100px;height:95px;object-fit:contain}.select-mascot p{margin:0;padding:12px;background:#fffdf5;border:2px solid #e6c499;border-radius:22px;font-size:.85rem;font-weight:750;color:#794c2b}
+#stageSelectView .controls .btn{max-width:260px;margin:auto}
+#tutorialView{min-height:calc(100dvh - 180px)}.tutorial-mascot{display:flex;justify-content:center}.tutorial-mascot img{width:100px;height:90px;object-fit:contain}#tutorialView .progress{margin:2px 0 8px}.progress>i{background:#f0d8a7}.progress>i.active{background:#f5a630}
+#tutorialView>.game{margin:8px 0}#tutorialView .board{max-width:335px;margin:auto;background:#ffe4c2;padding:10px;border-radius:23px;border:2px solid #efc6a1}
+#tutorialView .guide-card:not(.nonblocking){background:rgba(67,43,27,.89)}
+#tutorialView .guide-card.nonblocking{padding-top:9px;margin-bottom:12px;border:none;background:#fff5df;border-radius:20px;box-shadow:none}
+#tutorialView .guide-card.nonblocking .guide-lead,#tutorialView .guide-card.nonblocking .guide-body{color:#79502f;text-shadow:none}
+#tutorialView .guide-card.nonblocking .guide-title{color:#704328;text-shadow:none}
+.footer{color:#946e49;margin-top:18px}.footer button{color:#89582d;border:2px solid #e5bc92;background:#fff8e9;padding:8px;border-radius:13px;font-weight:800}
+.stage-clear-tap{background:radial-gradient(circle at 50% 30%,#fff4c9,#fff8e9 77%);color:#754626;padding:22px;z-index:50;gap:9px}
+.clear-ribbon{background:linear-gradient(#ff7679,#e94b58);color:white;transform:rotate(-4deg);font-weight:1000;letter-spacing:.04em;text-shadow:1px 2px #cc3445;padding:14px 38px;border-radius:18px;box-shadow:0 5px 0 #c93343;font-size:clamp(42px,11vw,60px)}
+.clear-piyoko{width:min(68vw,295px,37dvh);height:auto;aspect-ratio:1;object-fit:contain}
+.stage-clear-tap .tap-stars{font-size:clamp(33px,9vw,46px);color:#ffa900;text-shadow:0 2px #cc8224;letter-spacing:3px}.clear-caption{font-size:1.18rem;font-weight:900;margin:2px 0!important}.clear-caption small{display:block;color:#a0754b;font-size:.75rem;margin-top:7px}.stage-clear-tap .tap-next{background:#ff9c2b;color:white;min-height:52px;border-radius:999px;padding:14px 22px;margin-top:10px;font-weight:900;box-shadow:0 4px 0 #ce771e;animation:none}
+.achievement-shade{background:#fff5dbee}.achievement-panel{color:#694125}.achievement-image{width:min(60vw,260px,31dvh)}.achievement-piyoko{height:min(27dvh,180px);width:auto;object-fit:contain}.achievement-caption{color:#7b5132;font-weight:800}.achievement-progress{color:#ac875e}.achievement-buttons .btn.primary{background:#4aade5;color:white;border-color:#3f9ed6}
+@media(max-width:390px){.app{padding-left:12px;padding-right:12px}.top{min-height:88px}.brand{font-size:33px}.hintchan-launch{min-height:75px}.hintchan-launch-img{width:77px;height:71px}.hintchan-launch-talk{font-size:.73rem}.stage-choice{min-height:76px}.stage-choice .number{font-size:1.18rem}.stage-choice .stars{font-size:.7rem}#levelBoard{max-width:322px;padding:9px}#levelMode{margin-top:13px}#stagePlayView>.game-actions{margin-top:14px}}
+@media(max-height:700px){.top{min-height:75px}.hintchan-launch{margin:0 0 3px;min-height:69px}.hintchan-launch-img{height:67px}.play-heading .play-meta{margin-top:5px}#stagePlayView>.game{margin:2px 0}#levelMode{margin-top:9px}#stagePlayView>.game-actions{margin-top:10px}}
+
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Prototype v0.4.2</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
-  <div class="nav-top"><button id="toStages" class="menu-btn" type="button">ステージ選択へ →</button></div>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.0</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
-  <div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
+  <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
 
   <section class="guide-card" id="tutorialGuide" aria-live="polite">
     <div class="eyebrow">GUIDE</div>
@@ -205,13 +251,14 @@ button{-webkit-tap-highlight-color:transparent}
   <div class="footer"><span id="moves">操作回数：0</span><div class="footer-actions"><button id="back" type="button">一つ戻る ↶</button><button id="reset" type="button">最初からやり直す ↻</button></div></div>
   </div>
   <section id="stageSelectView" class="view hidden">
+    <div class="select-mascot"><img src="images/piyoko_guide.png" alt="Piyoko"><p>遊びたいステージを選んでね！</p></div>
     <div class="guide-card"><div class="eyebrow">STAGE SELECT</div><h1 class="guide-title">パズルを選ぼう！</h1><p class="guide-lead">01から順番に解放。04は打ち消し合いの練習！</p><p class="guide-body">クリア手数に応じて星を獲得できるよ。何度でも挑戦可能！</p></div>
     <div id="stageList" class="stage-list" aria-label="ステージ一覧"></div>
     <p id="stageSummary" class="stage-info"></p>
     <div class="controls"><button id="backToTutorial" class="btn secondary">チュートリアルに戻る</button></div>
   </section>
   <section id="stagePlayView" class="view hidden">
-    <button id="hintchanLaunch" class="hintchan-launch" type="button"><span class="hintchan-avatar" aria-hidden="true">🤖</span>ヒントちゃんに盤面を見てもらう</button>
+    <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="Piyokoに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk">困ったらPiyokoに聞いてね！<small>タップして盤面を相談</small></span></button>
     <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><p id="levelDescription">全部0にしよう！</p><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span></div></div>
     <div class="game"><div id="levelBoard" class="board" aria-label="ステージ盤面"></div><div id="levelOverlay" class="overlay" aria-live="polite"></div></div>
     <div id="levelMode" class="controls"><button id="levelMinus" class="btn selected" type="button">−1 操作</button><button id="levelPlus" class="btn" type="button">+1 操作</button></div>
@@ -221,7 +268,7 @@ button{-webkit-tap-highlight-color:transparent}
   </section>
   <div id="hintchanShade" class="hintchan-shade hidden" role="presentation">
     <section class="hintchan-dialog" role="dialog" aria-modal="true" aria-labelledby="hintchanName">
-      <div class="hintchan-top"><span class="hintchan-avatar" aria-hidden="true">🤖</span><span id="hintchanName" class="name">ヒントちゃん</span><button id="hintchanClose" class="hintchan-close" type="button">閉じる ×</button></div>
+      <div class="hintchan-top"><img id="hintchanPortrait" class="hintchan-dialog-img" src="images/piyoko_thinking.png" alt="Piyoko"><span id="hintchanName" class="name">Piyokoに相談</span><button id="hintchanClose" class="hintchan-close" type="button">閉じる ×</button></div>
       <div id="hintchanSpeech" class="hintchan-speech" aria-live="polite"></div>
       <div class="hintchan-choices">
         <button class="hintchan-choice" type="button" data-advice="distance">あと何手で解ける？</button>
@@ -238,7 +285,7 @@ button{-webkit-tap-highlight-color:transparent}
 
   <div id="achievementShade" class="achievement-shade hidden" role="dialog" aria-modal="true" aria-labelledby="achievementHeading">
     <section class="achievement-panel">
-      <img id="achievementImage" class="achievement-image" src="images/clear.png" alt="CLEAR" width="1200" height="1200">
+      <img id="achievementPiyoko" class="achievement-piyoko" src="images/piyoko_all_clear.png" alt="喜ぶPiyoko"><img id="achievementImage" class="achievement-image" src="images/clear.png" alt="CLEAR" width="1200" height="1200">
       <h2 id="achievementHeading" class="hidden">CLEAR</h2>
       <p id="achievementCaption" class="achievement-caption"></p>
       <p id="achievementProgress" class="achievement-progress" aria-live="polite"></p>
@@ -584,6 +631,7 @@ function advanceAchievement(){
   $('achievementShade').classList.remove('hidden');
   const isPerfect=kind==='allClear';
   $('achievementImage').src=isPerfect?'images/all_clear.png':'images/clear.png';
+  $('achievementPiyoko').src=isPerfect?'images/piyoko_all_clear.png':'images/piyoko_clear.png';
   $('achievementImage').alt=isPerfect?'ALL CLEAR':'CLEAR';
   $('achievementHeading').textContent=isPerfect?'ALL CLEAR':'CLEAR';
   $('achievementCaption').textContent=isPerfect?'全11ステージ・33スター完全制覇！':'全11ステージクリア！';
@@ -719,7 +767,7 @@ function renderLevel(){
   clearTap.classList.toggle('hidden',!cleared||levelAnimating);
   if(cleared&&!levelAnimating){
     const stars=scoreStars(levelMovesCount,stage.min);
-    clearTap.innerHTML=`<h2>STAGE CLEAR!</h2><div class="tap-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p>${levelMovesCount}手でクリア！ 最短：${stage.min}手</p><div class="tap-next">${selectedLevel<STAGES.length-1?'画面をタップして次のステージへ ↓':'画面をタップしてステージ一覧へ ↓'}</div>`;
+    clearTap.innerHTML=`<div class="clear-ribbon">CLEAR!</div><img class="clear-piyoko" src="images/piyoko_clear.png" alt="喜ぶPiyoko"><div class="tap-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p class="clear-caption">STAGE ${String(selectedLevel+1).padStart(2,"0")} クリア！<small>${levelMovesCount}手でクリア・最短${stage.min}手</small></p><div class="tap-next">${selectedLevel<STAGES.length-1?'画面をタップして次のステージへ ↓':'画面をタップしてステージ一覧へ ↓'}</div>`;
   }
   if(cleared&&!levelAnimating){
     const stars=scoreStars(levelMovesCount,stage.min);
@@ -854,6 +902,7 @@ function hintchanNextAdvice(step,b){
   else outcome=`その操作では0のマスが${beforeZeros}個から${afterZeros}個に減るけれど、残り最短手数はちゃんと1手減るよ。`;
   return `【ヒント③｜実際の変化を想像】\n最短につながる一例では、${row}のどこかに「${dir}」を使うよ。${outcome}\n正解マスはまだ秘密。十字の変化を比べてみよう！`;
 }
+function setPiyokoFace(name){const img=$("hintchanPortrait");if(img)img.src=`images/piyoko_${name}.png`;}
 function hideHintchan(){
   const shade=$('hintchanShade');if(shade)shade.classList.add('hidden');
   hintchanNextStep=0;hintchanAnalyzedBoard=null;
@@ -866,6 +915,7 @@ function openHintchan(){
   hintchanPreviousFocus=document.activeElement;
   hintchanNextStep=0;hintchanAnalyzedBoard=null;
   $('hintchanFollowup').classList.add('hidden');
+  setPiyokoFace('thinking');
   $('hintchanSpeech').textContent=`STAGE ${String(selectedLevel+1).padStart(2,'0')} の今の盤面を見ているよ。\nどうしたの？ 一緒に考えよう！`;
   $('hintchanShade').classList.remove('hidden');
   $('hintchanClose').focus();
@@ -873,6 +923,7 @@ function openHintchan(){
 function showHintchanNextStep(){
   if(!hintchanAnalyzedBoard)return;
   hintchanNextStep=Math.min(hintchanNextStep+1,3);
+  setPiyokoFace(hintchanNextStep>=3?'idea':hintchanNextStep===2?'cheer':'thinking');
   $('hintchanSpeech').textContent=hintchanNextAdvice(hintchanNextStep,hintchanAnalyzedBoard);
   $('hintchanHintStep').textContent=`現在の盤面から考えるヒント ${hintchanNextStep} / 3`;
   $('hintchanMore').classList.toggle('hidden',hintchanNextStep>=3);
@@ -885,6 +936,7 @@ function hintchanRespond(kind){
   let msg='';
   $('hintchanFollowup').classList.add('hidden');
   hintchanNextStep=0;hintchanAnalyzedBoard=null;
+  setPiyokoFace(kind==='route'?(used+remaining===original?'cheer':'worried'):kind==='distance'?'icon':'thinking');
   if(kind==='distance'){
     msg=remaining===0?'もう全部0だよ。クリアおめでとう！':`今の盤面からは、最短あと ${remaining} 手で解けるよ！\nここまで ${used} 手だから、合計の最短は ${used+remaining} 手だね。`;
   }else if(kind==='route'){
