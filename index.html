@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.3</title>
+<title>SUM SHIFT | Ver.0.5.4</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -324,6 +324,8 @@ body { color:var(--p-brown); }
 /* The ribbon contains fixed raster lettering to avoid Safari distorted glyphs. */
 .clear-ribbon-image{display:block;width:min(86vw,380px);max-height:min(23dvh,145px);height:auto;object-fit:contain;filter:drop-shadow(0 5px 5px #b03c3440);flex-shrink:0;}
 .level-overlay-ribbon{display:block;width:min(74vw,320px);max-height:min(18dvh,120px);height:auto;object-fit:contain;filter:drop-shadow(0 6px 10px #9b3a3460);}
+.success-chip{display:inline-flex;align-items:center;justify-content:center;min-width:min(60vw,240px);min-height:56px;padding:12px 20px;border-radius:999px;background:linear-gradient(180deg,#fffaf0,#ffe7b8);border:3px solid #f1be68;color:#7c4c24;font-weight:1000;font-size:clamp(22px,6vw,30px);box-shadow:0 8px 20px #9f6b2c2e, inset 0 2px 0 #fff7df;}
+.success-chip.small{font-size:clamp(20px,5.5vw,28px);}
 .stage-clear-tap{gap:5px;}
 /* Bubble art is an independent image; text stays responsive and localized. */
 .hintchan-launch-talk{
@@ -356,7 +358,7 @@ body { color:var(--p-brown); }
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.3</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.4</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -473,8 +475,12 @@ function updateBoard(source,index,delta){ return source.map((value,i)=>crossing(
 function isClear(){ return board.every(value=>value===0); }
 function setPhase(value){ phase=value; render(); }
 function clearAnimation(){ if(animationHandle!==null){ clearTimeout(animationHandle); animationHandle=null; } $('overlay').innerHTML=''; }
-function animateSuccess(label,onEnd){
-  $('overlay').innerHTML=`<div class="clear">CLEAR!<small>${label}</small></div>`;
+function animateSuccess(label,onEnd,kind='action'){
+  if(kind==='clear' || label==='STAGE CLEAR'){
+    $('overlay').innerHTML='<img class="level-overlay-ribbon" src="images/clear_ribbon.png" alt="CLEAR!">';
+  }else{
+    $('overlay').innerHTML=`<div class="success-chip small">${label}</div>`;
+  }
   animationHandle=setTimeout(()=>{ $('overlay').innerHTML=''; animationHandle=null; onEnd(); },1400);
 }
 function impact(index){
@@ -503,7 +509,7 @@ function tap(index){
     board=updateBoard(board,index,-1);
     render();
     impact(index);
-    animateSuccess('操作成功！',()=>{ locked=false; setPhase('affected'); });
+    animateSuccess('操作成功！',()=>{ locked=false; setPhase('affected'); },'action');
     return;
   }
   if(phase!=='practice' && phase!=='free') return;
@@ -516,7 +522,7 @@ function tap(index){
   if(isClear()){
     locked=true;
     const next = phase==='practice' ? 'complete' : 'freeComplete';
-    animateSuccess('STAGE CLEAR',()=>{ locked=false; setPhase(next); });
+    animateSuccess('STAGE CLEAR',()=>{ locked=false; setPhase(next); },'clear');
   }
 }
 function renderBoard(){
