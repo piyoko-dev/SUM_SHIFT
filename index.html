@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.1</title>
+<title>SUM SHIFT | Ver.0.5.2</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -314,11 +314,48 @@ body { color:var(--p-brown); }
  .hintchan-launch-talk{min-height:43px;font-size:.65rem;}
 }
 
+
+/* === v0.5.2 UI refinements === */
+/* The heading must never be obscured by the tutorial badge. */
+.top{position:relative;padding-inline:76px;min-width:0;}
+#statePill{position:absolute;right:4px;top:5px;font-size:.60rem;line-height:1;padding:6px 7px;max-width:70px;white-space:nowrap;text-align:center;}
+.brand{max-width:100%;font-size:clamp(26px,8vw,43px);overflow-wrap:normal;white-space:nowrap;}
+@media(max-width:390px){.top{padding-inline:55px;}#statePill{font-size:.51rem;padding:5px 5px;right:0;top:4px;max-width:57px;}.brand{font-size:clamp(24px,7.5vw,33px);letter-spacing:-.07em;}}
+/* The ribbon contains fixed raster lettering to avoid Safari distorted glyphs. */
+.clear-ribbon-image{display:block;width:min(86vw,380px);max-height:min(23dvh,145px);height:auto;object-fit:contain;filter:drop-shadow(0 5px 5px #b03c3440);flex-shrink:0;}
+.stage-clear-tap{gap:5px;}
+/* Bubble art is an independent image; text stays responsive and localized. */
+.hintchan-launch-talk{
+  background:transparent url('images/piyoko_bubble.png') center / 100% 100% no-repeat;
+  border:0;box-shadow:none;border-radius:0;padding:9px 15px 10px 19px;
+  min-width:0;min-height:69px;line-height:1.35;display:flex;justify-content:center;align-items:center;
+}
+.hintchan-launch-talk:before{display:none!important;}
+#piyokoLaunchMessage{display:block;line-height:1.45;font-size:.81rem;color:#654025;}
+/* Explicitly distinct 0 / 1 / 2 colors, dark text for all tiles. */
+#levelBoard .tile[data-value="0"]{background:linear-gradient(155deg,#fffdf4,#fff0c7);border-color:#ddcaa0;color:#6a4126;box-shadow:0 4px 0 #cdb58a;}
+#levelBoard .tile[data-value="1"]{background:linear-gradient(155deg,#e5f7ff,#bee8ff);border-color:#80c5e8;color:#3b4f62;box-shadow:0 4px 0 #80b4d0;}
+#levelBoard .tile[data-value="2"]{background:linear-gradient(155deg,#fff0f5,#ffd4e5);border-color:#e6a0bf;color:#684359;box-shadow:0 4px 0 #d499b2;}
+/* Hint page controls appear immediately below the speech, not below the options list. */
+.hintchan-dialog{display:flex;flex-direction:column;}
+.hintchan-top{order:0}.hintchan-speech{order:1;margin-bottom:7px;}
+.hintchan-followup{order:2;padding-top:5px;margin-top:0;border-top:0;margin-bottom:14px;}
+.hintchan-choices{order:3;}.hintchan-note{order:4;}
+.hintchan-hintstep{text-align:center;margin-bottom:7px;font-size:.73rem;}
+.hintchan-page-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.hintchan-page-btn{background:#fff1d7;border:2px solid #e5c292;color:#714929;min-height:40px;min-width:95px;border-radius:14px;font-size:1.17rem;font-weight:900;padding:3px 10px;}
+.hintchan-page-btn span{font-size:.83rem;vertical-align:1px;}
+.hintchan-page-btn:disabled{opacity:.32;cursor:default;}
+.hintchan-page-count{font-size:.83rem;color:#886341;font-weight:850;}
+@media(max-width:390px){.hintchan-launch-talk{min-height:53px;padding:5px 12px 5px 18px;}#piyokoLaunchMessage{font-size:.71rem;}.clear-ribbon-image{width:min(87vw,340px);}}
+@media(max-height:750px){.hintchan-launch-talk{min-height:48px;}#piyokoLaunchMessage{font-size:.69rem;}.clear-ribbon-image{max-height:19dvh;}}
+@media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
+
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.1</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.2</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -350,7 +387,7 @@ body { color:var(--p-brown); }
     <div class="controls"><button id="backToTutorial" class="btn secondary">チュートリアルに戻る</button></div>
   </section>
   <section id="stagePlayView" class="view hidden">
-    <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="Piyokoに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk">「−1」と「＋1」を使い分けて<br>すべて0にしよう！<small>困ったらPiyokoをタップして相談</small></span></button>
+    <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="Piyokoに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk"><span id="piyokoLaunchMessage">「−1」と「＋1」を使い分けて<br>すべて0にしよう！</span></span></button>
     <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><p id="levelDescription">全部0にしよう！</p><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span><span id="levelStarsPreview" class="level-stars-preview" aria-label="このステージのベストスター">☆☆☆</span></div></div>
     <div class="game"><div id="levelBoard" class="board" aria-label="ステージ盤面"></div><div id="levelOverlay" class="overlay" aria-live="polite"></div></div>
     <div id="levelMode" class="controls"><button id="levelMinus" class="btn selected" type="button">−1 操作</button><button id="levelPlus" class="btn" type="button">+1 操作</button></div>
@@ -369,7 +406,11 @@ body { color:var(--p-brown); }
       </div>
       <div id="hintchanFollowup" class="hintchan-followup hidden">
         <div id="hintchanHintStep" class="hintchan-hintstep" aria-live="polite"></div>
-        <button id="hintchanMore" type="button" class="hintchan-choice">もう少し教えて →</button>
+        <div class="hintchan-page-nav" aria-label="ヒントのページ移動">
+          <button id="hintchanPrev" type="button" class="hintchan-page-btn" aria-label="前のヒント">‹ <span>戻る</span></button>
+          <span id="hintchanPageCounter" class="hintchan-page-count">1 / 3</span>
+          <button id="hintchanMore" type="button" class="hintchan-page-btn" aria-label="次のヒント"><span>次へ</span> ›</button>
+        </div>
       </div>
       <p class="hintchan-note">次の一手の相談は、今の数字と最短解を分析して3段階で案内するよ。答えのマスは表示しないよ。</p>
     </section>
@@ -831,7 +872,7 @@ function renderStageSelect(){
 }
 function startLevel(index){
   if(!isUnlocked(index))return;
-  hideHintchan();selectedLevel=index;levelBoard=[...STAGES[index].board];levelDirection=-1;levelHistory=[];levelMovesCount=0;levelHintStep=0;stopLevelFx();navigate('play');
+  hideHintchan();resetPiyokoLaunchSpeech();selectedLevel=index;levelBoard=[...STAGES[index].board];levelDirection=-1;levelHistory=[];levelMovesCount=0;levelHintStep=0;stopLevelFx();navigate('play');
 }
 function isLevelClear(){return levelBoard.every(n=>n===0)}
 function renderLevel(){
@@ -860,7 +901,7 @@ function renderLevel(){
   clearTap.classList.toggle('hidden',!cleared||levelAnimating);
   if(cleared&&!levelAnimating){
     const stars=scoreStars(levelMovesCount,stage.min);
-    clearTap.innerHTML=`<div class="clear-ribbon">CLEAR!</div><img class="clear-piyoko" src="images/piyoko_clear.png" alt="喜ぶPiyoko"><div class="tap-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p class="clear-caption">STAGE ${String(selectedLevel+1).padStart(2,"0")} クリア！<small>${levelMovesCount}手でクリア・最短${stage.min}手</small></p><div class="tap-next">${selectedLevel<STAGES.length-1?'画面をタップして次のステージへ ↓':'画面をタップしてステージ一覧へ ↓'}</div>`;
+    clearTap.innerHTML=`<img class="clear-ribbon-image" src="images/clear_ribbon.png" alt="CLEAR!"><img class="clear-piyoko" src="images/piyoko_clear.png" alt="喜ぶPiyoko"><div class="tap-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p class="clear-caption">STAGE ${String(selectedLevel+1).padStart(2,"0")} クリア！<small>${levelMovesCount}手でクリア・最短${stage.min}手</small></p><div class="tap-next">${selectedLevel<STAGES.length-1?'画面をタップして次のステージへ ↓':'画面をタップしてステージ一覧へ ↓'}</div>`;
   }
   if(cleared&&!levelAnimating){
     const stars=scoreStars(levelMovesCount,stage.min);
@@ -1013,15 +1054,17 @@ function openHintchan(){
   $('hintchanShade').classList.remove('hidden');
   $('hintchanClose').focus();
 }
-function showHintchanNextStep(){
+function showHintchanStep(step){
   if(!hintchanAnalyzedBoard)return;
-  hintchanNextStep=Math.min(hintchanNextStep+1,3);
+  hintchanNextStep=Math.max(1,Math.min(3,step));
   setPiyokoFace(hintchanNextStep>=3?'idea':hintchanNextStep===2?'cheer':'thinking');
   $('hintchanSpeech').textContent=hintchanNextAdvice(hintchanNextStep,hintchanAnalyzedBoard);
-  $('hintchanHintStep').textContent=`現在の盤面から考えるヒント ${hintchanNextStep} / 3`;
-  $('hintchanMore').classList.toggle('hidden',hintchanNextStep>=3);
-  $('hintchanMore').textContent=hintchanNextStep===1?'ヒント②を聞く →':'ヒント③を聞く →';
+  $('hintchanHintStep').textContent='この盤面のヒント';
+  $('hintchanPageCounter').textContent=`${hintchanNextStep} / 3`;
+  $('hintchanPrev').disabled=hintchanNextStep<=1;
+  $('hintchanMore').disabled=hintchanNextStep>=3;
 }
+function showHintchanNextStep(){showHintchanStep(hintchanNextStep+1);}
 function hintchanRespond(kind){
   if(page!=='play')return;
   const remaining=minimumRemaining(levelBoard);
@@ -1050,7 +1093,8 @@ $('hintchanLaunch').addEventListener('click',openHintchan);
 $('hintchanClose').addEventListener('click',hideHintchan);
 $('hintchanShade').addEventListener('click',e=>{if(e.target===$('hintchanShade'))hideHintchan();});
 document.querySelectorAll('[data-advice]').forEach(b=>b.addEventListener('click',()=>hintchanRespond(b.dataset.advice)));
-$('hintchanMore').addEventListener('click',showHintchanNextStep);
+$('hintchanMore').addEventListener('click',()=>showHintchanStep(hintchanNextStep+1));
+$('hintchanPrev').addEventListener('click',()=>showHintchanStep(hintchanNextStep-1));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('hintchanShade').classList.contains('hidden'))hideHintchan();});
 
 // Google SheetsからダウンロードしたCSVを読み込み、ブラウザ内に保存する。
@@ -1097,6 +1141,30 @@ function applyHintsFromCSV(csvText){
 
 
 render();
+
+/* v0.5.2: Piyoko speech rotates every 30 seconds of active gameplay. */
+const PIYOKO_MESSAGES=[
+  '「−1」と「＋1」を使い分けて<br>すべて0にしよう！',
+  'ヒントが欲しい場合は<br>ボクをタッチしてね！'
+];
+let piyokoSpeechSeconds=0;
+let piyokoSpeechTick=null;
+function updatePiyokoLaunchSpeech(){
+  const el=$('piyokoLaunchMessage');
+  if(el)el.innerHTML=PIYOKO_MESSAGES[Math.floor(piyokoSpeechSeconds/30)%2];
+}
+function resetPiyokoLaunchSpeech(){piyokoSpeechSeconds=0;updatePiyokoLaunchSpeech();}
+function startPiyokoSpeechClock(){
+  if(piyokoSpeechTick!==null)return;
+  piyokoSpeechTick=window.setInterval(()=>{
+    if(page!=='play'||document.hidden||!$('hintchanShade').classList.contains('hidden')||
+       !$('achievementShade').classList.contains('hidden')||!$('stageClearTap').classList.contains('hidden')||levelAnimating)return;
+    piyokoSpeechSeconds++;
+    if(piyokoSpeechSeconds%30===0)updatePiyokoLaunchSpeech();
+  },1000);
+}
+startPiyokoSpeechClock();
+
 </script>
 </body>
 </html>
