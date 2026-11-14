@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.4</title>
+<title>SUM SHIFT | Ver.0.5.5</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -358,7 +358,7 @@ body { color:var(--p-brown); }
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.4</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.5</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -476,11 +476,8 @@ function isClear(){ return board.every(value=>value===0); }
 function setPhase(value){ phase=value; render(); }
 function clearAnimation(){ if(animationHandle!==null){ clearTimeout(animationHandle); animationHandle=null; } $('overlay').innerHTML=''; }
 function animateSuccess(label,onEnd,kind='action'){
-  if(kind==='clear' || label==='STAGE CLEAR'){
-    $('overlay').innerHTML='<img class="level-overlay-ribbon" src="images/clear_ribbon.png" alt="CLEAR!">';
-  }else{
-    $('overlay').innerHTML=`<div class="success-chip small">${label}</div>`;
-  }
+  // チュートリアルの操作成功時も、ステージクリア時も同じCLEARリボンを使用。
+  $('overlay').innerHTML='<img class="level-overlay-ribbon" src="images/clear_ribbon.png" alt="CLEAR!">';
   animationHandle=setTimeout(()=>{ $('overlay').innerHTML=''; animationHandle=null; onEnd(); },1400);
 }
 function impact(index){
