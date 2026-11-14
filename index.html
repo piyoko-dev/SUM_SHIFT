@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.0</title>
+<title>SUM SHIFT | Ver.0.5.1</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -177,7 +177,7 @@ button{-webkit-tap-highlight-color:transparent}
 @keyframes achievementAppear{from{opacity:0;transform:translateY(14px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(max-height:650px){.achievement-image{width:min(65vw,300px,48dvh)}.achievement-panel{gap:5px}}
 
-/* SUM SHIFT v0.5.0 — warm Piyoko UI. Core 3x3 puzzle logic is unchanged. */
+/* SUM SHIFT v0.5.1 — warm Piyoko UI. Core 3x3 puzzle logic is unchanged. */
 :root{color-scheme:light;--bg:#fff9ed;--card:#fffaef;--tile:#fff9f0;--ink:#654025;--muted:#927150;--blue:#55afe3;--green:#35b77a;--pink:#ff8c9d}
 html,body{background:#fff9eb;color:var(--ink)}
 body{background:radial-gradient(circle at 50% 0%,#ffecad 0%,#fff9ed 32%,#fff9ed 85%,#fff2bd 100%)}
@@ -222,11 +222,103 @@ body{background:radial-gradient(circle at 50% 0%,#ffecad 0%,#fff9ed 32%,#fff9ed 
 @media(max-width:390px){.app{padding-left:12px;padding-right:12px}.top{min-height:88px}.brand{font-size:33px}.hintchan-launch{min-height:75px}.hintchan-launch-img{width:77px;height:71px}.hintchan-launch-talk{font-size:.73rem}.stage-choice{min-height:76px}.stage-choice .number{font-size:1.18rem}.stage-choice .stars{font-size:.7rem}#levelBoard{max-width:322px;padding:9px}#levelMode{margin-top:13px}#stagePlayView>.game-actions{margin-top:14px}}
 @media(max-height:700px){.top{min-height:75px}.hintchan-launch{margin:0 0 3px;min-height:69px}.hintchan-launch-img{height:67px}.play-heading .play-meta{margin-top:5px}#stagePlayView>.game{margin:2px 0}#levelMode{margin-top:9px}#stagePlayView>.game-actions{margin-top:10px}}
 
+
+/* ================= v0.5.1 Polish ================= */
+:root { --p-brown:#5b351e; --p-cream:#fffaf0; --p-border:#e6bb8b; }
+html,body { overflow-x:hidden; }
+body { color:var(--p-brown); }
+.app { isolation:isolate; position:relative; min-height:100dvh; overflow:hidden; background:linear-gradient(to bottom,#fff9ed,#fffaf2 93%,#fff0ba); padding-top:calc(11px + env(safe-area-inset-top)); padding-bottom:calc(14px + env(safe-area-inset-bottom)); }
+.app:before,.app:after { content:""; position:absolute; left:0; right:0; z-index:-1; pointer-events:none; }
+.app:before { top:0; height:155px; background:#ffedaf; border-bottom-left-radius:48% 13px; border-bottom-right-radius:48% 13px; }
+.app:after { bottom:0; height:30px; background:radial-gradient(circle at 28px 0px,#ffefb9 27px,transparent 28px) 0 0/56px 45px repeat-x; }
+.top { min-height:78px; display:flex; align-items:center; justify-content:center; }
+.brand { max-width:240px; margin:auto; font-size:clamp(34px,9vw,44px); line-height:.83; text-align:center; font-weight:1000; letter-spacing:-.04em; color:#714220; text-shadow:2px 3px 0 #fff9ed; }
+.subtitle {font-size:.60rem; margin-top:7px; color:#a77f4f;}
+.nav-top { margin:-2px 0 5px; }
+.menu-btn {padding:7px 12px;font-size:.75rem;}
+.play-heading { display:flex; flex-direction:column; gap:3px; }
+.play-heading h1 {margin:0 auto;padding:3px 20px;font-size:.90rem;}
+.play-heading p {color:#624023;line-height:1.25;margin:2px 0 0;font-size:.76rem;}
+.play-heading .play-meta {margin:5px 0 3px;padding:7px 9px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;align-items:center;text-align:center;white-space:nowrap;font-size:.79rem;background:#fff4de;border:2px solid #f0d9b5;}
+.level-stars-preview {color:#e5a31c;font-size:1.15rem;letter-spacing:1px;text-shadow:0 1px #fff;}
+.hintchan-launch {min-height:74px;margin:3px 0 5px;gap:5px;padding:2px 5px 2px 0;align-items:center;}
+.hintchan-launch-img {width:80px;height:72px;filter:drop-shadow(0 2px 0 #d6a260);}
+.hintchan-launch-talk {font-size:.79rem;line-height:1.35;min-height:62px;padding:6px 8px;border-color:#dbb28c;}
+.hintchan-launch-talk small {font-size:.64rem;margin-top:2px;}
+#stagePlayView {min-height:0;gap:0;}
+#stagePlayView>.game {margin:4px 0;padding:3px 0;}
+#levelBoard {width:min(100%,344px);max-width:344px;padding:10px;}
+#levelBoard .tile {font-size:clamp(31px,8.9vw,49px);}
+#levelMode {margin-top:9px;gap:10px;}
+#levelMode button {min-height:50px;font-size:1rem;}
+#stagePlayView>.game-actions {margin-top:13px;gap:7px;}
+#stagePlayView>.game-actions .btn {min-height:45px;white-space:normal;font-size:.73rem;padding:6px 3px;line-height:1.1;box-shadow:0 3px 0 #d4b28c;}
+#stagePlayView .game-actions .btn:focus-visible {outline:3px solid #56a9eb;outline-offset:3px;}
+#tutorialView {min-height:0;justify-content:flex-start;}
+.tutorial-mascot img {height:68px;width:86px;}
+#tutorialView .guide-card:not(.nonblocking) {background:rgba(47,31,20,.76);color:#fff9ed;}
+#tutorialView .guide-card:not(.nonblocking) .guide-title,
+#tutorialView .guide-card:not(.nonblocking) .guide-lead,
+#tutorialView .guide-card:not(.nonblocking) .guide-body {color:#fffaf0!important;text-shadow:0 2px 6px #211008;}
+#tutorialView .guide-card.nonblocking .guide-title,
+#tutorialView .guide-card.nonblocking .guide-lead,
+#tutorialView .guide-card.nonblocking .guide-body {color:var(--p-brown)!important;}
+#tutorialView .guide-card.nonblocking {margin-bottom:12px;}
+/* Clear animation: high contrast in both the warm stage and the dark stage-transition overlay. */
+#levelOverlay .clear,#overlay .clear {color:#fff!important;font-size:clamp(39px,10vw,56px);font-weight:1000;letter-spacing:.07em;-webkit-text-stroke:2px #a82f37;text-shadow:0 3px #a82f37,0 5px 0 #71232b,0 7px 24px #491b1b99,0 0 16px #ffe6a7;line-height:1.15;}
+#levelOverlay .clear small,#overlay .clear small {font-size:.27em;color:#fffaf0;-webkit-text-stroke:0;letter-spacing:.09em;text-shadow:0 1px 4px #572c20;}
+.stage-clear-tap {background:radial-gradient(circle at 50% 30%,#fff4c9,#fffaf0 77%);}
+.clear-ribbon {color:#fff!important;-webkit-text-stroke:1.4px #aa3741;text-shadow:0 2px #ac3340,0 4px 7px #8c293555;border:3px solid #fff3d8;box-shadow:0 6px 0 #c93343,0 12px 25px #ba563433;}
+.stage-clear-tap .tap-next {color:#fff;}
+/* iPhone 13 mini: responsive layout scales height as well as width. */
+@media(max-width:390px) {
+ .app{padding-left:12px;padding-right:12px;}
+ .top{min-height:69px;}
+ .brand{font-size:34px;}
+ .nav-top{margin:-5px 0 3px;}
+ .hintchan-launch{min-height:65px;margin:0 0 2px;}
+ .hintchan-launch-img{height:64px;width:73px;}
+ .hintchan-launch-talk{min-height:56px;font-size:.72rem;padding:5px 6px;}
+ .hintchan-launch-talk small{font-size:.61rem;}
+ .play-heading .play-meta{margin:4px 0 2px;padding:5px 6px;font-size:.73rem;}
+ .level-stars-preview{font-size:1.03rem;}
+ #levelBoard{width:min(100%,316px);padding:8px;gap:6px;}
+ #levelMode {margin-top:7px;}
+ #levelMode button {min-height:46px;font-size:.93rem;}
+ #stagePlayView>.game-actions {margin-top:9px;}
+ #stagePlayView>.game-actions .btn{min-height:42px;font-size:.70rem;}
+}
+@media(max-height:750px) {
+ .top{min-height:61px;}
+ .subtitle{margin-top:3px;}
+ .hintchan-launch{min-height:55px;}
+ .hintchan-launch-img{height:54px;width:62px;}
+ .hintchan-launch-talk{min-height:50px;}
+ .hintchan-launch-talk small{display:none;}
+ #levelBoard{width:min(100%, min(310px,42dvh));padding:7px;gap:5px;}
+ .play-heading h1{padding:3px 16px;}
+ .play-heading .play-meta{margin:2px 0;padding:4px 6px;}
+ #levelMode{margin-top:6px;}
+ #levelMode button{min-height:43px;}
+ #stagePlayView>.game-actions{margin-top:8px;}
+ #stagePlayView>.game-actions .btn{min-height:40px;}
+}
+@media(max-height:660px) {
+ .top{min-height:54px;}
+ .brand{font-size:30px;}
+ .subtitle{display:none;}
+ #levelBoard{width:min(100%, min(275px,39dvh));}
+ .play-heading p {font-size:.69rem;}
+ .hintchan-launch-img{height:46px;width:53px;}
+ .hintchan-launch{min-height:47px;}
+ .hintchan-launch-talk{min-height:43px;font-size:.65rem;}
+}
+
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.0</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.1</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -258,12 +350,12 @@ body{background:radial-gradient(circle at 50% 0%,#ffecad 0%,#fff9ed 32%,#fff9ed 
     <div class="controls"><button id="backToTutorial" class="btn secondary">チュートリアルに戻る</button></div>
   </section>
   <section id="stagePlayView" class="view hidden">
-    <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="Piyokoに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk">困ったらPiyokoに聞いてね！<small>タップして盤面を相談</small></span></button>
-    <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><p id="levelDescription">全部0にしよう！</p><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span></div></div>
+    <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="Piyokoに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk">「−1」と「＋1」を使い分けて<br>すべて0にしよう！<small>困ったらPiyokoをタップして相談</small></span></button>
+    <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><p id="levelDescription">全部0にしよう！</p><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span><span id="levelStarsPreview" class="level-stars-preview" aria-label="このステージのベストスター">☆☆☆</span></div></div>
     <div class="game"><div id="levelBoard" class="board" aria-label="ステージ盤面"></div><div id="levelOverlay" class="overlay" aria-live="polite"></div></div>
     <div id="levelMode" class="controls"><button id="levelMinus" class="btn selected" type="button">−1 操作</button><button id="levelPlus" class="btn" type="button">+1 操作</button></div>
     <div id="levelWin" class="win-card hidden" aria-live="polite"><h2>STAGE CLEAR!</h2><div id="levelStars" class="win-stars"></div><p id="levelScore"></p><div class="game-actions"><button id="levelNext" class="btn primary">次のステージ →</button><button id="levelSelect" class="btn secondary">一覧へ戻る</button></div></div>
-    <div class="game-actions"><button id="levelUndo" class="btn secondary" type="button">↶ 戻る</button><button id="levelRestart" class="btn secondary" type="button">↻ リセット</button><button id="levelHome" class="btn secondary" type="button">一覧</button></div>
+    <div class="game-actions"><button id="levelUndo" class="btn secondary" type="button">↶ 1つ戻る</button><button id="levelRestart" class="btn secondary" type="button">↻ やり直す</button><button id="levelHome" class="btn secondary" type="button">☷ 一覧</button></div>
 
   </section>
   <div id="hintchanShade" class="hintchan-shade hidden" role="presentation">
@@ -748,6 +840,7 @@ function renderLevel(){
   $('levelDescription').innerHTML=selectedLevel===0?'最初は1手！すべて0にしよう。':selectedLevel===3?'打ち消し合いを体験！ ＋1と−1で2手クリアを目指そう。':selectedLevel===STAGES.length-1?'最後の難問に挑戦！最短手数を目指そう。':'「−1」と「＋1」を使い分けて、<br>すべて0にしよう！';
   $('levelMoves').textContent=`操作：${levelMovesCount}手`;
   $('levelMinimum').textContent=`最短：${stage.min}手`;
+  $('levelStarsPreview').textContent='★'.repeat(progressData.stars[selectedLevel])+'☆'.repeat(3-progressData.stars[selectedLevel]);
   $('levelMinus').classList.toggle('selected',levelDirection===-1);
   $('levelPlus').classList.toggle('selected',levelDirection===1);
   $('levelUndo').disabled=levelHistory.length===0||levelAnimating;
