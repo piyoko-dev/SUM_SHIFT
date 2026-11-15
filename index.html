@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.5</title>
+<title>SUM SHIFT | Ver.0.5.6</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -354,11 +354,21 @@ body { color:var(--p-brown); }
 @media(max-height:750px){.hintchan-launch-talk{min-height:48px;}#piyokoLaunchMessage{font-size:.69rem;}.clear-ribbon-image{max-height:19dvh;}}
 @media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
 
+
+/* Ver.0.5.6: flat, high-contrast tiles without depth or gradient shading. */
+#levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;box-shadow:none;text-shadow:none;}
+#levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;box-shadow:none;text-shadow:none;}
+#levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;box-shadow:none;text-shadow:none;}
+#levelBoard .tile.target{box-shadow:none;outline:2px solid #40ace6;outline-offset:-2px;}
+/* Keep CLEAR front and center while retaining its stars and next-stage control. */
+.stage-clear-tap .clear-ribbon-image{width:min(89vw,420px);max-height:min(31dvh,210px);margin:0 auto 12px;}
+.stage-clear-tap{justify-content:center;gap:12px;}
+
 </style>
 </head>
 <body>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.5</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.6</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -391,7 +401,7 @@ body { color:var(--p-brown); }
   </section>
   <section id="stagePlayView" class="view hidden">
     <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="Piyokoに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk"><span id="piyokoLaunchMessage">「−1」と「＋1」を使い分けて<br>すべて0にしよう！</span></span></button>
-    <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><p id="levelDescription">全部0にしよう！</p><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span><span id="levelStarsPreview" class="level-stars-preview" aria-label="このステージのベストスター">☆☆☆</span></div></div>
+    <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span><span id="levelStarsPreview" class="level-stars-preview" aria-label="このステージのベストスター">☆☆☆</span></div></div>
     <div class="game"><div id="levelBoard" class="board" aria-label="ステージ盤面"></div><div id="levelOverlay" class="overlay" aria-live="polite"></div></div>
     <div id="levelMode" class="controls"><button id="levelMinus" class="btn selected" type="button">−1 操作</button><button id="levelPlus" class="btn" type="button">+1 操作</button></div>
     <div id="levelWin" class="win-card hidden" aria-live="polite"><h2>STAGE CLEAR!</h2><div id="levelStars" class="win-stars"></div><p id="levelScore"></p><div class="game-actions"><button id="levelNext" class="btn primary">次のステージ →</button><button id="levelSelect" class="btn secondary">一覧へ戻る</button></div></div>
@@ -882,7 +892,6 @@ function isLevelClear(){return levelBoard.every(n=>n===0)}
 function renderLevel(){
   const stage=STAGES[selectedLevel];
   $('levelTitle').textContent=`STAGE ${String(selectedLevel+1).padStart(2,'0')}`;
-  $('levelDescription').innerHTML=selectedLevel===0?'最初は1手！すべて0にしよう。':selectedLevel===3?'打ち消し合いを体験！ ＋1と−1で2手クリアを目指そう。':selectedLevel===STAGES.length-1?'最後の難問に挑戦！最短手数を目指そう。':'「−1」と「＋1」を使い分けて、<br>すべて0にしよう！';
   $('levelMoves').textContent=`操作：${levelMovesCount}手`;
   $('levelMinimum').textContent=`最短：${stage.min}手`;
   $('levelStarsPreview').textContent='★'.repeat(progressData.stars[selectedLevel])+'☆'.repeat(3-progressData.stars[selectedLevel]);
@@ -905,7 +914,7 @@ function renderLevel(){
   clearTap.classList.toggle('hidden',!cleared||levelAnimating);
   if(cleared&&!levelAnimating){
     const stars=scoreStars(levelMovesCount,stage.min);
-    clearTap.innerHTML=`<img class="clear-ribbon-image" src="images/clear_ribbon.png" alt="CLEAR!"><img class="clear-piyoko" src="images/piyoko_clear.png" alt="喜ぶPiyoko"><div class="tap-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p class="clear-caption">STAGE ${String(selectedLevel+1).padStart(2,"0")} クリア！<small>${levelMovesCount}手でクリア・最短${stage.min}手</small></p><div class="tap-next">${selectedLevel<STAGES.length-1?'画面をタップして次のステージへ ↓':'画面をタップしてステージ一覧へ ↓'}</div>`;
+    clearTap.innerHTML=`<img class="clear-ribbon-image" src="images/clear_ribbon.png" alt="CLEAR!"><div class="tap-stars">${'★'.repeat(stars)+'☆'.repeat(3-stars)}</div><p class="clear-caption">STAGE ${String(selectedLevel+1).padStart(2,"0")} クリア！<small>${levelMovesCount}手でクリア・最短${stage.min}手</small></p><div class="tap-next">${selectedLevel<STAGES.length-1?'画面をタップして次のステージへ ↓':'画面をタップしてステージ一覧へ ↓'}</div>`;
   }
   if(cleared&&!levelAnimating){
     const stars=scoreStars(levelMovesCount,stage.min);
@@ -920,17 +929,17 @@ function tapLevel(index){
   levelBoard=updateBoard(levelBoard,index,levelDirection);levelMovesCount++;
   const clear=isLevelClear();
   if(clear){
-    levelAnimating=true;
     const score=scoreStars(levelMovesCount,STAGES[selectedLevel].min);
     const before=achievementCounts();
     progressData.stars[selectedLevel]=Math.max(progressData.stars[selectedLevel],score);storeProgress();
     queueNewAchievements(before,achievementCounts());
   }
   renderLevel();
-  $('levelBoard').querySelectorAll('.tile').forEach((b,i)=>{if(crossing(i,index)){b.classList.add('affected')}});
   if(clear){
-    $('levelOverlay').innerHTML='<img class="level-overlay-ribbon" src="images/clear_ribbon.png" alt="CLEAR!">';
-    levelTimer=setTimeout(()=>{levelAnimating=false;levelTimer=null;$('levelOverlay').replaceChildren();if(page==='play'){renderLevel();showPendingAchievements();}},1400);
+    // Skip the short ribbon-only flash; go directly to the normal CLEAR screen.
+    showPendingAchievements();
+  }else{
+    $('levelBoard').querySelectorAll('.tile').forEach((b,i)=>{if(crossing(i,index)){b.classList.add('affected')}});
   }
 }
 $('toStages').addEventListener('click',()=>navigate('select'));
@@ -1038,7 +1047,7 @@ function hintchanNextAdvice(step,b){
   if(gain>0)outcome=`その操作では0のマスが${beforeZeros}個から${afterZeros}個に増えるよ。`;
   else if(gain===0)outcome=`その操作では0のマスの数は${beforeZeros}個のままだよ。数字の並び方が変わることに注目して。`;
   else outcome=`その操作では0のマスが${beforeZeros}個から${afterZeros}個に減るけれど、残り最短手数はちゃんと1手減るよ。`;
-  return `【ヒント③｜実際の変化を想像】\n最短につながる一例では、${row}のどこかに「${dir}」を使うよ。${outcome}\n正解マスはまだ秘密。十字の変化を比べてみよう！`;
+  return `【ヒント③｜実際の変化を想像】\n最短につながる一例では、${row}のどこかに「${dir}」を使うよ。${outcome}\n${remaining===1?'ゴールは目前だ！キミの思いのまま進んでみよう！':'正解マスはまだ秘密。十字の変化を比べてみよう！'}`;
 }
 function setPiyokoFace(name){const img=$("hintchanPortrait");if(img)img.src=`images/piyoko_${name}.png`;}
 function hideHintchan(){
@@ -1146,7 +1155,7 @@ function applyHintsFromCSV(csvText){
 
 render();
 
-/* v0.5.2: Piyoko speech rotates every 30 seconds of active gameplay. */
+/* v0.5.2: Piyoko speech rotates every 20 seconds of active gameplay. */
 const PIYOKO_MESSAGES=[
   '「−1」と「＋1」を使い分けて<br>すべて0にしよう！',
   'ヒントが欲しい場合は<br>ボクをタッチしてね！'
@@ -1155,7 +1164,7 @@ let piyokoSpeechSeconds=0;
 let piyokoSpeechTick=null;
 function updatePiyokoLaunchSpeech(){
   const el=$('piyokoLaunchMessage');
-  if(el)el.innerHTML=PIYOKO_MESSAGES[Math.floor(piyokoSpeechSeconds/30)%2];
+  if(el)el.innerHTML=PIYOKO_MESSAGES[Math.floor(piyokoSpeechSeconds/20)%2];
 }
 function resetPiyokoLaunchSpeech(){piyokoSpeechSeconds=0;updatePiyokoLaunchSpeech();}
 function startPiyokoSpeechClock(){
@@ -1164,7 +1173,7 @@ function startPiyokoSpeechClock(){
     if(page!=='play'||document.hidden||!$('hintchanShade').classList.contains('hidden')||
        !$('achievementShade').classList.contains('hidden')||!$('stageClearTap').classList.contains('hidden')||levelAnimating)return;
     piyokoSpeechSeconds++;
-    if(piyokoSpeechSeconds%30===0)updatePiyokoLaunchSpeech();
+    if(piyokoSpeechSeconds%20===0)updatePiyokoLaunchSpeech();
   },1000);
 }
 startPiyokoSpeechClock();
