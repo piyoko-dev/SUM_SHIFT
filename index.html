@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.6</title>
+<title>SUM SHIFT | Ver.0.5.7</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -355,7 +355,7 @@ body { color:var(--p-brown); }
 @media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
 
 
-/* Ver.0.5.6: flat, high-contrast tiles without depth or gradient shading. */
+/* Ver.0.5.7: flat, high-contrast tiles without depth or gradient shading. */
 #levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;box-shadow:none;text-shadow:none;}
@@ -364,11 +364,49 @@ body { color:var(--p-brown); }
 .stage-clear-tap .clear-ribbon-image{width:min(89vw,420px);max-height:min(31dvh,210px);margin:0 auto 12px;}
 .stage-clear-tap{justify-content:center;gap:12px;}
 
+
+/* Ver.0.5.7 — start screen, centered tutorial success, unified tiles and compact boards */
+.start-screen{position:fixed;inset:0;z-index:150;width:100%;height:100dvh;padding:0;border:0;background:#fff7e8;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:manipulation}
+.start-screen-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;pointer-events:none}
+.start-screen-tap{position:absolute;bottom:max(9dvh,calc(26px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);border:2px solid #b97c40;border-radius:999px;background:#fff7dfed;color:#794520;font-size:clamp(16px,4.5vw,20px);font-weight:900;letter-spacing:.035em;white-space:nowrap;padding:13px 26px;box-shadow:0 4px 0 #d9b17a;animation:startPromptPulse 1.8s ease-in-out infinite;pointer-events:none}
+@keyframes startPromptPulse{50%{transform:translateX(-50%) scale(1.045);box-shadow:0 5px 13px #c9915170}}
+.tutorial-celebration{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;background:rgba(61,41,26,.57);pointer-events:auto;overflow:hidden}
+.tutorial-celebration-ribbon{width:min(90vw,470px);height:auto;max-height:30dvh;object-fit:contain;filter:drop-shadow(0 11px 14px #4c211b80);animation:tutorialRibbonEnter 1.75s cubic-bezier(.22,1,.36,1) both;position:relative;z-index:1}
+.celebration-rays{color:#ffe17a;font-size:clamp(38px,10vw,62px);letter-spacing:1.1rem;text-shadow:0 3px 5px #a26736;animation:celebrateSpark 1.75s ease-out both;position:absolute;top:calc(50% - 140px)}
+.celebration-rays span{color:#fff6a9}
+.celebration-confetti{position:absolute;top:calc(50% + 93px);color:#ffdc6b;font-size:clamp(28px,7vw,44px);white-space:nowrap;text-shadow:10px 8px #f67d89,-13px 5px #77cceb;animation:celebrateSpark 1.75s ease-out both}
+@keyframes tutorialRibbonEnter{0%{opacity:0;transform:scale(.55) rotate(-8deg)}20%{opacity:1;transform:scale(1.12) rotate(3deg)}40%{transform:scale(.97) rotate(-1deg)}60%,88%{transform:scale(1) rotate(0);opacity:1}100%{transform:scale(1.03);opacity:0}}
+@keyframes celebrateSpark{0%{opacity:0;transform:scale(.35) translateY(30px)}25%,80%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(1.1) translateY(-12px)}}
+/* Both 3x3 boards use exactly the same flat tile palette. */
+#board,#levelBoard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;min-width:0;box-sizing:border-box;gap:clamp(5px,1.75vw,8px);}
+#board .tile,#levelBoard .tile{min-width:0;min-height:0;box-sizing:border-box;aspect-ratio:1;box-shadow:none!important;text-shadow:none!important;background-image:none!important;}
+#board .tile[data-value="0"],#levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;color:#6a4126;}
+#board .tile[data-value="1"],#levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;color:#3b4f62;}
+#board .tile[data-value="2"],#levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;color:#684359;}
+#board .tile.target,#levelBoard .tile.target{outline:2px solid #40ace6;outline-offset:-3px;}
+#tutorialView .board,#levelBoard{max-width:335px;width:100%;min-width:0;margin-left:auto;margin-right:auto;padding:clamp(6px,2.6vw,10px);}
+#stagePlayView,#stagePlayView>.game{width:100%;min-width:0;max-width:100%;}
+#stagePlayView>.game{box-sizing:border-box;}
+/* Attention jump: three small hops only when the hint invitation appears. */
+.hintchan-launch-img.piyoko-jump{animation:piyokoThreeHops 1.65s ease-out both;will-change:transform}
+@keyframes piyokoThreeHops{0%,16%,33%,49%,66%,82%,100%{transform:translateY(0)}8%,41%,74%{transform:translateY(-15px)}}
+@media(max-width:390px){#levelBoard{max-width:min(322px,100%);gap:6px;padding:7px;}#tutorialView .board{max-width:min(322px,100%);padding:7px;gap:6px}.start-screen-tap{font-size:16px;padding:11px 21px}}
+@media(prefers-reduced-motion:reduce){.start-screen-tap,.tutorial-celebration-ribbon,.celebration-rays,.celebration-confetti,.hintchan-launch-img.piyoko-jump{animation:none!important}}
+
 </style>
 </head>
 <body>
+<button id="startScreen" class="start-screen" type="button" aria-label="タップしてゲームを始める">
+  <img src="images/start_screen.png" alt="SUM SHIFT Piyokoと数字のパズル" class="start-screen-art">
+  <span class="start-screen-tap">タップしてスタート <span aria-hidden="true">▶</span></span>
+</button>
+<div id="tutorialCelebration" class="tutorial-celebration hidden" role="status" aria-live="polite" aria-label="CLEAR!">
+  <div class="celebration-rays" aria-hidden="true">✦ <span>★</span> ✦</div>
+  <img src="images/clear_ribbon.png" alt="CLEAR!" class="tutorial-celebration-ribbon">
+  <div class="celebration-confetti" aria-hidden="true">✦　★　✧　★　✦</div>
+</div>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.6</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.7</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -484,11 +522,12 @@ function crossing(a,b){ return Math.floor(a/3)===Math.floor(b/3) || a%3===b%3; }
 function updateBoard(source,index,delta){ return source.map((value,i)=>crossing(index,i)?(value+delta+3)%3:value); }
 function isClear(){ return board.every(value=>value===0); }
 function setPhase(value){ phase=value; render(); }
-function clearAnimation(){ if(animationHandle!==null){ clearTimeout(animationHandle); animationHandle=null; } $('overlay').innerHTML=''; }
+function clearAnimation(){ if(animationHandle!==null){ clearTimeout(animationHandle); animationHandle=null; } $('overlay').innerHTML=''; $('tutorialCelebration').classList.add('hidden'); }
 function animateSuccess(label,onEnd,kind='action'){
-  // チュートリアルの操作成功時も、ステージクリア時も同じCLEARリボンを使用。
-  $('overlay').innerHTML='<img class="level-overlay-ribbon" src="images/clear_ribbon.png" alt="CLEAR!">';
-  animationHandle=setTimeout(()=>{ $('overlay').innerHTML=''; animationHandle=null; onEnd(); },1400);
+  // Full viewport effect instead of tile-local overlay.
+  $('overlay').replaceChildren();
+  $('tutorialCelebration').classList.remove('hidden');
+  animationHandle=setTimeout(()=>{ $('tutorialCelebration').classList.add('hidden');animationHandle=null;onEnd(); },1750);
 }
 function impact(index){
   document.querySelectorAll('.tile').forEach((element,i)=>{
@@ -864,7 +903,7 @@ function stopLevelFx(){if(levelTimer!==null){clearTimeout(levelTimer);levelTimer
 function navigate(where){
   if(activeAchievement)return;
   if(where!=='play' && pendingAchievements.length){pendingAchievements=[];}
-  hideHintchan();stopLevelFx();cancelGuidance();cancelModeIntro();$('stageClearTap').classList.add('hidden');if(where!=='tutorial'){clearAnimation();locked=false;if(phase==='animating'){phase='tap';board=[...DEMO];}}page=where;
+  hideHintchan();stopLevelFx();cancelGuidance();cancelModeIntro();$('stageClearTap').classList.add('hidden');$('tutorialCelebration').classList.add('hidden');if(where!=='tutorial'){clearAnimation();locked=false;if(phase==='animating'){phase='tap';board=[...DEMO];}}page=where;
   $('tutorialView').classList.toggle('hidden',where!=='tutorial');
   $('stageSelectView').classList.toggle('hidden',where!=='select');
   $('stagePlayView').classList.toggle('hidden',where!=='play');
@@ -1154,8 +1193,14 @@ function applyHintsFromCSV(csvText){
 
 
 render();
+// Show the illustrated title card on initial load; the tutorial begins on user tap.
+$('startScreen').addEventListener('click',()=>{
+  $('startScreen').classList.add('hidden');
+  if(page!=='tutorial')navigate('tutorial');
+  else render();
+});
 
-/* v0.5.2: Piyoko speech rotates every 20 seconds of active gameplay. */
+/* v0.5.7: Piyoko speech rotates every 20 seconds of active gameplay. */
 const PIYOKO_MESSAGES=[
   '「−1」と「＋1」を使い分けて<br>すべて0にしよう！',
   'ヒントが欲しい場合は<br>ボクをタッチしてね！'
@@ -1164,7 +1209,16 @@ let piyokoSpeechSeconds=0;
 let piyokoSpeechTick=null;
 function updatePiyokoLaunchSpeech(){
   const el=$('piyokoLaunchMessage');
-  if(el)el.innerHTML=PIYOKO_MESSAGES[Math.floor(piyokoSpeechSeconds/20)%2];
+  const showingHint=(Math.floor(piyokoSpeechSeconds/20)%2)===1;
+  if(el)el.innerHTML=PIYOKO_MESSAGES[showingHint?1:0];
+  const img=document.querySelector('.hintchan-launch-img');
+  if(img){
+    img.classList.remove('piyoko-jump');
+    if(showingHint && page==='play' && !$('hintchanLaunch').classList.contains('hidden')){
+      void img.offsetWidth; // replay only on the 20-second transition
+      img.classList.add('piyoko-jump');
+    }
+  }
 }
 function resetPiyokoLaunchSpeech(){piyokoSpeechSeconds=0;updatePiyokoLaunchSpeech();}
 function startPiyokoSpeechClock(){
