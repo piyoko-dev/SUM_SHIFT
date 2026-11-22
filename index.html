@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.6.1</title>
+<title>SUM SHIFT | Ver.0.6.2</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -355,7 +355,7 @@ body { color:var(--p-brown); }
 @media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
 
 
-/* Ver.0.6.1: flat, high-contrast tiles without depth or gradient shading. */
+/* Ver.0.6.2: flat, high-contrast tiles without depth or gradient shading. */
 #levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;box-shadow:none;text-shadow:none;}
@@ -365,7 +365,7 @@ body { color:var(--p-brown); }
 .stage-clear-tap{justify-content:center;gap:12px;}
 
 
-/* Ver.0.6.1 — start screen, centered tutorial success, unified tiles and compact boards */
+/* Ver.0.6.2 — start screen, centered tutorial success, unified tiles and compact boards */
 .start-screen{position:fixed;inset:0;z-index:150;width:100%;height:100dvh;padding:0;border:0;background:#fff7e8;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:manipulation}
 .start-screen-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;pointer-events:none}
 .start-screen-tap{position:absolute;bottom:max(9dvh,calc(26px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);border:2px solid #b97c40;border-radius:999px;background:#fff7dfed;color:#794520;font-size:clamp(16px,4.5vw,20px);font-weight:900;letter-spacing:.035em;white-space:nowrap;padding:13px 26px;box-shadow:0 4px 0 #d9b17a;animation:startPromptPulse 1.8s ease-in-out infinite;pointer-events:none}
@@ -394,13 +394,13 @@ body { color:var(--p-brown); }
 @media(prefers-reduced-motion:reduce){.start-screen-tap,.tutorial-celebration-ribbon,.celebration-rays,.celebration-confetti,.hintchan-launch-img.piyoko-jump{animation:none!important}}
 
 
-/* Ver.0.6.1: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
+/* Ver.0.6.2: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
 .top>div:first-child{display:flex;flex-direction:column;align-items:center;min-width:0;}
 .brand-logo{display:block;width:min(100%,235px);max-height:78px;height:auto;object-fit:contain;}
 @media(max-width:390px){.brand-logo{width:min(100%,182px);max-height:62px}.top{padding-inline:56px;}}
 @media(max-height:700px){.brand-logo{max-height:54px}.top{min-height:58px;}}
 
-/* Ver.0.6.1: title artwork fills mobile area without distortion or accidental clipping. */
+/* Ver.0.6.2: title artwork fills mobile area without distortion or accidental clipping. */
 .start-screen{background:#fff5dc;min-height:100svh;height:100dvh;}
 .start-screen-art{width:100%;height:100%;object-fit:cover;object-position:center center;}
 @media(min-aspect-ratio:9/15){.start-screen-art{width:auto;max-width:100%;height:100%;object-fit:contain;}}
@@ -418,12 +418,24 @@ body { color:var(--p-brown); }
 
 @media(max-height:650px){.achievement-panel .achievement-image{width:min(86vw,350px,44dvh);max-height:44dvh;}}
 
-/* Ver.0.6.1: 12th expert stage, 12-stage achievement art, responsive screen. */
+/* Ver.0.6.2: 12th expert stage, 12-stage achievement art, responsive screen. */
 .stage-choice.expert-stage{border-color:#d89c2d;background:linear-gradient(180deg,#fff5cf,#ffe3a2);position:relative;}
 .stage-choice.expert-stage .number{font-weight:950;}
 .stage-choice.expert-stage .expert-label{font-size:.57rem;font-weight:900;color:#a76b12;line-height:1;}
 .achievement-panel .achievement-image{width:min(90vw,390px,48dvh);max-height:48dvh;object-fit:contain;}
 @media(max-height:650px){.achievement-panel .achievement-image{width:min(86vw,350px,44dvh);max-height:44dvh;}}
+
+/* Ver.0.6.2: developer-only achievement previews (?debug=1). */
+.dev-preview-panel{position:fixed;z-index:160;bottom:calc(16px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(94vw,410px);background:#fff9ea;border:2px solid #d7ac70;border-radius:18px;box-shadow:0 8px 24px #5e382847;padding:10px 12px;color:#724828;text-align:center}
+.dev-preview-panel strong{font-size:13px;display:block;margin-bottom:6px}
+.dev-preview-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.dev-preview-actions button{flex:1;min-width:90px;border:1.5px solid #cc9c5b;border-radius:10px;background:#fff;color:#674024;font-weight:800;font-size:12px;padding:10px 5px;cursor:pointer}
+.dev-preview-actions button:active{background:#ffe6b0}
+.dev-preview-note{font-size:11px;margin:6px 0 0;line-height:1.35}
+.achievement-shade{z-index:180}
+.achievement-preview-label{font-weight:800;color:#915c35;font-size:13px;margin:2px 0}
+.achievement-preview-exit{position:absolute;right:max(14px,env(safe-area-inset-right));top:calc(12px + env(safe-area-inset-top));padding:8px 13px;border:1.5px solid #c99e69;border-radius:999px;background:#fff9e7;color:#674024;font-size:13px;font-weight:800;cursor:pointer}
+@media(max-height:520px){.dev-preview-panel{bottom:4px;padding:6px}.dev-preview-note{display:none}}
 </style>
 </head>
 <body>
@@ -437,7 +449,7 @@ body { color:var(--p-brown); }
   <div class="celebration-confetti" aria-hidden="true">✦　★　✧　★　✦</div>
 </div>
 <main class="app">
-  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.6.1</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.6.2</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_guide.png" alt="案内するPiyoko" onerror="this.src='images/piyoko_icon.png'"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -498,8 +510,19 @@ body { color:var(--p-brown); }
     </section>
   </div>
 
+  <aside id="devPreviewPanel" class="dev-preview-panel hidden" aria-label="開発者用クリア演出プレビュー">
+    <strong>🛠 開発者プレビュー</strong>
+    <div class="dev-preview-actions">
+      <button type="button" id="previewClear">CLEAR</button>
+      <button type="button" id="previewAllClear">ALL CLEAR</button>
+      <button type="button" id="previewBoth">両方を順番に</button>
+    </div>
+    <p class="dev-preview-note">テスト再生のみ。クリア記録・スター数は変更しません。</p>
+  </aside>
   <div id="achievementShade" class="achievement-shade hidden" role="dialog" aria-modal="true" aria-labelledby="achievementHeading">
+    <button type="button" id="achievementPreviewExit" class="achievement-preview-exit hidden">✕ プレビューを閉じる</button>
     <section class="achievement-panel">
+      <p id="achievementPreviewLabel" class="achievement-preview-label hidden">開発者プレビュー・記録は変更されません</p>
       <img id="achievementImage" class="achievement-image" src="images/clear.png" alt="CLEAR" width="1200" height="1200">
       <h2 id="achievementHeading" class="hidden">CLEAR</h2>
       <p id="achievementCaption" class="achievement-caption"></p>
@@ -822,6 +845,9 @@ let pendingAchievements = [];
 let activeAchievement = null;
 let achievementTimer = null;
 let achievementReady = false;
+let achievementPreviewMode = false;
+let achievementPreviewQueue = [];
+const developerPreviewEnabled = new URLSearchParams(window.location.search).get('debug') === '1';
 function readAchievementSeen(){
   try {
     const v=JSON.parse(localStorage.getItem(ACHIEVEMENT_KEY));
@@ -851,7 +877,7 @@ function showPendingAchievements(){
 }
 function advanceAchievement(){
   if(achievementTimer!==null){clearTimeout(achievementTimer);achievementTimer=null;}
-  const kind=pendingAchievements.shift();
+  const kind=achievementPreviewMode?achievementPreviewQueue.shift():pendingAchievements.shift();
   if(!kind){closeAchievement();return;}
   activeAchievement=kind;achievementReady=false;
   $('achievementShade').classList.remove('hidden');
@@ -861,21 +887,47 @@ function advanceAchievement(){
   $('achievementHeading').textContent=isPerfect?'ALL CLEAR':'CLEAR';
   $('achievementCaption').textContent=isPerfect?'全12ステージ・36スター完全制覇！':'全12ステージクリア！';
   $('achievementButtons').classList.add('hidden');
-  $('achievementProgress').textContent=pendingAchievements.length?'次の達成演出に続くよ…':'達成おめでとう！';
+  const morePending = achievementPreviewMode ? achievementPreviewQueue.length : pendingAchievements.length;
+  $('achievementProgress').textContent=morePending?'次の達成演出に続くよ…':(achievementPreviewMode?'テスト再生中（記録は変更されません）':'達成おめでとう！');
   $('achievementImage').style.animation='none';void $('achievementImage').offsetWidth;$('achievementImage').style.animation='';
   achievementTimer=setTimeout(()=>{
     achievementTimer=null;
-    if(pendingAchievements.length){advanceAchievement();return;}
+    if((achievementPreviewMode?achievementPreviewQueue.length:pendingAchievements.length)){advanceAchievement();return;}
     achievementReady=true;
-    $('achievementProgress').textContent='達成記念をシェアしよう！';
+    $('achievementProgress').textContent=achievementPreviewMode?'プレビュー完了！記録は変更されていません。':'達成記念をシェアしよう！';
     $('achievementButtons').classList.remove('hidden');
   },ACHIEVEMENT_DURATION);
 }
 function closeAchievement(){
   if(achievementTimer!==null){clearTimeout(achievementTimer);achievementTimer=null;}
-  activeAchievement=null;pendingAchievements=[];achievementReady=false;
+  const wasPreview=achievementPreviewMode;
+  activeAchievement=null;achievementReady=false;
+  achievementPreviewMode=false;achievementPreviewQueue=[];
+  if(!wasPreview)pendingAchievements=[];
   $('achievementShade').classList.add('hidden');
-  if(page==='play')renderLevel();
+  $('achievementPreviewLabel').classList.add('hidden');
+  $('achievementPreviewExit').classList.add('hidden');
+  $('achievementShare').classList.remove('hidden');
+  $('achievementClose').textContent='ゲームに戻る';
+  // A preview must not alter progress, navigation, or existing achievement queues.
+  if(!wasPreview&&page==='play')renderLevel();
+}
+function beginAchievementPreview(kinds){
+  if(!developerPreviewEnabled||activeAchievement)return;
+  achievementPreviewMode=true;
+  achievementPreviewQueue=[...kinds];
+  $('achievementPreviewLabel').classList.remove('hidden');
+  $('achievementPreviewExit').classList.remove('hidden');
+  $('achievementShare').classList.add('hidden');
+  $('achievementClose').textContent='プレビューを閉じる';
+  advanceAchievement();
+}
+if(developerPreviewEnabled){
+  $('devPreviewPanel').classList.remove('hidden');
+  $('previewClear').addEventListener('click',()=>beginAchievementPreview(['clear']));
+  $('previewAllClear').addEventListener('click',()=>beginAchievementPreview(['allClear']));
+  $('previewBoth').addEventListener('click',()=>beginAchievementPreview(['clear','allClear']));
+  $('achievementPreviewExit').addEventListener('click',closeAchievement);
 }
 function achievementShareText(kind){
   if(kind==='allClear')return 'SUM SHIFTを完全制覇！\n全12ステージクリア＆36スター獲得！';
