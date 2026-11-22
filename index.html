@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.8</title>
+<title>SUM SHIFT | Ver.0.5.9</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -355,7 +355,7 @@ body { color:var(--p-brown); }
 @media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
 
 
-/* Ver.0.5.8: flat, high-contrast tiles without depth or gradient shading. */
+/* Ver.0.5.9: flat, high-contrast tiles without depth or gradient shading. */
 #levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;box-shadow:none;text-shadow:none;}
@@ -365,7 +365,7 @@ body { color:var(--p-brown); }
 .stage-clear-tap{justify-content:center;gap:12px;}
 
 
-/* Ver.0.5.8 — start screen, centered tutorial success, unified tiles and compact boards */
+/* Ver.0.5.9 — start screen, centered tutorial success, unified tiles and compact boards */
 .start-screen{position:fixed;inset:0;z-index:150;width:100%;height:100dvh;padding:0;border:0;background:#fff7e8;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:manipulation}
 .start-screen-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;pointer-events:none}
 .start-screen-tap{position:absolute;bottom:max(9dvh,calc(26px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);border:2px solid #b97c40;border-radius:999px;background:#fff7dfed;color:#794520;font-size:clamp(16px,4.5vw,20px);font-weight:900;letter-spacing:.035em;white-space:nowrap;padding:13px 26px;box-shadow:0 4px 0 #d9b17a;animation:startPromptPulse 1.8s ease-in-out infinite;pointer-events:none}
@@ -394,11 +394,29 @@ body { color:var(--p-brown); }
 @media(prefers-reduced-motion:reduce){.start-screen-tap,.tutorial-celebration-ribbon,.celebration-rays,.celebration-confetti,.hintchan-launch-img.piyoko-jump{animation:none!important}}
 
 
-/* Ver.0.5.8: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
+/* Ver.0.5.9: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
 .top>div:first-child{display:flex;flex-direction:column;align-items:center;min-width:0;}
 .brand-logo{display:block;width:min(100%,235px);max-height:78px;height:auto;object-fit:contain;}
 @media(max-width:390px){.brand-logo{width:min(100%,182px);max-height:62px}.top{padding-inline:56px;}}
 @media(max-height:700px){.brand-logo{max-height:54px}.top{min-height:58px;}}
+
+/* Ver.0.5.9: title artwork fills mobile area without distortion or accidental clipping. */
+.start-screen{background:#fff5dc;min-height:100svh;height:100dvh;}
+.start-screen-art{width:100%;height:100%;object-fit:cover;object-position:center center;}
+@media(min-aspect-ratio:9/15){.start-screen-art{width:auto;max-width:100%;height:100%;object-fit:contain;}}
+/* Keep the title call-to-action independently legible. */
+.start-screen-tap{bottom:max(5.5dvh,calc(20px + env(safe-area-inset-bottom)));}
+/* Improved tutorial Piyoko position and predictable image fallback. */
+.tutorial-mascot{position:relative;justify-content:center;transform:translateX(13px);}
+.tutorial-mascot img{display:block;max-width:100%;object-fit:contain;}
+/* The mode-introduction hint should sit away from the highlighted +/- controls. */
+.mode-intro-continue{position:fixed;bottom:calc(max(8%,env(safe-area-inset-bottom)) + 100px);left:0;right:0;z-index:26;pointer-events:none;color:#fff7e8;text-shadow:0 2px 8px #352114;}
+@media(max-height:660px){.mode-intro-continue{bottom:calc(max(8%,env(safe-area-inset-bottom)) + 76px);}}
+/* The award image already contains Piyoko: no second Piyoko overlay. */
+.achievement-panel .achievement-piyoko:not(.hidden){display:block;}
+.achievement-panel .achievement-image{width:min(60vw,260px,31dvh);max-height:31dvh;object-fit:contain;}
+.achievement-panel .achievement-piyoko.hidden + .achievement-image{width:min(78vw,360px,47dvh);max-height:47dvh;}
+@media(max-height:650px){.achievement-panel .achievement-piyoko.hidden + .achievement-image{width:min(77vw,330px,43dvh);max-height:43dvh;}}
 </style>
 </head>
 <body>
@@ -412,10 +430,10 @@ body { color:var(--p-brown); }
   <div class="celebration-confetti" aria-hidden="true">✦　★　✧　★　✦</div>
 </div>
 <main class="app">
-  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.5.8</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.5.9</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
-  <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
+  <div class="tutorial-mascot"><img src="images/piyoko_guide.png" alt="案内するPiyoko" onerror="this.src='images/piyoko_icon.png'"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
 
   <section class="guide-card" id="tutorialGuide" aria-live="polite">
     <div class="eyebrow">GUIDE</div>
@@ -475,7 +493,8 @@ body { color:var(--p-brown); }
 
   <div id="achievementShade" class="achievement-shade hidden" role="dialog" aria-modal="true" aria-labelledby="achievementHeading">
     <section class="achievement-panel">
-      <img id="achievementPiyoko" class="achievement-piyoko" src="images/piyoko_all_clear.png" alt="喜ぶPiyoko"><img id="achievementImage" class="achievement-image" src="images/clear.png" alt="CLEAR" width="1200" height="1200">
+      <img id="achievementPiyoko" class="achievement-piyoko" src="images/piyoko_all_clear.png" alt="喜ぶPiyoko">
+      <img id="achievementImage" class="achievement-image" src="images/clear.png" alt="CLEAR" width="1200" height="1200">
       <h2 id="achievementHeading" class="hidden">CLEAR</h2>
       <p id="achievementCaption" class="achievement-caption"></p>
       <p id="achievementProgress" class="achievement-progress" aria-live="polite"></p>
@@ -600,10 +619,10 @@ function render(){
     affected:{title:'どこが変わった？',lead:'中央を押すと、縦と横の合計5マスが変化するよ。',body:'<strong>押したマス自身と、上下左右の4マス</strong>が変わったね。斜めのマスは変わらないよ。',primary:'次へ →'},
     neighbors:{title:'周りの数字の変化',lead:'0から1引くと、どうなるかな？',body:'このゲームの数字は <strong>0 → 1 → 2 → 0</strong> と循環するよ。だから上下左右の <strong>0 → 2</strong> になったんだ。',primary:'確認問題へ →'},
 
-    practice:{title:'自分で解いてみよう！',lead:'今度はヒントなしで、全部0にしてみよう。',body:'<strong>−1操作</strong>で、好きなマスをタップしてみてね。',primary:''},
-    complete:{title:'確認問題クリア！',lead:'自分でルールを使って解けたね。',body:'<strong>一手でクリア！</strong><br>次は＋1も使える操作モードが増えるよ。',primary:'次の問題へ →'},
+    practice:{title:'自分で解いてみよう！',lead:'今度はヒントなしで、全部0にしてみよう。どこを押したら0になるかな？',body:'',primary:''},
+    complete:{title:'確認問題クリア！',lead:'自分でルールを使って解けたね。',body:'次は+1も使える操作モードが増えるよ。',primary:'次の問題へ →'},
     modeIntro:{title:'',lead:'',body:'',primary:''},
-    free:{title:'2手問題に挑戦！',lead:'今度は「+1」と「−1」の両方を使おう。',body:'方向を選んでマスを押そう。すべて0にすればクリア！',primary:''},
+    free:{title:'2手問題に挑戦！',lead:'今度は「+1」と「-1」を使い分け、すべて0にしてみよう！',body:'',primary:''},
     freeComplete:{title:'クリア！',lead:'SUM SHIFTの基本操作はマスターしたね。',body:`<strong>${moves}手でクリア！</strong> この問題は最短2手で解けるよ。`,primary:'本編ステージへ →'}
   }[phase];
 
@@ -635,6 +654,10 @@ function render(){
     modeIntroCanContinue=false;
     $('modeIntroTapLayer').classList.remove('hidden');
     $('modeIntroContinue').classList.add('hidden');
+    // Always position the continue prompt about 100px above the visible +/- buttons.
+    const modeButtonTop=$('modeControls').getBoundingClientRect().top;
+    $('modeIntroContinue').style.top=Math.max(72,Math.round(modeButtonTop-127))+'px';
+    $('modeIntroContinue').style.bottom='auto';
     // ボタンがフェードインし、その後説明文が現れる。2秒経過するまでタップ不可。
     modeIntroTextTimer=setTimeout(()=>{
       modeIntroTextTimer=null;
@@ -824,6 +847,7 @@ function advanceAchievement(){
   const isPerfect=kind==='allClear';
   $('achievementImage').src=isPerfect?'images/all_clear.png':'images/clear.png';
   $('achievementPiyoko').src=isPerfect?'images/piyoko_all_clear.png':'images/piyoko_clear.png';
+  $('achievementPiyoko').classList.toggle('hidden', !isPerfect);
   $('achievementImage').alt=isPerfect?'ALL CLEAR':'CLEAR';
   $('achievementHeading').textContent=isPerfect?'ALL CLEAR':'CLEAR';
   $('achievementCaption').textContent=isPerfect?'全11ステージ・33スター完全制覇！':'全11ステージクリア！';
