@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.9</title>
+<title>SUM SHIFT | Ver.0.6.0</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -218,7 +218,7 @@ body{background:radial-gradient(circle at 50% 0%,#ffecad 0%,#fff9ed 32%,#fff9ed 
 .clear-ribbon{background:linear-gradient(#ff7679,#e94b58);color:white;transform:rotate(-4deg);font-weight:1000;letter-spacing:.04em;text-shadow:1px 2px #cc3445;padding:14px 38px;border-radius:18px;box-shadow:0 5px 0 #c93343;font-size:clamp(42px,11vw,60px)}
 .clear-piyoko{width:min(68vw,295px,37dvh);height:auto;aspect-ratio:1;object-fit:contain}
 .stage-clear-tap .tap-stars{font-size:clamp(33px,9vw,46px);color:#ffa900;text-shadow:0 2px #cc8224;letter-spacing:3px}.clear-caption{font-size:1.18rem;font-weight:900;margin:2px 0!important}.clear-caption small{display:block;color:#a0754b;font-size:.75rem;margin-top:7px}.stage-clear-tap .tap-next{background:#ff9c2b;color:white;min-height:52px;border-radius:999px;padding:14px 22px;margin-top:10px;font-weight:900;box-shadow:0 4px 0 #ce771e;animation:none}
-.achievement-shade{background:#fff5dbee}.achievement-panel{color:#694125}.achievement-image{width:min(60vw,260px,31dvh)}.achievement-piyoko{height:min(27dvh,180px);width:auto;object-fit:contain}.achievement-caption{color:#7b5132;font-weight:800}.achievement-progress{color:#ac875e}.achievement-buttons .btn.primary{background:#4aade5;color:white;border-color:#3f9ed6}
+.achievement-shade{background:#fff5dbee}.achievement-panel{color:#694125}.achievement-image{width:min(60vw,260px,31dvh)}.achievement-caption{color:#7b5132;font-weight:800}.achievement-progress{color:#ac875e}.achievement-buttons .btn.primary{background:#4aade5;color:white;border-color:#3f9ed6}
 @media(max-width:390px){.app{padding-left:12px;padding-right:12px}.top{min-height:88px}.brand{font-size:33px}.hintchan-launch{min-height:75px}.hintchan-launch-img{width:77px;height:71px}.hintchan-launch-talk{font-size:.73rem}.stage-choice{min-height:76px}.stage-choice .number{font-size:1.18rem}.stage-choice .stars{font-size:.7rem}#levelBoard{max-width:322px;padding:9px}#levelMode{margin-top:13px}#stagePlayView>.game-actions{margin-top:14px}}
 @media(max-height:700px){.top{min-height:75px}.hintchan-launch{margin:0 0 3px;min-height:69px}.hintchan-launch-img{height:67px}.play-heading .play-meta{margin-top:5px}#stagePlayView>.game{margin:2px 0}#levelMode{margin-top:9px}#stagePlayView>.game-actions{margin-top:10px}}
 
@@ -355,7 +355,7 @@ body { color:var(--p-brown); }
 @media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
 
 
-/* Ver.0.5.9: flat, high-contrast tiles without depth or gradient shading. */
+/* Ver.0.6.0: flat, high-contrast tiles without depth or gradient shading. */
 #levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;box-shadow:none;text-shadow:none;}
@@ -365,7 +365,7 @@ body { color:var(--p-brown); }
 .stage-clear-tap{justify-content:center;gap:12px;}
 
 
-/* Ver.0.5.9 — start screen, centered tutorial success, unified tiles and compact boards */
+/* Ver.0.6.0 — start screen, centered tutorial success, unified tiles and compact boards */
 .start-screen{position:fixed;inset:0;z-index:150;width:100%;height:100dvh;padding:0;border:0;background:#fff7e8;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:manipulation}
 .start-screen-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;pointer-events:none}
 .start-screen-tap{position:absolute;bottom:max(9dvh,calc(26px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);border:2px solid #b97c40;border-radius:999px;background:#fff7dfed;color:#794520;font-size:clamp(16px,4.5vw,20px);font-weight:900;letter-spacing:.035em;white-space:nowrap;padding:13px 26px;box-shadow:0 4px 0 #d9b17a;animation:startPromptPulse 1.8s ease-in-out infinite;pointer-events:none}
@@ -394,13 +394,13 @@ body { color:var(--p-brown); }
 @media(prefers-reduced-motion:reduce){.start-screen-tap,.tutorial-celebration-ribbon,.celebration-rays,.celebration-confetti,.hintchan-launch-img.piyoko-jump{animation:none!important}}
 
 
-/* Ver.0.5.9: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
+/* Ver.0.6.0: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
 .top>div:first-child{display:flex;flex-direction:column;align-items:center;min-width:0;}
 .brand-logo{display:block;width:min(100%,235px);max-height:78px;height:auto;object-fit:contain;}
 @media(max-width:390px){.brand-logo{width:min(100%,182px);max-height:62px}.top{padding-inline:56px;}}
 @media(max-height:700px){.brand-logo{max-height:54px}.top{min-height:58px;}}
 
-/* Ver.0.5.9: title artwork fills mobile area without distortion or accidental clipping. */
+/* Ver.0.6.0: title artwork fills mobile area without distortion or accidental clipping. */
 .start-screen{background:#fff5dc;min-height:100svh;height:100dvh;}
 .start-screen-art{width:100%;height:100%;object-fit:cover;object-position:center center;}
 @media(min-aspect-ratio:9/15){.start-screen-art{width:auto;max-width:100%;height:100%;object-fit:contain;}}
@@ -413,10 +413,17 @@ body { color:var(--p-brown); }
 .mode-intro-continue{position:fixed;bottom:calc(max(8%,env(safe-area-inset-bottom)) + 100px);left:0;right:0;z-index:26;pointer-events:none;color:#fff7e8;text-shadow:0 2px 8px #352114;}
 @media(max-height:660px){.mode-intro-continue{bottom:calc(max(8%,env(safe-area-inset-bottom)) + 76px);}}
 /* The award image already contains Piyoko: no second Piyoko overlay. */
-.achievement-panel .achievement-piyoko:not(.hidden){display:block;}
-.achievement-panel .achievement-image{width:min(60vw,260px,31dvh);max-height:31dvh;object-fit:contain;}
-.achievement-panel .achievement-piyoko.hidden + .achievement-image{width:min(78vw,360px,47dvh);max-height:47dvh;}
-@media(max-height:650px){.achievement-panel .achievement-piyoko.hidden + .achievement-image{width:min(77vw,330px,43dvh);max-height:43dvh;}}
+
+.achievement-panel .achievement-image{width:min(90vw,390px,48dvh);max-height:48dvh;object-fit:contain;}
+
+@media(max-height:650px){.achievement-panel .achievement-image{width:min(86vw,350px,44dvh);max-height:44dvh;}}
+
+/* Ver.0.6.0: 12th expert stage, 12-stage achievement art, responsive screen. */
+.stage-choice.expert-stage{border-color:#d89c2d;background:linear-gradient(180deg,#fff5cf,#ffe3a2);position:relative;}
+.stage-choice.expert-stage .number{font-weight:950;}
+.stage-choice.expert-stage .expert-label{font-size:.57rem;font-weight:900;color:#a76b12;line-height:1;}
+.achievement-panel .achievement-image{width:min(90vw,390px,48dvh);max-height:48dvh;object-fit:contain;}
+@media(max-height:650px){.achievement-panel .achievement-image{width:min(86vw,350px,44dvh);max-height:44dvh;}}
 </style>
 </head>
 <body>
@@ -430,7 +437,7 @@ body { color:var(--p-brown); }
   <div class="celebration-confetti" aria-hidden="true">✦　★　✧　★　✦</div>
 </div>
 <main class="app">
-  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.5.9</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.6.0</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_guide.png" alt="案内するPiyoko" onerror="this.src='images/piyoko_icon.png'"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -493,7 +500,6 @@ body { color:var(--p-brown); }
 
   <div id="achievementShade" class="achievement-shade hidden" role="dialog" aria-modal="true" aria-labelledby="achievementHeading">
     <section class="achievement-panel">
-      <img id="achievementPiyoko" class="achievement-piyoko" src="images/piyoko_all_clear.png" alt="喜ぶPiyoko">
       <img id="achievementImage" class="achievement-image" src="images/clear.png" alt="CLEAR" width="1200" height="1200">
       <h2 id="achievementHeading" class="hidden">CLEAR</h2>
       <p id="achievementCaption" class="achievement-caption"></p>
@@ -697,7 +703,7 @@ $('back').addEventListener('click',goBack);
 // ==========================================
 // Ver.0.2 本編：ステージとクリア記録
 // ==========================================
-const STAGES = [{"board":[1,1,1,1,0,0,1,0,0],"min":1},{"board":[2,2,2,1,1,0,1,1,0],"min":2},{"board":[0,0,0,1,1,1,1,1,1],"min":3},{"board":[0,0,0,2,1,0,2,1,0],"min":2,"lesson":"cancel"},{"board":[0,0,2,0,1,2,1,2,2],"min":3},{"board":[1,0,0,2,2,2,2,1,1],"min":4},{"board":[2,1,2,0,2,1,1,1,1],"min":5},{"board":[1,1,2,2,1,1,0,2,2],"min":6},{"board":[2,2,2,2,1,2,1,0,1],"min":7},{"board":[1,1,2,1,1,0,1,2,1],"min":7},{"board":[1,2,1,1,1,2,0,2,2],"min":8}];
+const STAGES = [{"board":[1,1,1,1,0,0,1,0,0],"min":1},{"board":[2,2,2,1,1,0,1,1,0],"min":2},{"board":[0,0,0,1,1,1,1,1,1],"min":3},{"board":[0,0,0,2,1,0,2,1,0],"min":2,"lesson":"cancel"},{"board":[0,0,2,0,1,2,1,2,2],"min":3},{"board":[1,0,0,2,2,2,2,1,1],"min":4},{"board":[2,1,2,0,2,1,1,1,1],"min":5},{"board":[1,1,2,2,1,1,0,2,2],"min":6},{"board":[2,2,2,2,1,2,1,0,1],"min":7},{"board":[1,1,2,1,1,0,1,2,1],"min":7},{"board":[1,2,1,1,1,2,0,2,2],"min":8},{"board":[1,0,2,0,2,2,2,2,1],"min":9,"label":"超難問"}];
 // 本編ステージの3段階ヒント。どのヒントも正解マスや操作列は表示しません。
 const DEFAULT_STAGE_HINTS = [
   [
@@ -754,6 +760,11 @@ const DEFAULT_STAGE_HINTS = [
     "操作回数が増えても、同じマスに＋1と−1を重ねる必要はないよ。",
     "上段に1が多く、下段には0と2が混ざっているね。",
     "行ごとの操作の合計と、列ごとの操作の合計を別々に考えよう。最後は両方の影響を足して数字を0にできるよ。"
+  ],
+  [
+    "9手の超難問！0を守るより、列と行の並びの関係を観察してみよう。",
+    "上段と下段で数字の並びが大きく違うよ。十字の影響が重なるマスを数えてみて。",
+    "最短手順でも途中で0が減ることがあるよ。＋1と−1の打ち消しを利用して最後の形から逆算してみよう。"
   ]
 ];
 const HINT_STORAGE_KEY = 'sumshift_custom_hints_v1';
@@ -761,7 +772,7 @@ let STAGE_HINTS = DEFAULT_STAGE_HINTS.map(row => [...row]);
 function loadCustomHints(){
   try {
     const saved=JSON.parse(localStorage.getItem(HINT_STORAGE_KEY));
-    if(Array.isArray(saved)&&saved.length===DEFAULT_STAGE_HINTS.length&&saved.every(row=>Array.isArray(row)&&row.length===3&&row.every(v=>typeof v==='string'&&v.trim()))) STAGE_HINTS=saved;
+    if(Array.isArray(saved)&&saved.every(row=>Array.isArray(row)&&row.length===3&&row.every(v=>typeof v==='string'&&v.trim())) && (saved.length===DEFAULT_STAGE_HINTS.length || saved.length===DEFAULT_STAGE_HINTS.length-1)) STAGE_HINTS=DEFAULT_STAGE_HINTS.map((row,i)=>saved[i]?[...saved[i]]:[...row]);
   } catch(e) { console.warn('ヒントの保存データを読み込めませんでした',e); }
 }
 loadCustomHints();
@@ -802,8 +813,8 @@ const PREVIOUS_SAVE_KEY = 'sumshift_v023_progress';
 const OLD_SAVE_KEY = 'sumshift_v02_progress';
 let progressData = loadProgress();
 
-// 11ステージ/33スターの「初回達成時」だけをキューに追加する。
-const ACHIEVEMENT_KEY = 'sumshift_v042_achievement_seen';
+// 12ステージ/36スターの初回達成フラグは旧11ステージ記録と独立して管理。
+const ACHIEVEMENT_KEY = 'sumshift_v060_achievement_seen_12stages';
 const ACHIEVEMENT_DURATION = 2500; // CLEAR と ALL CLEAR はともに2.5秒
 const GAME_URL = 'https://piyoko-dev.github.io/SUM_SHIFT/';
 let achievementSeen = readAchievementSeen();
@@ -846,11 +857,9 @@ function advanceAchievement(){
   $('achievementShade').classList.remove('hidden');
   const isPerfect=kind==='allClear';
   $('achievementImage').src=isPerfect?'images/all_clear.png':'images/clear.png';
-  $('achievementPiyoko').src=isPerfect?'images/piyoko_all_clear.png':'images/piyoko_clear.png';
-  $('achievementPiyoko').classList.toggle('hidden', !isPerfect);
   $('achievementImage').alt=isPerfect?'ALL CLEAR':'CLEAR';
   $('achievementHeading').textContent=isPerfect?'ALL CLEAR':'CLEAR';
-  $('achievementCaption').textContent=isPerfect?'全11ステージ・33スター完全制覇！':'全11ステージクリア！';
+  $('achievementCaption').textContent=isPerfect?'全12ステージ・36スター完全制覇！':'全12ステージクリア！';
   $('achievementButtons').classList.add('hidden');
   $('achievementProgress').textContent=pendingAchievements.length?'次の達成演出に続くよ…':'達成おめでとう！';
   $('achievementImage').style.animation='none';void $('achievementImage').offsetWidth;$('achievementImage').style.animation='';
@@ -869,8 +878,8 @@ function closeAchievement(){
   if(page==='play')renderLevel();
 }
 function achievementShareText(kind){
-  if(kind==='allClear')return 'SUM SHIFTを完全制覇！\n全11ステージクリア＆33スター獲得！';
-  return 'SUM SHIFTの全11ステージをクリアしたよ！';
+  if(kind==='allClear')return 'SUM SHIFTを完全制覇！\n全12ステージクリア＆36スター獲得！';
+  return 'SUM SHIFTの全12ステージをクリアしたよ！';
 }
 async function shareAchievement(){
   if(!activeAchievement||!achievementReady)return;
@@ -912,16 +921,17 @@ let levelMovesCount = 0;
 let levelAnimating = false;
 let levelTimer = null;
 function insightCells(level){
-  // Stage 08–11: focus on rows/columns related to each stage's clue.
+  // Stage 08–12: focus on rows/columns related to each stage's clue.
   if(level===7)return [0,1,2,6,7,8]; // compare upper and lower rows
   if(level===8)return [3,4,5];       // middle row
   if(level===9)return [0,1,2,6,7,8]; // compare outer rows
   if(level===10)return [0,1,2,6,7,8]; // upper/lower rows
+  if(level===11)return [0,1,2,6,7,8]; // ultra-hard: compare rows
   return [];
 }
 
 function loadProgress(){
-  try {const v=JSON.parse(localStorage.getItem(SAVE_KEY));if(v&&Array.isArray(v.stars)&&v.stars.length===STAGES.length)return {stars:v.stars.map(n=>Math.max(0,Math.min(3,Number(n)||0)))}}catch(e){}
+  try {const v=JSON.parse(localStorage.getItem(SAVE_KEY));if(v&&Array.isArray(v.stars)&&v.stars.length>=11)return {stars:STAGES.map((_,i)=>Math.max(0,Math.min(3,Number(v.stars[i])||0)))}}catch(e){}
   // Stage 04 is a new lesson, so carry forward only stages 01-03.
   for(const key of [PREVIOUS_SAVE_KEY,OLD_SAVE_KEY]){
     try {const old=JSON.parse(localStorage.getItem(key));if(old&&Array.isArray(old.stars))return {stars:STAGES.map((_,i)=>i<3?Math.max(0,Math.min(3,Number(old.stars[i])||0)):0)}}catch(e){}
@@ -946,8 +956,8 @@ function isUnlocked(i){return i===0||progressData.stars[i-1]>0;}
 function renderStageSelect(){
   $('stageList').replaceChildren();
   STAGES.forEach((stage,i)=>{
-    const btn=document.createElement('button');btn.type='button';btn.className='stage-choice'+(isUnlocked(i)?'':' locked');btn.disabled=!isUnlocked(i);
-    btn.innerHTML=`<span class="number">${String(i+1).padStart(2,'0')}</span><span class="stars">${!isUnlocked(i)?'🔒':progressData.stars[i]?'★'.repeat(progressData.stars[i])+'☆'.repeat(3-progressData.stars[i]):'☆☆☆'}</span>`;
+    const btn=document.createElement('button');btn.type='button';btn.className='stage-choice'+(i===11?' expert-stage':'')+(isUnlocked(i)?'':' locked');btn.disabled=!isUnlocked(i);
+    btn.innerHTML=`<span class="number">${String(i+1).padStart(2,'0')}</span>${i===11?'<span class="expert-label">超難問</span>':''}<span class="stars">${!isUnlocked(i)?'🔒':progressData.stars[i]?'★'.repeat(progressData.stars[i])+'☆'.repeat(3-progressData.stars[i]):'☆☆☆'}</span>`;
     btn.setAttribute('aria-label',`ステージ${i+1} ${isUnlocked(i)?'選択可能':'ロック中'}`);
     btn.addEventListener('click',()=>startLevel(i));$('stageList').appendChild(btn);
   });
@@ -960,7 +970,7 @@ function startLevel(index){
 function isLevelClear(){return levelBoard.every(n=>n===0)}
 function renderLevel(){
   const stage=STAGES[selectedLevel];
-  $('levelTitle').textContent=`STAGE ${String(selectedLevel+1).padStart(2,'0')}`;
+  $('levelTitle').textContent=selectedLevel===11?'STAGE 12｜超難問':`STAGE ${String(selectedLevel+1).padStart(2,'0')}`;
   $('levelMoves').textContent=`操作：${levelMovesCount}手`;
   $('levelMinimum').textContent=`最短：${stage.min}手`;
   $('levelStarsPreview').textContent='★'.repeat(progressData.stars[selectedLevel])+'☆'.repeat(3-progressData.stars[selectedLevel]);
