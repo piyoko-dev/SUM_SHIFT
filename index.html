@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.6.0</title>
+<title>SUM SHIFT | Ver.0.6.1</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -355,7 +355,7 @@ body { color:var(--p-brown); }
 @media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
 
 
-/* Ver.0.6.0: flat, high-contrast tiles without depth or gradient shading. */
+/* Ver.0.6.1: flat, high-contrast tiles without depth or gradient shading. */
 #levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;box-shadow:none;text-shadow:none;}
@@ -365,7 +365,7 @@ body { color:var(--p-brown); }
 .stage-clear-tap{justify-content:center;gap:12px;}
 
 
-/* Ver.0.6.0 — start screen, centered tutorial success, unified tiles and compact boards */
+/* Ver.0.6.1 — start screen, centered tutorial success, unified tiles and compact boards */
 .start-screen{position:fixed;inset:0;z-index:150;width:100%;height:100dvh;padding:0;border:0;background:#fff7e8;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:manipulation}
 .start-screen-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;pointer-events:none}
 .start-screen-tap{position:absolute;bottom:max(9dvh,calc(26px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);border:2px solid #b97c40;border-radius:999px;background:#fff7dfed;color:#794520;font-size:clamp(16px,4.5vw,20px);font-weight:900;letter-spacing:.035em;white-space:nowrap;padding:13px 26px;box-shadow:0 4px 0 #d9b17a;animation:startPromptPulse 1.8s ease-in-out infinite;pointer-events:none}
@@ -394,13 +394,13 @@ body { color:var(--p-brown); }
 @media(prefers-reduced-motion:reduce){.start-screen-tap,.tutorial-celebration-ribbon,.celebration-rays,.celebration-confetti,.hintchan-launch-img.piyoko-jump{animation:none!important}}
 
 
-/* Ver.0.6.0: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
+/* Ver.0.6.1: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
 .top>div:first-child{display:flex;flex-direction:column;align-items:center;min-width:0;}
 .brand-logo{display:block;width:min(100%,235px);max-height:78px;height:auto;object-fit:contain;}
 @media(max-width:390px){.brand-logo{width:min(100%,182px);max-height:62px}.top{padding-inline:56px;}}
 @media(max-height:700px){.brand-logo{max-height:54px}.top{min-height:58px;}}
 
-/* Ver.0.6.0: title artwork fills mobile area without distortion or accidental clipping. */
+/* Ver.0.6.1: title artwork fills mobile area without distortion or accidental clipping. */
 .start-screen{background:#fff5dc;min-height:100svh;height:100dvh;}
 .start-screen-art{width:100%;height:100%;object-fit:cover;object-position:center center;}
 @media(min-aspect-ratio:9/15){.start-screen-art{width:auto;max-width:100%;height:100%;object-fit:contain;}}
@@ -418,7 +418,7 @@ body { color:var(--p-brown); }
 
 @media(max-height:650px){.achievement-panel .achievement-image{width:min(86vw,350px,44dvh);max-height:44dvh;}}
 
-/* Ver.0.6.0: 12th expert stage, 12-stage achievement art, responsive screen. */
+/* Ver.0.6.1: 12th expert stage, 12-stage achievement art, responsive screen. */
 .stage-choice.expert-stage{border-color:#d89c2d;background:linear-gradient(180deg,#fff5cf,#ffe3a2);position:relative;}
 .stage-choice.expert-stage .number{font-weight:950;}
 .stage-choice.expert-stage .expert-label{font-size:.57rem;font-weight:900;color:#a76b12;line-height:1;}
@@ -437,7 +437,7 @@ body { color:var(--p-brown); }
   <div class="celebration-confetti" aria-hidden="true">✦　★　✧　★　✦</div>
 </div>
 <main class="app">
-  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.6.0</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.6.1</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_guide.png" alt="案内するPiyoko" onerror="this.src='images/piyoko_icon.png'"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -466,7 +466,7 @@ body { color:var(--p-brown); }
     <div class="guide-card"><div class="eyebrow">STAGE SELECT</div><h1 class="guide-title">パズルを選ぼう！</h1><p class="guide-lead">01から順番に解放。04は打ち消し合いの練習！</p><p class="guide-body">クリア手数に応じて星を獲得できるよ。何度でも挑戦可能！</p></div>
     <div id="stageList" class="stage-list" aria-label="ステージ一覧"></div>
     <p id="stageSummary" class="stage-info"></p>
-    <div class="controls"><button id="backToTutorial" class="btn secondary">チュートリアルに戻る</button></div>
+    
   </section>
   <section id="stagePlayView" class="view hidden">
     <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="Piyokoに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk"><span id="piyokoLaunchMessage">「−1」と「＋1」を使い分けて<br>すべて0にしよう！</span></span></button>
@@ -1022,7 +1022,7 @@ function tapLevel(index){
   }
 }
 $('toStages').addEventListener('click',()=>navigate('select'));
-$('backToTutorial').addEventListener('click',()=>navigate('tutorial'));
+
 $('levelHome').addEventListener('click',()=>navigate('select'));
 $('levelSelect').addEventListener('click',()=>navigate('select'));
 $('levelNext').addEventListener('click',()=>{if(selectedLevel<STAGES.length-1)startLevel(selectedLevel+1)});
