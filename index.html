@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.5.7</title>
+<title>SUM SHIFT | Ver.0.5.8</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -355,7 +355,7 @@ body { color:var(--p-brown); }
 @media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
 
 
-/* Ver.0.5.7: flat, high-contrast tiles without depth or gradient shading. */
+/* Ver.0.5.8: flat, high-contrast tiles without depth or gradient shading. */
 #levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;box-shadow:none;text-shadow:none;}
@@ -365,7 +365,7 @@ body { color:var(--p-brown); }
 .stage-clear-tap{justify-content:center;gap:12px;}
 
 
-/* Ver.0.5.7 — start screen, centered tutorial success, unified tiles and compact boards */
+/* Ver.0.5.8 — start screen, centered tutorial success, unified tiles and compact boards */
 .start-screen{position:fixed;inset:0;z-index:150;width:100%;height:100dvh;padding:0;border:0;background:#fff7e8;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:manipulation}
 .start-screen-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;pointer-events:none}
 .start-screen-tap{position:absolute;bottom:max(9dvh,calc(26px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);border:2px solid #b97c40;border-radius:999px;background:#fff7dfed;color:#794520;font-size:clamp(16px,4.5vw,20px);font-weight:900;letter-spacing:.035em;white-space:nowrap;padding:13px 26px;box-shadow:0 4px 0 #d9b17a;animation:startPromptPulse 1.8s ease-in-out infinite;pointer-events:none}
@@ -393,6 +393,12 @@ body { color:var(--p-brown); }
 @media(max-width:390px){#levelBoard{max-width:min(322px,100%);gap:6px;padding:7px;}#tutorialView .board{max-width:min(322px,100%);padding:7px;gap:6px}.start-screen-tap{font-size:16px;padding:11px 21px}}
 @media(prefers-reduced-motion:reduce){.start-screen-tap,.tutorial-celebration-ribbon,.celebration-rays,.celebration-confetti,.hintchan-launch-img.piyoko-jump{animation:none!important}}
 
+
+/* Ver.0.5.8: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
+.top>div:first-child{display:flex;flex-direction:column;align-items:center;min-width:0;}
+.brand-logo{display:block;width:min(100%,235px);max-height:78px;height:auto;object-fit:contain;}
+@media(max-width:390px){.brand-logo{width:min(100%,182px);max-height:62px}.top{padding-inline:56px;}}
+@media(max-height:700px){.brand-logo{max-height:54px}.top{min-height:58px;}}
 </style>
 </head>
 <body>
@@ -406,7 +412,7 @@ body { color:var(--p-brown); }
   <div class="celebration-confetti" aria-hidden="true">✦　★　✧　★　✦</div>
 </div>
 <main class="app">
-  <header class="top"><div><div class="brand">SUM SHIFT</div><div class="subtitle">Ver.0.5.7</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.5.8</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
   <div class="tutorial-mascot"><img src="images/piyoko_cheer.png" alt="案内するPiyoko"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
@@ -1109,7 +1115,7 @@ function openHintchan(){
 function showHintchanStep(step){
   if(!hintchanAnalyzedBoard)return;
   hintchanNextStep=Math.max(1,Math.min(3,step));
-  setPiyokoFace(hintchanNextStep>=3?'idea':hintchanNextStep===2?'cheer':'thinking');
+  setPiyokoFace(hintchanNextStep>=3?(minimumRemaining(hintchanAnalyzedBoard)===1?'idea_cheer':'idea'):hintchanNextStep===2?'cheer':'thinking');
   $('hintchanSpeech').textContent=hintchanNextAdvice(hintchanNextStep,hintchanAnalyzedBoard);
   $('hintchanHintStep').textContent='この盤面のヒント';
   $('hintchanPageCounter').textContent=`${hintchanNextStep} / 3`;
