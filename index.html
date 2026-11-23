@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SUM SHIFT">
-<title>SUM SHIFT | Ver.0.6.7</title>
+<title>SUM SHIFT | Ver.0.6.8</title>
 <style>
 :root{color-scheme:dark;--bg:#0e1422;--card:#182235;--tile:#25334b;--ink:#f3f7ff;--muted:#a8b9d3;--blue:#42c5ff;--green:#64e0b0;--pink:#c2a1ff}
 *{box-sizing:border-box}
@@ -355,7 +355,7 @@ body { color:var(--p-brown); }
 @media(max-height:660px){.hintchan-launch-talk{min-height:42px;}#piyokoLaunchMessage{font-size:.64rem;}}
 
 
-/* Ver.0.6.7: flat, high-contrast tiles without depth or gradient shading. */
+/* Ver.0.6.8: flat, high-contrast tiles without depth or gradient shading. */
 #levelBoard .tile[data-value="0"]{background:#FFF5D8;border-color:#ddcaa0;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="1"]{background:#DDF2FF;border-color:#80c5e8;box-shadow:none;text-shadow:none;}
 #levelBoard .tile[data-value="2"]{background:#FBE2EE;border-color:#e6a0bf;box-shadow:none;text-shadow:none;}
@@ -365,7 +365,7 @@ body { color:var(--p-brown); }
 .stage-clear-tap{justify-content:center;gap:12px;}
 
 
-/* Ver.0.6.7 — start screen, centered tutorial success, unified tiles and compact boards */
+/* Ver.0.6.8 — start screen, centered tutorial success, unified tiles and compact boards */
 .start-screen{position:fixed;inset:0;z-index:150;width:100%;height:100dvh;padding:0;border:0;background:#fff7e8;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:manipulation}
 .start-screen-art{display:block;width:100%;height:100%;object-fit:contain;object-position:center;pointer-events:none}
 .start-screen-tap{position:absolute;bottom:max(9dvh,calc(26px + env(safe-area-inset-bottom)));left:50%;transform:translateX(-50%);border:2px solid #b97c40;border-radius:999px;background:#fff7dfed;color:#794520;font-size:clamp(16px,4.5vw,20px);font-weight:900;letter-spacing:.035em;white-space:nowrap;padding:13px 26px;box-shadow:0 4px 0 #d9b17a;animation:startPromptPulse 1.8s ease-in-out infinite;pointer-events:none}
@@ -394,13 +394,13 @@ body { color:var(--p-brown); }
 @media(prefers-reduced-motion:reduce){.start-screen-tap,.tutorial-celebration-ribbon,.celebration-rays,.celebration-confetti,.hintchan-launch-img.piyoko-jump{animation:none!important}}
 
 
-/* Ver.0.6.7: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
+/* Ver.0.6.8: Updated hand-drawn title logo, responsive without blocking TUTORIAL badge. */
 .top>div:first-child{display:flex;flex-direction:column;align-items:center;min-width:0;}
 .brand-logo{display:block;width:min(100%,235px);max-height:78px;height:auto;object-fit:contain;}
 @media(max-width:390px){.brand-logo{width:min(100%,182px);max-height:62px}.top{padding-inline:56px;}}
 @media(max-height:700px){.brand-logo{max-height:54px}.top{min-height:58px;}}
 
-/* Ver.0.6.7: title artwork fills mobile area without distortion or accidental clipping. */
+/* Ver.0.6.8: title artwork fills mobile area without distortion or accidental clipping. */
 .start-screen{background:#fff5dc;min-height:100svh;height:100dvh;}
 .start-screen-art{width:100%;height:100%;object-fit:cover;object-position:center center;}
 @media(min-aspect-ratio:9/15){.start-screen-art{width:auto;max-width:100%;height:100%;object-fit:contain;}}
@@ -418,14 +418,14 @@ body { color:var(--p-brown); }
 
 @media(max-height:650px){.achievement-panel .achievement-image{width:min(86vw,350px,44dvh);max-height:44dvh;}}
 
-/* Ver.0.6.7: 12th expert stage, 12-stage achievement art, responsive screen. */
+/* Ver.0.6.8: 12th expert stage, 12-stage achievement art, responsive screen. */
 .stage-choice.expert-stage{border-color:#d89c2d;background:linear-gradient(180deg,#fff5cf,#ffe3a2);position:relative;}
 .stage-choice.expert-stage .number{font-weight:950;}
 .stage-choice.expert-stage .expert-label{font-size:.57rem;font-weight:900;color:#a76b12;line-height:1;}
 .achievement-panel .achievement-image{width:min(90vw,390px,48dvh);max-height:48dvh;object-fit:contain;}
 @media(max-height:650px){.achievement-panel .achievement-image{width:min(86vw,350px,44dvh);max-height:44dvh;}}
 
-/* Ver.0.6.7: developer-only achievement previews (?debug=1). */
+/* Ver.0.6.8: developer-only achievement previews (?debug=1). */
 .dev-preview-panel{position:fixed;z-index:160;bottom:calc(16px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(94vw,410px);background:#fff9ea;border:2px solid #d7ac70;border-radius:18px;box-shadow:0 8px 24px #5e382847;padding:10px 12px;color:#724828;text-align:center}
 .dev-preview-panel strong{font-size:13px;display:block;margin-bottom:6px}
 .dev-preview-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
@@ -437,7 +437,7 @@ body { color:var(--p-brown); }
 .achievement-preview-exit{position:absolute;right:max(14px,env(safe-area-inset-right));top:calc(12px + env(safe-area-inset-top));padding:8px 13px;border:1.5px solid #c99e69;border-radius:999px;background:#fff9e7;color:#674024;font-size:13px;font-weight:800;cursor:pointer}
 @media(max-height:520px){.dev-preview-panel{bottom:4px;padding:6px}.dev-preview-note{display:none}}
 
-/* Ver.0.6.7: a hidden three-hop mascot interaction on the stage picker. */
+/* Ver.0.6.8: a hidden three-hop mascot interaction on the stage picker. */
 .select-piyoko-hop{display:block;flex:0 0 auto;border:0;background:transparent;padding:0;margin:0;cursor:pointer;line-height:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .select-piyoko-hop img{width:100px;height:95px;object-fit:contain;display:block}
 .select-piyoko-hop:focus-visible{outline:3px solid #58ace0;outline-offset:2px;border-radius:12px}
@@ -448,7 +448,7 @@ body { color:var(--p-brown); }
 @keyframes achievementTapPulse{50%{opacity:.6}}
 @media(prefers-reduced-motion:reduce){.achievement-shade.awaiting-next .achievement-progress{animation:none}}
 
-/* Ver.0.6.7: keep the two-step announcement within the centered game column on PC.
+/* Ver.0.6.8: keep the two-step announcement within the centered game column on PC.
    The title and tap prompt are deliberately positioned in separate vertical regions. */
 #tutorialView.controls-focus #modeIntroMessage {
   left:50%; right:auto; width:min(100vw,480px); max-width:100vw;
@@ -466,7 +466,7 @@ body { color:var(--p-brown); }
   #tutorialView.controls-focus #modeIntroMessage p {font-size:13px;line-height:1.3;}
 }
 
-/* Ver.0.6.7: pronounced glowing selection for tutorial targets only.
+/* Ver.0.6.8: pronounced glowing selection for tutorial targets only.
    The global flat-tile rule disables box-shadow with !important;
    override it specifically for the two tutorial teaching steps. */
 #tutorialView #board .tile.target {
@@ -499,7 +499,7 @@ body { color:var(--p-brown); }
   #tutorialView #board .tile.target {animation:none !important;}
 }
 
-/* Ver.0.6.7: unobtrusive build version in the viewport's upper-left corner. */
+/* Ver.0.6.8: unobtrusive build version in the viewport's upper-left corner. */
 .subtitle {
   display: block !important; /* Override narrow-height rules that previously hid the version. */
   position: fixed;
@@ -520,7 +520,7 @@ body { color:var(--p-brown); }
 </head>
 <body>
 <button id="startScreen" class="start-screen" type="button" aria-label="タップしてゲームを始める">
-  <img src="images/start_screen.png" alt="SUM SHIFT Piyokoと数字のパズル" class="start-screen-art">
+  <img src="images/start_screen.png" alt="SUM SHIFT ぴよこと数字のパズル" class="start-screen-art">
   <span class="start-screen-tap">タップしてスタート <span aria-hidden="true">▶</span></span>
 </button>
 <div id="tutorialCelebration" class="tutorial-celebration hidden" role="status" aria-live="polite" aria-label="CLEAR!">
@@ -529,10 +529,10 @@ body { color:var(--p-brown); }
   <div class="celebration-confetti" aria-hidden="true">✦　★　✧　★　✦</div>
 </div>
 <main class="app">
-  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.6.7</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
+  <header class="top"><div><img class="brand-logo" src="images/title_logo.png" alt="SUM SHIFT"><div class="subtitle">Ver.0.6.8</div></div><div id="statePill" class="pill">TUTORIAL</div></header>
   <div class="nav-top"><button id="toStages" class="menu-btn" type="button">⌂ ステージ選択</button></div>
   <div id="tutorialView" class="view">
-  <div class="tutorial-mascot"><img src="images/piyoko_guide.png" alt="案内するPiyoko" onerror="this.src='images/piyoko_icon.png'"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
+  <div class="tutorial-mascot"><img src="images/piyoko_guide.png" alt="案内するぴよこ" onerror="this.src='images/piyoko_icon.png'"></div><div id="progress" class="progress" aria-label="チュートリアル進捗"></div>
 
   <section class="guide-card" id="tutorialGuide" aria-live="polite">
     <div class="eyebrow">GUIDE</div>
@@ -554,14 +554,14 @@ body { color:var(--p-brown); }
   <div class="footer"><span id="moves">操作回数：0</span><div class="footer-actions"><button id="back" type="button">一つ戻る ↶</button><button id="reset" type="button">最初からやり直す ↻</button></div></div>
   </div>
   <section id="stageSelectView" class="view hidden">
-    <div class="select-mascot"><button id="selectPiyokoHop" class="select-piyoko-hop" type="button" aria-label="Piyokoをジャンプさせる"><img src="images/piyoko_guide.png" alt="Piyoko"></button><p>遊びたいステージを選んでね！</p></div>
+    <div class="select-mascot"><button id="selectPiyokoHop" class="select-piyoko-hop" type="button" aria-label="ぴよこをジャンプさせる"><img src="images/piyoko_guide.png" alt="ぴよこ"></button><p>遊びたいステージを選んでね！</p></div>
     <div class="guide-card"><div class="eyebrow">STAGE SELECT</div><h1 class="guide-title">パズルを選ぼう！</h1><p class="guide-lead">01から順番に解放。04は打ち消し合いの練習！</p><p class="guide-body">クリア手数に応じて星を獲得できるよ。何度でも挑戦可能！</p></div>
     <div id="stageList" class="stage-list" aria-label="ステージ一覧"></div>
     <p id="stageSummary" class="stage-info"></p>
     
   </section>
   <section id="stagePlayView" class="view hidden">
-    <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="Piyokoに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk"><span id="piyokoLaunchMessage">「−1」と「＋1」を使い分けて<br>すべて0にしよう！</span></span></button>
+    <button id="hintchanLaunch" class="hintchan-launch" type="button" aria-label="ぴよこに相談する"><img src="images/piyoko_guide.png" alt="" class="hintchan-launch-img"><span class="hintchan-launch-talk"><span id="piyokoLaunchMessage">「−1」と「＋1」を使い分けて<br>すべて0にしよう！</span></span></button>
     <div class="play-heading"><h1 id="levelTitle">STAGE 01</h1><div class="play-meta"><span id="levelMoves">操作：0手</span><span id="levelMinimum">最短：1手</span><span id="levelStarsPreview" class="level-stars-preview" aria-label="このステージのベストスター">☆☆☆</span></div></div>
     <div class="game"><div id="levelBoard" class="board" aria-label="ステージ盤面"></div><div id="levelOverlay" class="overlay" aria-live="polite"></div></div>
     <div id="levelMode" class="controls"><button id="levelMinus" class="btn selected" type="button">−1 操作</button><button id="levelPlus" class="btn" type="button">+1 操作</button></div>
@@ -571,7 +571,7 @@ body { color:var(--p-brown); }
   </section>
   <div id="hintchanShade" class="hintchan-shade hidden" role="presentation">
     <section class="hintchan-dialog" role="dialog" aria-modal="true" aria-labelledby="hintchanName">
-      <div class="hintchan-top"><img id="hintchanPortrait" class="hintchan-dialog-img" src="images/piyoko_thinking.png" alt="Piyoko"><span id="hintchanName" class="name">Piyokoに相談</span><button id="hintchanClose" class="hintchan-close" type="button">閉じる ×</button></div>
+      <div class="hintchan-top"><img id="hintchanPortrait" class="hintchan-dialog-img" src="images/piyoko_thinking.png" alt="ぴよこ"><span id="hintchanName" class="name">ぴよこに相談</span><button id="hintchanClose" class="hintchan-close" type="button">閉じる ×</button></div>
       <div id="hintchanSpeech" class="hintchan-speech" aria-live="polite"></div>
       <div class="hintchan-choices">
         <button class="hintchan-choice" type="button" data-advice="distance">あと何手で解ける？</button>
